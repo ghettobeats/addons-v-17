@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-
-    <menuitem id="l10n_do_account_batch_payment_base_menu"
-              name="Payment files"
-              action="l10n_do_account_batch_payment_base.l10n_do_account_batch_payment_wizard_action"
-              parent="account.menu_finance_payables" sequence="900"/>
-
-</odoo>

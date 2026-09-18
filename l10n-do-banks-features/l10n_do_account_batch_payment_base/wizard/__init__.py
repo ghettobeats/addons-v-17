@@ -1,1 +1,0 @@
-from . import l10n_do_account_batch_payment_wizard

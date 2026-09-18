@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_helpdesk_ticket,HelpdeskTicket,model_helpdesk_ticket,base.group_user,1,1,1,1
-access_helpdesk_stage,HelpdeskStages,model_helpdesk_stages_log,base.group_user,1,1,1,1
-access_data_migration,data.migration,model_data_migration,base.group_system,1,1,1,1
