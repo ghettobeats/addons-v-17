@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    <record id="employee_sequence_no" model="ir.sequence">
+        <field name="name">Sequence Id</field>
+        <field name="code">seqemp.seqemp</field>
+        <field name="padding">5</field>
+        <field name="implementation">no_gap</field>
+    </record>
+</odoo>

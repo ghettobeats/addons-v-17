@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2026 ISJO TECHNOLOGY, SRL (Daniel Diaz <daniel.diaz@isjo-technology.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <!-- Formulario: header + seccion asignacion institucional + historial -->
+    <record id="fleet_vehicle_view_form_tier" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.tier</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Botones y barra de estado en el header -->
+            <xpath expr="//form/header" position="inside">
+                <!--<button
+                    name="action_request_assignment"
+                    string="Solicitar Asignacion"
+                    type="object"
+                    class="oe_highlight"
+                    invisible="movement_state != 'draft' or review_ids"/>-->
+                <!--<button
+                    name="action_request_reassignment"
+                    string="Reasignar"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="movement_state != 'assigned' or review_ids"/>-->
+                <button
+                    name="action_request_discharge"
+                    string="Solicitar Descarga"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="movement_state != 'assigned' or review_ids"
+                    groups="isjo_fleet_tier_validation.group_fleet_movement_approver"/>
+                <button
+                    name="action_reset_to_draft"
+                    string="Nueva Solicitud"
+                    type="object"
+                    invisible="movement_state not in ('assigned', 'discharged') or review_ids"/>
+                <button
+                    name="action_cancel_movement"
+                    string="Cancelar Solicitud"
+                    type="object"
+                    invisible="not review_ids or movement_state == 'cancelled'"/>
+                <field
+                    name="movement_state"
+                    widget="statusbar"
+                    statusbar_visible="draft,assigned,discharged"
+                    readonly="1"/>
+            </xpath>
+
+            <!-- Ocultar campo y boton nativos de future_driver_id (res.partner) -->
+            <xpath expr="//button[@name='action_accept_driver_change']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='future_driver_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Campos ocultos requeridos por tier.validation -->
+            <xpath expr="//sheet" position="before">
+                <field name="review_ids" invisible="1"/>
+                <field name="need_validation" invisible="1"/>
+                <field name="validated" invisible="1"/>
+                <field name="rejected" invisible="1"/>
+                <field name="hide_reviews" invisible="1"/>
+                <field name="can_review" invisible="1"/>
+            </xpath>
+
+            <!-- Seccion de asignacion institucional -->
+            <xpath expr="//sheet/group[1]" position="after">
+                <group string="Asignacion Institucional" name="grp_asignacion"
+                       invisible="movement_state == 'cancelled'">
+                    <group string="Solicitud">
+                        <field
+                            name="pending_assignee_id"
+                            options="{'no_create': True}"
+                            />
+                        <field
+                            name="pending_assignee_position"
+                            readonly="1"
+                            invisible="not pending_assignee_id"/>
+                        <!--<field
+                            name="assigned_person_id"
+                            string="Conductor"
+                            options="{'no_create': True}"/>-->
+                    </group>
+                    <group string="Actual">
+                        <field name="fleet_responsible_id" readonly="1" options="{'no_open': True}"/>
+                        <field
+                            name="fleet_responsible_position"
+                            readonly="1"
+                            invisible="not fleet_responsible_id"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <!-- Pestaña de historial de aprobaciones -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Historial de Aprobaciones" name="approval_history">
+                    <field name="movement_history_ids" readonly="1">
+                        <tree decoration-success="action == 'approved'"
+                              decoration-danger="action == 'rejected'"
+                              decoration-muted="action in ('cancelled', 'restarted')"
+                              decoration-info="action == 'requested'">
+                            <field name="date"/>
+                            <field name="movement_state" widget="badge"/>
+                            <field name="action" widget="badge"/>
+                            <field name="assignee_id"/>
+                            <field name="driver_id"/>
+                            <field name="done_by"/>
+                            <field name="comment"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Vista lista: columnas de estado -->
+    <record id="fleet_vehicle_view_tree_tier" model="ir.ui.view">
+        <field name="name">fleet.vehicle.tree.tier</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[last()]" position="after">
+                <field name="fleet_responsible_id" optional="show" string="Responsable"/>
+                <field
+                    name="movement_state"
+                    widget="badge"
+                    optional="show"
+                    decoration-warning="movement_state == 'draft'"
+                    decoration-success="movement_state == 'assigned'"
+                    decoration-danger="movement_state == 'discharged'"
+                    decoration-muted="movement_state == 'cancelled'"/>
+                <field
+                    name="validation_status"
+                    widget="badge"
+                    optional="hide"
+                    decoration-info="validation_status == 'pending'"
+                    decoration-danger="validation_status == 'rejected'"
+                    decoration-success="validation_status == 'validated'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vista busqueda: filtros de movimiento -->
+    <record id="fleet_vehicle_view_search_tier" model="ir.ui.view">
+        <field name="name">fleet.vehicle.search.tier</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/>
+        <field name="arch" type="xml">
+            <filter name="available" position="after">
+                <separator/>
+                <filter
+                    name="needs_my_review"
+                    string="Necesita mi aprobacion"
+                    domain="[('reviewer_ids', 'in', uid), ('movement_state', '=', 'draft')]"/>
+                <filter
+                    name="assigned_vehicles"
+                    string="Asignados"
+                    domain="[('movement_state', '=', 'assigned')]"/>
+                <filter
+                    name="discharged_vehicles"
+                    string="Descargados"
+                    domain="[('movement_state', '=', 'discharged')]"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

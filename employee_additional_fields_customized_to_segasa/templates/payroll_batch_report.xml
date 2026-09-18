@@ -1,0 +1,56 @@
+<odoo>
+  <template id="inherit_payroll_batch_report_payslip" inherit_id="payroll_batch_report.report_payslip">
+    <xpath expr="//table/tr[1]" position="replace">
+      <tr>
+        <td><strong>Empleado</strong></td>
+        <td colspan="2"><strong>Posición</strong></td>
+        <td><strong>Periodo</strong></td>
+      </tr>
+    </xpath>
+    <xpath expr="//table/tr[2]" position="replace">
+      <tr>
+        <td><span t-field="o.employee_id"/></td>
+        <td colspan="2"><span t-field="o.employee_id.job_id"/></td>
+        <td><span t-field="o.date_from"/> | <span t-field="o.date_to"/></td>
+      </tr>
+    </xpath>
+    <xpath expr="//tr[@t-if='o.payslip_run_id']" position="after">
+      <t t-set="bank" t-value="o.employee_id.bank_account_id"/>
+      <tr t-if="bank">
+        <td><strong>Número de cuenta</strong></td>
+        <td colspan="3">
+          <strong>
+            <span t-esc="bank.acc_number"/> -
+            <span t-esc="bank.bank_id.name"/>
+          </strong>
+        </td>
+      </tr>
+    </xpath>
+  </template>
+
+  <template id="inherit_report_payslip_run" inherit_id="payroll_batch_report.report_payslip_run">
+    <xpath expr="//table/theader/th[1]" position="before">
+      <th>Código</th>
+    </xpath>
+    <xpath expr="//table/tbody/tr[1]/td[1]" position="before">
+      <t t-set="employee" t-value="o.env['hr.employee'].search([('name', '=', l_value['employee_name'])], limit=1)"/>
+      <td><t t-esc="employee.identification_code"/></td>
+    </xpath>
+    <xpath expr="//table/tbody/tr[1]/t/td" position="replace">
+      <td class="text-right">
+        <t t-if="name[h] in ('Bruto', 'Total de descuentos', 'Salario neto')">
+          <strong t-esc="'{:,.2f}'.format(l_value.get(h, 0.0))"/>
+        </t>
+        <t t-else="">
+          <span t-esc="'{:,.2f}'.format(l_value.get(h, 0.0))"/>
+        </t>
+      </td>
+    </xpath>
+    <xpath expr="//table/tbody/tr[2]/td[1]" position="after">
+      <td/>
+    </xpath>
+    <xpath expr="//div[@class='page']" position="inside">
+      <p>Cantidad de empleados: <t t-esc="len(data)"/></p>
+    </xpath>
+  </template>
+</odoo>

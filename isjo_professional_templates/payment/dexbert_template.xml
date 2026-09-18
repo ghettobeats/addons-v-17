@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+        <template id="PAYMENT_1_document" name="Dexbert Template">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                <t t-set="style" t-value="o.style or res_company.df_style or user.env.ref('isjo_professional_templates.df_style_for_all_reports')"/>
+
+                <div class="page">
+                    <div class="row mb-2"  t-attf-style="color:{{style.text_color}};font-size:{{int(style.body_font)}}px !important;">
+
+                        <div class="col-4 float-left">
+                            <h3 t-attf-style="margin-top:8px;color:{{style.text_color}};text-underline-position: under;"><b><u><span t-field="o.amount"/></u></b></h3>
+                        </div>
+                        <div class="col-8 text-center"  t-attf-style="background-color:{{style.theme_color}};">
+                            <h3 t-attf-style="margin-top:8px;color:{{style.theme_txt_color}}"><b>Payment Receipt: <span t-field="o.name"/></b></h3>
+                        </div>
+                    </div>
+                    <div class="row mb-2 text-end"  t-attf-style="color:{{style.text_color}};font-size:{{int(style.body_font)}}px !important;">
+                        <div class="col-4">
+                            <h5 t-attf-style="color:{{style.theme_color}}">Payment Date:</h5><span t-field="o.date"/>
+                        </div>
+                        <div class="col-4">
+                            <h5 t-attf-style="color:{{style.theme_color}}">Amount: </h5><span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                        </div>
+                        <div class="col-4">
+                            <h5 t-attf-style="color:{{style.theme_color}}">Client:</h5>
+                            <address t-field="o.partner_id"  t-options='{"widget": "contact", "fields":["name"],"no_marker": true}'/>
+                        </div>
+                    </div>
+                    <div class="row mb-2"  t-attf-style="color:{{style.text_color}};font-size:{{int(style.body_font)}}px !important;">
+                        <div class="col">
+                            <h5 t-attf-style="color:{{style.theme_color}}">NOTE:</h5>
+                            <span t-field="o.ref"/>
+                        </div>
+                    </div>
+                    <t t-set="partials" t-value="o.move_id._get_reconciled_invoices_partials()[0]"/>
+                    <t t-set="invoices" t-value="{partial[2].move_id for partial in partials}"/>
+                        <!-- Check if invoices include different currencies -->
+                    <t t-foreach="invoices" t-as="inv">
+                        <t t-if="any(inv.currency_id != par[2].currency_id for par in inv._get_reconciled_invoices_partials()[0])" t-set="otherCurrency" t-value="True"/>
+                    </t>
+                    <table class="table table-sm" t-attf-style="color:{{style.text_color}};font-size:{{int(style.body_font)}}px !important;">
+                        <thead  t-attf-style="background-color:{{style.theme_color}};color:{{style.theme_txt_color}};">
+                            <tr>
+                                <th class="text-end" t-attf-style="color:{{style.theme_txt_color}};"><span>Amount </span><i class="fa fa-money"/></th>
+                                <th t-if="otherCurrency" class="text-end"><span>Amount In Currency</span></th>
+                                <th class="text-end" t-attf-style="color:{{style.theme_txt_color}};"><span>Reference </span><i class="fa fa-hashtag"/></th>
+                                <th class="text-end" t-attf-style="color:{{style.theme_txt_color}};"><span>Invoice Number </span><i class="fa fa-hashtag"/></th>
+                                <th class="text-end" t-attf-style="color:{{style.theme_txt_color}};"><span>Invoice Date </span><i class="fa fa-calendar"/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="invoices" t-as="inv">
+                                <!-- MOVE -->
+                                <t t-if="inv.move_type != 'entry'">
+                                    <tr>
+                                        <td class="text-end"><span t-field="inv.amount_total"/></td>
+                                        <td class="text-end" t-if="otherCurrency"/>
+                                        <td class="text-end"><span t-field="inv.ref"/></td>
+                                        <td class="text-end"><span t-field="inv.name"/></td>
+                                        <td class="text-end"><span t-field="inv.invoice_date"/></td>
+                                    </tr>
+                                    <!-- PAYMENTS/REVERSALS -->
+                                    <tr t-foreach="inv._get_reconciled_invoices_partials()[0]" t-as="par">
+                                        <t t-set="payment" t-value="par[2].move_id"/>
+                                        <t t-set="amountPayment" t-value="-payment.amount_total"/>
+                                        <t t-set="amountInvoice" t-value="-par[1]"/>
+                                        <t t-set="currencyPayment" t-value="payment.currency_id"/>
+                                        <t t-set="currencyInvoice" t-value="inv.currency_id"/>
+                                        <td class="text-end"><span t-esc="amountInvoice" t-options="{'widget': 'monetary', 'display_currency': currencyInvoice}"/></td>
+                                            <!-- Fill the column "Amount In Currency" only if necessary -->
+                                        <td t-if="otherCurrency" class="text-end"><span t-if="currencyPayment != currencyInvoice" t-esc="amountPayment" t-options="{'widget': 'monetary', 'display_currency': currencyPayment}"/></td>
+                                        <td class="text-end"><span t-field="payment.ref"/></td>
+                                        <td class="text-end"><span t-field="payment.name"/></td>
+                                        <td class="text-end"><span t-field="payment.date"/></td>
+                                    </tr>
+                                    <!-- BALANCE -->
+                                    <tr>
+                                        <td/>
+                                        <td><strong>Due Amount for <span t-field="inv.name"/></strong></td>
+                                        <td/>
+                                        <td t-if="otherCurrency"/>
+                                        <td class="text-end"><strong><span t-field="inv.amount_residual"/></strong></td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+    
+</odoo>

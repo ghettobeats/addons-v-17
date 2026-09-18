@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_isjo_active_officers_report_user,isjo.active.officers.report user,model_isjo_active_officers_report,base.group_user,1,0,0,0
+access_isjo_active_officers_report_manager,isjo.active.officers.report manager,model_isjo_active_officers_report,hr.group_hr_manager,1,1,1,1
+access_isjo_staff_rotation_report_user,isjo.staff.rotation.report user,model_isjo_staff_rotation_report,base.group_user,1,0,0,0
+access_isjo_staff_rotation_report_manager,isjo.staff.rotation.report manager,model_isjo_staff_rotation_report,hr.group_hr_manager,1,1,1,1
+access_isjo_terminated_officers_report_user,isjo.terminated.officers.report user,model_isjo_terminated_officers_report,base.group_user,1,0,0,0
+access_isjo_terminated_officers_report_manager,isjo.terminated.officers.report manager,model_isjo_terminated_officers_report,hr.group_hr_manager,1,1,1,1

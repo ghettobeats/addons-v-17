@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_isjo_hr_reports_root"
+              name="Reportes RRHH"
+              parent="hr.menu_hr_root"
+              sequence="99"/>
+
+</odoo>

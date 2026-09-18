@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payslip_email_template" model="mail.template">
+        <field name="name">Volante de Nómina</field>
+        <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+        <field name="subject">Volante de Nómina - {{ object.employee_id.name }}</field>
+        <field name="email_from">{{ user.email_formatted }}</field>
+        <field name="partner_to">{{ object.employee_id.work_contact_id.id }}</field>
+        <field name="description">Enviar al empleado notificacion hacer de su recibo de nomina</field>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                <tr>
+                    <td align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                            <tbody>
+                                <p>Comprobante de Pago</p>
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr>
+                                                <td valign="middle">
+                                                    <span style="font-size: 10px;">Empleado/a</span><br/>
+                                                    <span style="font-size: 20px; font-weight: bold;"><t t-esc="object.employee_id.name"></t></span>
+                                                </td>
+                                                <!--<td valign="middle" align="right">
+                                                    <img t-att-src="object.company_id.logo and ('%s/web/image/res.company/%d/logo' % (request.httprequest.url_root, object.company_id.id)) or ''"
+                                                        style="padding: 0px !important; margin: 0px !important; height: 80px !important; width: 125px !important; object-fit: contain !important;"/>
+                                                </td>-->
+
+                                                <!--<td valign="middle" align="right">
+                                                    <img t-att-src="'/logo.png?company=' + str(object.company_id.id)" style="padding: 0px; margin: 0px; height: auto; width: 80px;" t-att-alt="object.company_id.name"/>
+                                                </td>-->
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align:center;">
+                                                    <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="top" style="font-size: 13px;">
+                                                <div>
+                                                    Estimado/a <t t-esc="object.employee_id.name"></t>,<br/><br/>
+                                                    Dejo en adjunto el siguiente documento PDF referente a su Volante de Nómina:
+                                                    <br/><br/>
+                                                    <table class="table table-sm">
+                                                        <tr>
+                                                            <td colspan="2"><h4><b>Resumen</b></h4></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Volante#:</b></td>
+                                                            <td><t t-esc="object.number or ''" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Empleado:</b></td>
+                                                            <td><t t-esc="object.employee_id.name" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Neto a Cobrar:</b></td>
+                                                            <td>
+                                                                <span t-esc="object.net_wage" t-options='{"widget": "monetary", "display_currency": object.company_id.currency_id}' />
+                                                            </td>
+                                                            <!--<td><span t-esc="('%.2f' % object.net_wage)" /></td>-->
+                                                        </tr>
+                                                    </table>
+                                                    <br/>
+                                                    Cualquier inquietud diríjase al departamento de Recursos Humanos.<br/><br/>
+                                                    ¡Que tenga un buen día!<br/>
+                                                    <t t-if="user.signature">
+                                                        <br/>
+                                                        <t t-esc="user.signature"/>
+                                                    </t>
+                                                </div>
+                                            </td></tr>
+                                            <tr><td style="text-align:center;">
+                                                <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="min-width: 590px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                            <tr><td valign="middle" align="left">
+                                                <t t-esc="object.company_id.name"/> 
+                                            </td></tr>
+                                        </table>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </field>
+        <field name="report_template_ids" eval="[(4, ref('isjo_hr_payroll.action_report_payslip'))]"/>
+    </record>
+</odoo>
+
+
+

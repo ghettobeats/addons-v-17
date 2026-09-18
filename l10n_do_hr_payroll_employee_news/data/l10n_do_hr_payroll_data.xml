@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <!-- Multi - Company Rules -->
+        <record model="ir.rule" id="input_import_comp_rule">
+            <field name="name">Payslip Inputs Import Multi Company</field>
+            <field name="model_id" ref="model_payslip_input_import"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="structure_type_regular" model="hr.payroll.structure.type">
+            <field name="name">Estructura Regular</field>
+            <field name="country_id" ref="base.do"/>
+        </record>
+        <record id="structure_type_special" model="hr.payroll.structure.type">
+            <field name="name">Estructura Especial</field>
+            <field name="country_id" ref="base.do"/>
+            <field name="special_structure" eval="True"/>
+        </record>
+
+        <!-- Salary Structure -->
+        <record id="hr_payroll_structure_regular" model="hr.payroll.structure">
+            <field name="name">Nomina Regular</field>
+            <field name="country_id" ref="base.do"/>
+            <field name="use_worked_day_lines" eval="False"/>
+            <field name="type_id" ref="structure_type_regular"/>
+        </record>
+        <record id="hr_payroll_structure_regalia" model="hr.payroll.structure">
+            <field name="name">Regalia Pascual</field>
+            <field name="country_id" ref="base.do"/>
+            <field name="use_worked_day_lines" eval="False"/>
+            <field name="type_id" ref="structure_type_special"/>
+        </record>
+        <record id="hr_payroll_structure_prestaciones" model="hr.payroll.structure">
+            <field name="name">Prestaciones</field>
+            <field name="country_id" ref="base.do"/>
+            <field name="use_worked_day_lines" eval="False"/>
+            <field name="type_id" ref="structure_type_special"/>
+        </record>
+        <record id="hr_payroll_structure_vacaciones" model="hr.payroll.structure">
+            <field name="name">Vacaciones</field>
+            <field name="country_id" ref="base.do"/>
+            <field name="use_worked_day_lines" eval="False"/>
+            <field name="type_id" ref="structure_type_special"/>
+        </record>
+        <record id="hr_payroll_structure_bonificacion" model="hr.payroll.structure">
+            <field name="name">Bonificacion de Ley</field>
+            <field name="country_id" ref="base.do"/>
+            <field name="use_worked_day_lines" eval="False"/>
+            <field name="type_id" ref="structure_type_special"/>
+        </record>
+        
+
+        <!-- Salary Rule Category -->
+        <record id="hr_payroll_int" model="hr.salary.rule.category">
+            <field name="name">Ingresos no Cotizables para la TSS</field>
+            <field name="code">INT</field>
+        </record>
+        <record id="hr_payroll_init" model="hr.salary.rule.category">
+            <field name="name">Ingresos Excentos de TSS e ISR</field>
+            <field name="code">INIT</field>
+        </record>
+        <record id="hr_payroll_tss" model="hr.salary.rule.category">
+            <field name="name">Retenciones Tributarias Deducibles - TSS</field>
+            <field name="code">TSS</field>
+        </record>
+        <record id="hr_payroll_isr" model="hr.salary.rule.category">
+            <field name="name">Retenciones Tributarias - ISR</field>
+            <field name="code">ISR</field>
+        </record>
+        <record id="hr_payroll_he" model="hr.salary.rule.category">
+            <field name="name">Horas Extras</field>
+            <field name="code">HE</field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2025 ISJO TECHNOLOGY, SRL (Daniel Diaz <daniel.diaz@isjo-technology.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="module_category_fleet_movement" model="ir.module.category">
+        <field name="name">Aprobacion de Movimientos de Flota</field>
+        <field name="sequence">100</field>
+    </record>
+
+    <record id="group_fleet_movement_approver" model="res.groups">
+        <field name="name">Aprobador de Movimientos de Flota</field>
+        <field name="category_id" ref="module_category_fleet_movement"/>
+    </record>
+</odoo>

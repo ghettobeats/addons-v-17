@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fleet_movement_history_view_tree" model="ir.ui.view">
+        <field name="name">fleet.movement.history.tree</field>
+        <field name="model">fleet.movement.history</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="action == 'approved'"
+                  decoration-danger="action == 'rejected'"
+                  decoration-muted="action in ('cancelled', 'restarted')"
+                  decoration-info="action == 'requested'">
+                <field name="date"/>
+                <field name="vehicle_id"/>
+                <field name="movement_state" widget="badge"/>
+                <field name="action" widget="badge"/>
+                <field name="assignee_id"/>
+                <field name="driver_id"/>
+                <field name="done_by"/>
+                <field name="comment"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

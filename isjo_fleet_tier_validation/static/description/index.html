@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://apps.odoo.com/web/assets/1/a4e1b5f/web.assets_frontend.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fleet Tier Validation | Aprobación de Movimientos Vehiculares</title>
+    <style>
+        .badge-isjo {
+            background-color: #1a3a5c;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 10px 30px 0px #00000033 !important;
+        }
+        .section-card {
+            box-shadow: 0px 4px 15px 0px #0000001F;
+            border-radius: 8px;
+            border: 1px solid #1a3a5c4D;
+            margin-bottom: 50px;
+        }
+        .section-header {
+            position: relative;
+            z-index: 1;
+            border-radius: 8px 8px 0 0;
+            padding: 14px 25px;
+            background-color: #1a3a5c1A;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .section-header h3 {
+            color: #0d1f30;
+            font-weight: 600;
+            margin: 0;
+        }
+        .tag-pill {
+            display: inline-block;
+            background-color: #1a3a5c15;
+            border: 1px solid #1a3a5c40;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1a3a5c;
+            margin: 3px;
+        }
+        .flow-arrow {
+            font-size: 20px;
+            color: #1a3a5c;
+            font-weight: bold;
+            margin: 0 6px;
+        }
+        .state-box {
+            border-radius: 8px;
+            padding: 8px 18px;
+            font-weight: 600;
+            border: 2px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="py-xl-5 py-4 px-3" style="background-color: #f8f9fa; max-width: 1420px; margin: 0 auto;">
+        <div class="px-lg-6 px-md-5 px-sm-4 px-3 pt-md-5 pt-sm-4 pt-3 rounded-3"
+            style="max-width: 1300px; background-color: #fff; margin: 0 auto; box-shadow: 0px 5px 25px 0px #00000066; border: 4px solid #1a3a5c;">
+
+            <!-- Header -->
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <img class="w-100 ms-md-0 mx-auto" style="max-width: 240px;" src="icon.png" alt="Logo ISJO Technology">
+                </div>
+                <div class="col-12 col-md-6 mt-md-0 mt-4 gap-1 d-flex justify-content-center justify-content-md-end flex-wrap">
+                    <a href="https://wa.me/18299442168"
+                        class="d-inline-flex align-items-center py-md-2 px-md-3 py-2 px-2"
+                        style="border-radius: 8px; color: #fff; background-color: #1a3a5c; font-weight: 500; font-size: 20px; line-height: 30px;">
+                        <img style="width: 20px; height: 20px;" src="info-icon-3.png" alt="WhatsApp">
+                    </a>
+                    <a href="tel:+18299442168" class="d-inline-flex align-items-center py-md-2 px-md-3 py-2 px-2"
+                        style="border-radius: 8px; color: #fff; background-color: #1a3a5c; font-weight: 500; font-size: 20px; line-height: 30px;">
+                        <img style="width: 20px; height: 20px; margin-right: 4px;" src="info-icon-4.png" alt="Phone">
+                        +1 (829) 944-2168
+                    </a>
+                </div>
+            </div>
+
+            <!-- Título -->
+            <div class="w-100 my-lg-6 my-5 mx-auto" style="max-width: 870px;">
+                <h2 class="text-center h1-fs" style="font-weight: 600; color: #111727;">Fleet Tier Validation</h2>
+                <h3 class="text-center" style="font-weight: 500; color: #1a3a5c;">Aprobación por Niveles para Movimientos Vehiculares</h3>
+                <div class="text-center mt-3">
+                    <span class="badge-isjo">Versión 17.0.1.1.0</span>
+                    <span class="badge-isjo ms-2">ISJO Technology</span>
+                    <span class="badge-isjo ms-2">Odoo 17</span>
+                </div>
+            </div>
+
+            <!-- Banner principal -->
+            <div class="w-100" style="margin-bottom: 60px;">
+                <div class="text-center">
+                    <div class="text-center w-sm-auto w-100" style="padding: 0 20px; display: inline-block;">
+                        <div class="d-inline-flex align-items-center justify-content-center text-center w-100"
+                            style="position: relative; z-index: 1; border-radius: 10px 10px 0 0; padding: 8px 25px; background-color: #1a3a5c; margin: 0 auto;">
+                            ✅
+                            <h3 style="color: #fff; font-weight: 500; font-size: 20px; line-height: 30px; margin: 0 10px;">
+                                Flujo de aprobación multinivel para asignación y descarga de vehículos</h3>
+                            ✅
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100"
+                    style="box-shadow: 0px 5px 20px 0px #40404066; border-radius: 16px; border: 4px solid #1a3a5c; padding: 11px;">
+                    <img class="w-100" style="border-radius: 7px;" src="fleet_tier_screenshot.png"
+                        alt="Flujo de aprobación de movimientos vehiculares">
+                </div>
+            </div>
+
+            <!-- Descripción del Módulo -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="text-center">📋 Descripción del Módulo</h3>
+                </div>
+                <div class="p-lg-5 p-md-4 p-3">
+                    <p style="font-size: 18px; font-weight: 400; color: #404040; line-height: 32px; margin-bottom: 25px;">
+                        <strong>Fleet Tier Validation</strong> extiende el módulo nativo de flota (<code>fleet.vehicle</code>)
+                        integrando el framework <strong>base_tier_validation</strong> de OCA para controlar los movimientos
+                        de asignación y descarga de vehículos institucionales mediante un flujo de
+                        <strong>aprobación por niveles</strong> configurable, con registro de historial y wizard de comentario
+                        obligatorio en cada decisión.
+                    </p>
+                    <h4 style="margin-bottom: 15px; font-size: 22px; font-weight: 600; color: #0d1f30;">🎯 Beneficios clave:</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul style="padding-left: 25px; margin-bottom: 0;">
+                                <li style="font-size: 16px; line-height: 36px;">✅ Flujo de estados: Borrador → Asignado → Descargado / Cancelado</li>
+                                <li style="font-size: 16px; line-height: 36px;">✅ Aprobación multinivel con <em>base_tier_validation</em></li>
+                                <li style="font-size: 16px; line-height: 36px;">✅ Wizard de comentario obligatorio para aprobar o rechazar</li>
+                                <li style="font-size: 16px; line-height: 36px;">✅ Solicitante + Responsable Institucional como campos separados</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul style="padding-left: 25px; margin-bottom: 0;">
+                                <li style="font-size: 16px; line-height: 36px;">✅ Historial completo de cada movimiento (solicitud, aprobación, rechazo)</li>
+                                <li style="font-size: 16px; line-height: 36px;">✅ Transición automática de estado al completarse todas las revisiones</li>
+                                <li style="font-size: 16px; line-height: 36px;">✅ Campos siempre editables durante la validación (estado, conductor, asignado)</li>
+                                <li style="font-size: 16px; line-height: 36px;">✅ Integrado con <em>mitur_fleet_extension</em> y <em>hr.employee</em></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flujo de Estados -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="text-center">🔄 Flujo de Estados del Movimiento</h3>
+                </div>
+                <div class="p-lg-5 p-md-4 p-3">
+                    <p style="font-size: 16px; color: #404040; margin-bottom: 25px;">
+                        El campo <code>movement_state</code> controla el ciclo de vida completo de cada movimiento vehicular.
+                        Cada transición requiere aprobación de los niveles configurados antes de hacerse efectiva.
+                    </p>
+
+                    <!-- Flujo visual -->
+                    <div class="d-flex flex-wrap align-items-center justify-content-center mb-4" style="gap: 6px;">
+                        <div class="state-box" style="background:#f0f4f8; border-color:#1a3a5c; color:#1a3a5c;">Borrador</div>
+                        <span class="flow-arrow">→</span>
+                        <div class="state-box" style="background:#d1e7dd; border-color:#198754; color:#0a3622;">Asignado</div>
+                        <span class="flow-arrow">→</span>
+                        <div class="state-box" style="background:#cfe2ff; border-color:#0d6efd; color:#084298;">Descargado</div>
+                        <span style="font-size:14px; color:#888; margin-left:10px;">| Cancelado</span>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-left: 4px solid #1a3a5c; border-radius: 6px;">
+                                <strong>📤 Solicitar Asignación</strong>
+                                <p style="font-size: 14px; margin: 8px 0 0;">
+                                    Requiere indicar al menos un <em>Responsable Institucional</em> o un <em>Conductor</em>.
+                                    Envía el vehículo al flujo de revisión por niveles.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-left: 4px solid #1a3a5c; border-radius: 6px;">
+                                <strong>🔁 Solicitar Reasignación</strong>
+                                <p style="font-size: 14px; margin: 8px 0 0;">
+                                    Inicia una nueva aprobación sin cancelar la asignación actual.
+                                    Limpia las revisiones anteriores y reinicia el flujo.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-left: 4px solid #1a3a5c; border-radius: 6px;">
+                                <strong>📥 Solicitar Descarga</strong>
+                                <p style="font-size: 14px; margin: 8px 0 0;">
+                                    Solicita la salida del vehículo de su asignación actual.
+                                    Al aprobarse, el estado pasa a <em>Descargado</em>.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #fff3cd; border-left: 4px solid #f0a500; border-radius: 6px;">
+                                <strong>✖️ Cancelar / Reiniciar</strong>
+                                <p style="font-size: 14px; margin: 8px 0 0;">
+                                    Cancela el movimiento en curso limpiando el asignado pendiente,
+                                    o reinicia a Borrador para una nueva solicitud desde cero.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wizard de Aprobación -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="text-center">🧙 Wizard de Aprobación / Rechazo</h3>
+                </div>
+                <div class="p-lg-5 p-md-4 p-3">
+                    <p style="font-size: 16px; color: #404040; line-height: 28px; margin-bottom: 20px;">
+                        Los botones nativos <strong>Validar Nivel</strong> y <strong>Rechazar</strong> del framework
+                        <em>base_tier_validation</em> están sobreescritos para abrir siempre el wizard
+                        <code>fleet.approval.wizard</code>, que obliga a escribir un comentario antes de confirmar la decisión.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #d1e7dd; border-left: 4px solid #198754; border-radius: 8px;">
+                                <strong style="color: #0a3622;">✅ Aprobar Movimiento</strong>
+                                <ul class="mt-2 mb-0" style="font-size: 14px;">
+                                    <li>Comentario obligatorio</li>
+                                    <li>Valida el nivel del aprobador actual</li>
+                                    <li>Si todas las revisiones están aprobadas, ejecuta <code>_fleet_apply_approved_state()</code></li>
+                                    <li>Registra la acción en el historial de movimientos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #f8d7da; border-left: 4px solid #dc3545; border-radius: 8px;">
+                                <strong style="color: #58151c;">❌ Rechazar Movimiento</strong>
+                                <ul class="mt-2 mb-0" style="font-size: 14px;">
+                                    <li>Comentario obligatorio</li>
+                                    <li>Llama a <code>_rejected_tier()</code> del framework</li>
+                                    <li>Registra el rechazo con el comentario en el historial</li>
+                                    <li>El vehículo permanece en su estado anterior</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campos y Responsables -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="text-center">👤 Campos de Asignación y Responsabilidad</h3>
+                </div>
+                <div class="p-lg-5 p-md-4 p-3">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 12px; height: 100%;">
+                                <strong>🕐 Asignar A (Pendiente)</strong><br>
+                                <code style="font-size: 12px;">pending_assignee_id</code>
+                                <ul class="mt-2 mb-0" style="font-size: 14px;">
+                                    <li>Responsable institucional propuesto para la asignación</li>
+                                    <li>Se muestra su cargo automáticamente (relacionado)</li>
+                                    <li>Al aprobarse, se convierte en <em>Responsable Institucional</em></li>
+                                    <li>Se limpia automáticamente tras la transición de estado</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 12px; height: 100%;">
+                                <strong>✅ Responsable Institucional</strong><br>
+                                <code style="font-size: 12px;">fleet_responsible_id</code>
+                                <ul class="mt-2 mb-0" style="font-size: 14px;">
+                                    <li>Asignado confirmado tras la aprobación del flujo</li>
+                                    <li>Campo de solo lectura — lo actualiza el sistema</li>
+                                    <li>Su cargo también se muestra automáticamente</li>
+                                    <li>Permanece al solicitar una reasignación de conductor</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 12px; height: 100%;">
+                                <strong>🚗 Conductor Asignado</strong><br>
+                                <code style="font-size: 12px;">assigned_person_id</code>
+                                <ul class="mt-2 mb-0" style="font-size: 14px;">
+                                    <li>Definido en <em>mitur_fleet_extension</em></li>
+                                    <li>Editable incluso durante el proceso de validación</li>
+                                    <li>Referenciado en el historial de movimientos</li>
+                                    <li>Filtra solo empleados con <em>is_mitur_driver = True</em></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 12px; height: 100%;">
+                                <strong>⚡ Campos Siempre Editables</strong><br>
+                                <code style="font-size: 12px;">ALWAYS_EDITABLE</code>
+                                <ul class="mt-2 mb-0" style="font-size: 14px;">
+                                    <li><code>state_id</code> — Estado nativo del vehículo</li>
+                                    <li><code>mitur_status</code> — Estatus MITUR</li>
+                                    <li><code>pending_assignee_id</code> — Asignado pendiente</li>
+                                    <li><code>assigned_person_id</code> — Conductor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historial de Movimientos -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="text-center">📜 Historial de Movimientos</h3>
+                </div>
+                <div class="p-lg-5 p-md-4 p-3">
+                    <p style="font-size: 16px; color: #404040; line-height: 28px; margin-bottom: 20px;">
+                        Cada acción sobre el flujo queda registrada automáticamente en
+                        <code>fleet.movement.history</code>, incluyendo el usuario que la ejecutó,
+                        el estado del vehículo en ese momento y el comentario ingresado.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 12px;">
+                                <strong>📌 Datos registrados por acción</strong>
+                                <ul class="mt-2 mb-0" style="font-size: 14px;">
+                                    <li>Vehículo relacionado</li>
+                                    <li>Estado del movimiento al momento del evento</li>
+                                    <li>Tipo de acción (solicitud, aprobación, rechazo, cancelación, reinicio)</li>
+                                    <li>Usuario que realizó la acción</li>
+                                    <li>Asignado institucional y conductor al momento</li>
+                                    <li>Comentario libre del aprobador/rechazador</li>
+                                    <li>Fecha y hora exacta del evento</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 12px;">
+                                <strong>🏷️ Tipos de Acción registrados</strong>
+                                <div class="mt-2">
+                                    <div class="d-flex flex-wrap" style="gap: 6px;">
+                                        <span class="tag-pill">📤 Solicitud Enviada</span>
+                                        <span class="tag-pill" style="background:#d1e7dd; border-color:#198754; color:#0a3622;">✅ Aprobado</span>
+                                        <span class="tag-pill" style="background:#f8d7da; border-color:#dc3545; color:#58151c;">❌ Rechazado</span>
+                                        <span class="tag-pill" style="background:#fff3cd; border-color:#f0a500; color:#856404;">✖️ Cancelado</span>
+                                        <span class="tag-pill">🔄 Reiniciado</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuración Tier Validation -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="text-center">⚙️ Configuración de Niveles (Tier Definitions)</h3>
+                </div>
+                <div class="p-lg-5 p-md-4 p-3">
+                    <p style="font-size: 16px; color: #404040; line-height: 28px; margin-bottom: 20px;">
+                        Los niveles de aprobación se configuran desde <strong>Configuración → Niveles de Validación</strong>
+                        (menú del módulo <em>base_tier_validation</em>). El módulo establece los
+                        siguientes parámetros fijos en <code>fleet.vehicle</code>:
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 12px;">
+                                <strong>🔧 Parámetros del modelo</strong>
+                                <ul class="mt-2 mb-0" style="font-size: 14px;">
+                                    <li><code>_state_field = "movement_state"</code></li>
+                                    <li><code>_state_from = ["draft", "assigned"]</code></li>
+                                    <li><code>_state_to = ["assigned", "discharged"]</code></li>
+                                    <li><code>_cancel_state = "cancelled"</code></li>
+                                    <li><code>_tier_validation_manual_config = False</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 12px;">
+                                <strong>🎭 Excepciones de validación</strong>
+                                <p style="font-size: 14px; margin: 8px 0 4px;">Los métodos siguientes se sobreescriben para permitir
+                                editar los campos de <code>ALWAYS_EDITABLE</code> en cualquier punto del flujo:</p>
+                                <ul class="mb-0" style="font-size: 13px; font-family: monospace;">
+                                    <li>_get_under_validation_exceptions()</li>
+                                    <li>_get_after_validation_exceptions()</li>
+                                    <li>_get_all_validation_exceptions()</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- post_init_hook -->
+                    <div class="mt-3 p-3" style="background-color: #fff3cd; border-left: 4px solid #f0a500; border-radius: 8px;">
+                        <strong>🪝 post_init_hook</strong>
+                        <p style="font-size: 14px; margin: 8px 0 0;">
+                            Al instalar el módulo se ejecuta un hook que configura automáticamente las
+                            <em>Tier Definitions</em> iniciales para el modelo <code>fleet.vehicle</code>,
+                            evitando que el administrador deba crearlas manualmente desde cero.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modelos incluidos -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="text-center">🗄️ Modelos Incluidos</h3>
+                </div>
+                <div class="p-lg-5 p-md-4 p-3">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 8px;">
+                                <strong style="font-size: 13px; color: #1a3a5c;">fleet.vehicle</strong><br>
+                                <small>Extendido con <em>tier.validation</em>, <code>movement_state</code>,
+                                responsables institucionales e historial de movimientos</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 8px;">
+                                <strong style="font-size: 13px; color: #1a3a5c;">fleet.movement.history</strong><br>
+                                <small>Registro inmutable de cada evento del flujo: solicitudes, aprobaciones, rechazos y cancelaciones</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 8px;">
+                                <strong style="font-size: 13px; color: #1a3a5c;">fleet.approval.wizard</strong><br>
+                                <small>Wizard transient que fuerza comentario al aprobar o rechazar cualquier nivel de validación</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3" style="background-color: #1a3a5c08; border-radius: 8px;">
+                                <strong style="font-size: 13px; color: #1a3a5c;">tier.definition (configuración)</strong><br>
+                                <small>Definiciones de niveles creadas por el <em>post_init_hook</em> al instalar; administradas desde la UI de <em>base_tier_validation</em></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dependencias -->
+            <div class="section-card" style="margin-bottom: 100px;">
+                <div class="section-header">
+                    <h3 class="text-center">🔗 Dependencias del Módulo</h3>
+                </div>
+                <div class="p-lg-5 p-md-4 p-3">
+                    <div class="d-flex flex-wrap justify-content-center" style="gap: 12px;">
+                        <span class="tag-pill">base_tier_validation</span>
+                        <span class="tag-pill">fleet</span>
+                        <span class="tag-pill">mitur_fleet_extension</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="w-100">
+                <div>
+                    <h2 class="text-center h1-fs"
+                        style="color: #111827; font-weight: 600; margin: 0 auto 20px; max-width: 790px;">
+                        ¡Control total sobre los movimientos de su flota!
+                    </h2>
+                    <p style="font-size: 20px; font-weight: 400; line-height: 34px; letter-spacing: -0.5px; text-align: center; margin: 0 auto 35px; max-width: 900px;">
+                        Aprobación multinivel, historial trazable, comentarios obligatorios y transiciones automáticas de estado — todo en un módulo ligero y configurable.
+                    </p>
+                </div>
+
+                <div class="d-flex flex-column flex-lg-row gap-4" style="max-width: 860px; margin: 0 auto 45px;">
+                    <div class="d-flex flex-column flex-sm-row gap-4"
+                        style="background-color: #1a3a5c1F; border-radius: 16px; width: 100%; padding: 24px 26px;">
+                        <img style="width: 64px; height: 64px;" src="info-icon-1.png" alt="icon">
+                        <div>
+                            <h5 style="font-size: 22px; font-weight: 500; line-height: 30px; color: #000; margin-bottom: 13px;">¿Tiene alguna pregunta?</h5>
+                            <p style="font-size: 17px; font-weight: 400; color: #38404A; margin-bottom: 6px;">
+                                <span style="color: #1a3a5c; font-weight: 500;">Ventas :</span>
+                                <a style="color: #38404A;" href="tel:+18299442168">+1 (829) 944-2168</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row gap-4"
+                        style="background-color: #1a3a5c1F; border-radius: 16px; width: 100%; padding: 24px 26px;">
+                        <img style="width: 64px; height: 64px;" src="info-icon-2.png" alt="icon">
+                        <div>
+                            <h5 style="font-size: 22px; font-weight: 500; line-height: 30px; color: #000; margin-bottom: 13px;">Escríbanos un correo</h5>
+                            <p style="font-size: 17px; font-weight: 400; color: #38404A; margin-bottom: 6px;">
+                                <span style="color: #1a3a5c; font-weight: 500;">Soporte :</span>
+                                <a style="color: #38404A;" href="mailto:daniel.diaz@isjo-technology.com">daniel.diaz@isjo-technology.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-inline-flex align-items-center justify-content-center text-center w-100"
+                    style="position: relative; z-index: 1; border-radius: 20px 20px 0 0; padding: 8px 25px; background-color: #1a3a5c; margin: 0 auto;">
+                    ✅
+                    <h3 style="color: #fff; font-weight: 500; font-size: 16px; line-height: 30px; margin: 0 10px;">
+                        Fleet Tier Validation | Módulo desarrollado por ISJO Technology — Aprobación por Niveles para Flota Vehicular Institucional
+                    </h3>
+                    ✅
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

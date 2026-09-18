@@ -1,0 +1,521 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* isjo_hr_payroll
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20240924\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-03 20:01+0000\n"
+"PO-Revision-Date: 2024-10-03 16:10-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_DO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: isjo_hr_payroll
+#: model:ir.actions.report,print_report_name:isjo_hr_payroll.action_report_payslip
+msgid ""
+"'Payslip - %s' % (object.employee_id.name or 'Employee').replace('/', '')"
+msgstr ""
+"'Comprobante de Pago - %s' % (object.employee_id.name or 'Empleado')."
+"replace('/', '')"
+
+#. module: isjo_hr_payroll
+#: model:ir.actions.report,print_report_name:isjo_hr_payroll.payslip_run_datailed_action_report
+msgid "(object._get_report_base_filename())"
+msgstr "(object._get_report_base_filename())"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "*** Fin del documento ***"
+msgstr "*** Fin del documento ***"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_clone_salary_rule_wizard_form
+msgid ""
+"<span colspan=\"4\" nolabel=\"1\">Este asistente creará las reglas "
+"salariales seleccionadas a la estructura salarial indicada debajo</span>"
+msgstr ""
+"<span colspan=\"4\" nolabel=\"1\">Este asistente creará las reglas "
+"salariales seleccionadas a la estructura salarial indicada debajo</span>"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_contract_form_inherit
+msgid "<span>/ month</span>"
+msgstr "<span>/ mes</span>"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Aprobado Por"
+msgstr "Aprobado Por"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_clone_salary_rule_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields.selection,name:isjo_hr_payroll.selection__hr_salary_rule__column_display_total_on_report__quantity
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_body
+msgid "Cantidad"
+msgstr "Cantidad"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_payslip_line__category_id_code
+msgid "Category Rule Code"
+msgstr "Código de regla de categoría"
+
+#. module: isjo_hr_payroll
+#. odoo-python
+#: code:addons/isjo_hr_payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid "Clonar Reglas Salariales"
+msgstr "Clonar Reglas Salariales"
+
+#. module: isjo_hr_payroll
+#: model:ir.actions.server,name:isjo_hr_payroll.hr_salary_rule_clone_action_server
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_clone_salary_rule_wizard_form
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_salary_rule_form_inherit
+msgid "Clone"
+msgstr "Clonar"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_clone_salary_rule_wizard_form
+msgid "Clone Salary Rules"
+msgstr "Clonar reglas salariales"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_salary_rule__cloned_salary_rule_id
+msgid "Cloned rule"
+msgstr "Regla clonada"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_salary_rule__clones_ids
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_salary_rule_form_inherit
+msgid "Clones"
+msgstr "Clones"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_clone_salary_rule_wizard
+msgid "Clones salary rules and assigns them to a salary structure"
+msgstr "Clona reglas salariales y las asigna a una estructura salarial"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_salary_rule__column_display_total_on_report
+msgid "Column showing the total in the report"
+msgstr "Columna que muestra el total en el reporte"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.employee_overview
+msgid "Comp."
+msgstr "Comp."
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_payslip_form_inherit
+msgid "Comprobante de pago"
+msgstr "Comprobante de pago"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Contribuciones del Empleador a la TSS"
+msgstr "Contribuciones del Empleador a la TSS"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_report
+msgid "Copia: Dpto. RRHH"
+msgstr "Copia: Dpto. RRHH"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_clone_salary_rule_wizard__create_uid
+msgid "Created by"
+msgstr "Creado por:"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_clone_salary_rule_wizard__create_date
+msgid "Created on"
+msgstr "Creado sobre:"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.employee_overview
+msgid "Código Emp."
+msgstr "Código Emp."
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__dearness_allowance
+msgid "Dearness Allowance"
+msgstr "Beneficio De Vida"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,help:isjo_hr_payroll.field_hr_contract__dearness_allowance
+msgid "Dearness allowance"
+msgstr "Asignación por carestía"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Debajo de esta línea no hay nada más escrito"
+msgstr "Debajo de esta línea no hay nada más escrito"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_payslip_by_employees_inherit
+msgid "Departamento"
+msgstr "Departamento"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Departamento de Contabilidad"
+msgstr "Departamento de Contabilidad"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Departamento de RRHH"
+msgstr "Departamento de RRHH"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_report
+msgid "Departamento de Recursos Humanos"
+msgstr "Departamento de Recursos Humanos"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_body
+msgid "Departamento:"
+msgstr "Departamento:"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_body
+msgid ""
+"Desglose - (Salario Bruto Devengado-Deducciones-Retenciones-Descuentos)"
+msgstr ""
+"Desglose - (Salario Bruto Devengado-Deducciones-Retenciones-Descuentos)"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_clone_salary_rule_wizard__display_name
+msgid "Display Name"
+msgstr "Nombre Completo"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_hr_contract
+msgid "Employee Contract"
+msgstr "Contrato del empleado"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_payslip_run_form_inherit
+msgid "Generate Payslips"
+msgstr "Generar nómina"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_hr_payslip_employees
+msgid "Generate payslips for all selected employees"
+msgstr "Generar nómina para todos los empleados seleccionados"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Gerencia Administrativa"
+msgstr "Gerencia Administrativa"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__house_rent_allowance
+msgid "House Rent Allowance"
+msgstr "Beneficio De Alquiler Casa"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,help:isjo_hr_payroll.field_hr_contract__house_rent_allowance
+msgid "House rent allowance."
+msgstr "Subsidio de alquiler de vivienda."
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_clone_salary_rule_wizard__id
+msgid "ID"
+msgstr "Id"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields.selection,name:isjo_hr_payroll.selection__hr_salary_rule__column_display_total_on_report__amount
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_body
+msgid "Importe"
+msgstr "Importe"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,help:isjo_hr_payroll.field_hr_salary_rule__column_display_total_on_report
+msgid ""
+"Indica la columna donde se va a mostrar el valor del total en el reporte de "
+"comprobantes de pago."
+msgstr ""
+"Indica la columna donde se va a mostrar el valor del total en el reporte de "
+"comprobantes de pago."
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,help:isjo_hr_payroll.field_hr_salary_rule__is_clone
+msgid "Indica que esta regla es clon de otra regla existente."
+msgstr "Indica que esta regla es clon de otra regla existente."
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_salary_rule__is_clone
+msgid "Is a clone"
+msgstr "Es un clon"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_clone_salary_rule_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Ultima actualización por"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_clone_salary_rule_wizard__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__meal_allowance
+msgid "Meal Allowance"
+msgstr "Beneficio De Comida"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,help:isjo_hr_payroll.field_hr_contract__meal_allowance
+msgid "Meal allowance"
+msgstr "Subsidio de comida"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__medical_allowance
+msgid "Medical Allowance"
+msgstr "Beneficios Médicos"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,help:isjo_hr_payroll.field_hr_contract__medical_allowance
+msgid "Medical allowance"
+msgstr "subsidio medico"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_contract_form_inherit
+msgid "Monthly Advantages"
+msgstr "Beneficios Mensuales"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Monto Total a Desembolsar por la Empresa"
+msgstr "Monto Total a Desembolsar por la Empresa"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Monto Total a Pagar de los Salarios Netos Devengados"
+msgstr "Monto Total a Pagar de los Salarios Netos Devengados"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Monto Total del Gasto para la Empresa"
+msgstr "Monto Total del Gasto para la Empresa"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Más:"
+msgstr "Más:"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.employee_overview
+msgid "No."
+msgstr "No."
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.employee_overview
+msgid "Nombre del Empleado"
+msgstr "Nombre del Empleado"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_body
+msgid "Nombre:"
+msgstr "Nombre:"
+
+#. module: isjo_hr_payroll
+#. odoo-python
+#: code:addons/isjo_hr_payroll/models/hr_payslip.py:0
+#, python-format
+msgid "Nómina Cerrada"
+msgstr "Nómina Cerrada"
+
+#. module: isjo_hr_payroll
+#. odoo-python
+#: code:addons/isjo_hr_payroll/models/hr_payslip.py:0
+#, python-format
+msgid "Nómina para Fines de Revisión"
+msgstr "Nómina para Fines de Revisión"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_report
+msgid "Original: Empleado"
+msgstr "Original: Empleado"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__other_allowance
+msgid "Other Allowance"
+msgstr "Otros Beneficios"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,help:isjo_hr_payroll.field_hr_contract__other_allowance
+msgid "Other allowances"
+msgstr "Otras asignaciones"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Recibo de nómina"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_res_config_settings__module_hr_payroll_account
+msgid "Payroll with Accounting"
+msgstr "Nómina y contabilidad"
+
+#. module: isjo_hr_payroll
+#: model:ir.actions.report,name:isjo_hr_payroll.action_report_payslip
+msgid "Payslip"
+msgstr "Comprobante de Pago del Empleado"
+
+#. module: isjo_hr_payroll
+#: model:ir.actions.report,name:isjo_hr_payroll.payslip_run_datailed_action_report
+msgid "Payslip Batch Detailed"
+msgstr "Reporte de Lote de Nóminas"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_report_isjo_hr_payroll_payslip_run_datailed_report
+msgid "Payslip Batch Detailed Report"
+msgstr "Informe detallado del lote de nóminas"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_hr_payslip_run
+msgid "Payslip Batches"
+msgstr "Lotes de recibos de nómina"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_hr_payslip_line
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_payslip_form_inherit
+msgid "Payslip Line"
+msgstr "Línea de la nómina"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_report_isjo_hr_payroll_payslip_report
+msgid "Payslip Report"
+msgstr "Informe de nómina"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_payslip_run_form_inherit
+msgid "Payslips"
+msgstr "Nóminas"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Preparado Por"
+msgstr "Preparado Por"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Provisiones"
+msgstr "Provisiones"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.employee_overview
+msgid "Puesto de Trabajo"
+msgstr "Puesto de Trabajo"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_body
+msgid "Puesto:"
+msgstr "Puesto:"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_report
+msgid "Recibido Conforme"
+msgstr "Recibido Conforme"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_payslip_form_inherit
+msgid "Regla Salarial"
+msgstr "Regla Salarial"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,help:isjo_hr_payroll.field_hr_salary_rule__cloned_salary_rule_id
+msgid "Regla la cual se clonará."
+msgstr "Regla la cual se clonará."
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Revisado Por"
+msgstr "Revisado Por"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_payslip__salary_computation_line_ids
+msgid "Salary Computation Lines"
+msgstr "Líneas de cálculo salarial"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_hr_salary_rule
+msgid "Salary Rule"
+msgstr "Regla salarial"
+
+#. module: isjo_hr_payroll
+#: model:ir.model,name:isjo_hr_payroll.model_hr_rule_parameter
+msgid "Salary Rule Parameter"
+msgstr "Parámetro de regla salarial"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_payslip_form_inherit
+msgid "Salary Rules"
+msgstr "Reglas salariales"
+
+#. module: isjo_hr_payroll
+#. odoo-python
+#: code:addons/isjo_hr_payroll/models/hr_payslip.py:0
+#, python-format
+msgid "Salary Slip"
+msgstr "Comprobante de pago"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_payslip_employees__structure_id
+msgid "Salary Structure"
+msgstr "Estructura salarial"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_clone_salary_rule_wizard__struct_id
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_payslip_run__struct_id
+msgid "Structure"
+msgstr "Estructura salarial"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields.selection,name:isjo_hr_payroll.selection__hr_salary_rule__column_display_total_on_report__total
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.department_summary
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.employee_overview
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payroll_overview
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_body
+msgid "Total"
+msgstr "Total"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.footer
+msgid "Total Provisiones"
+msgstr "Total Provisiones"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__travel_allowance
+msgid "Travel Allowance"
+msgstr "Beneficio De Viaje"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,help:isjo_hr_payroll.field_hr_contract__travel_allowance
+msgid "Travel allowance"
+msgstr "Subsidio de viaje"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.employee_overview
+msgid "de Pago"
+msgstr "de Pago"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.payslip_body
+msgid "Área Departamental:"
+msgstr "Área Departamental:"

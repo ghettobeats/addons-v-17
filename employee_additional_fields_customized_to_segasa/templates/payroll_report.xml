@@ -1,0 +1,18 @@
+<odoo>
+  <template id="inherit_hr_payroll_report_payslip" inherit_id="hr_payroll.report_payslip">
+    <xpath expr="//table/tr[1]" position="before">
+      <tr>
+        <td class="w-25"><strong>Código</strong></td>
+        <td class="w-25"><strong>Departamento</strong></td>
+        <td class="w-25"><strong>Región</strong></td>
+        <td class="w-25"><strong>Cédula</strong></td>
+      </tr>
+      <tr>
+        <td><span t-field="o.employee_id.identification_code"/></td>
+        <td><span t-field="o.employee_id.department_id"/></td>
+        <td><span t-field="o.employee_id.region"/></td>
+        <td><span t-field="o.employee_id.identification"/></td>
+      </tr>
+    </xpath>
+  </template>
+</odoo>

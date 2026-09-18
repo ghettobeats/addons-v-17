@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    <record id="view_hr_contract_form_inherit_multicurrency" model="ir.ui.view">
+        <field name="name">hr.contract.form.inherit.multicurrency</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <group name="salary" position="inside">
+                <field name="company_currency_id" invisible="1"/>
+                <field name="same_currency" invisible="1"/>
+                <field name="currency_id"/>
+                <label for="wage_currency" invisible="same_currency"/>
+                <div class="o_row mw-50" invisible="same_currency">
+                    <field name="wage_currency" nolabel="1" readonly="1"/>
+                    <span>/ month</span>
+                </div>
+            </group>
+        </field>
+    </record>
+</odoo>

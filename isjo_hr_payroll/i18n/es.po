@@ -1,0 +1,307 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * hr_payroll
+#   * isjo_hr_payroll
+# 
+# Translators:
+# Francisco Peñalo <frankpenalo24@gmail.com>, 2023
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-14 12:08+0000\n"
+"PO-Revision-Date: 2020-09-07 08:21+0000\n"
+"Last-Translator: Francisco Peñalo <frankpenalo24@gmail.com>, 2023\n"
+"Language-Team: Spanish (https://www.transifex.com/odoo/teams/41243/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#. module: hr_payroll
+#: model:ir.ui.menu,name:hr_payroll.menu_hr_payroll_employee_payslips_to_pay
+msgid "To Pay"
+msgstr "Nóminas por pagar"
+
+#. module: hr_payroll
+#: model:ir.ui.menu,name:hr_payroll.menu_hr_payroll_employee_payslips
+msgid "All Payslips"
+msgstr "Nóminas del empleado"
+
+#. module: hr_payroll
+#: model:ir.ui.menu,name:hr_payroll.menu_hr_payslip_run
+msgid "Batches"
+msgstr "Lotes de nóminas"
+
+#. module: hr_payroll
+#: model:ir.actions.act_window,name:hr_payroll.act_hr_employee_payslip_list
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_employee__slip_ids
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip_run__slip_ids
+#: model:ir.ui.menu,name:hr_payroll.menu_hr_payroll_payslips
+#: model_terms:ir.ui.view,arch_db:hr_payroll.payroll_hr_employee_view_form
+#: model_terms:ir.ui.view,arch_db:hr_payroll.view_hr_payslip_filter
+#: model_terms:ir.ui.view,arch_db:hr_payroll.view_hr_payslip_tree
+msgid "Payslips"
+msgstr "Nóminas"
+
+#. module: hr_payroll
+#: code:addons/hr_payroll/models/hr_payslip.py:0
+#, python-format
+msgid "Salary Slip"
+msgstr "Comprobante de pago"
+
+#. module: hr_payroll
+#: model:ir.actions.act_window,name:hr_payroll.action_hr_payslip_run_tree
+#: model_terms:ir.ui.view,arch_db:hr_payroll.hr_payslip_run_form
+#: model_terms:ir.ui.view,arch_db:hr_payroll.hr_payslip_run_tree
+msgid "Payslips Batches"
+msgstr "Lotes de nóminas"
+
+#. module: hr_payroll
+#: model:ir.actions.act_window,name:hr_payroll.hr_payslip_action_view_to_pay
+msgid "Payslips To Pay"
+msgstr "Nóminas por pagar"
+
+#. module: hr_payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll.hr_payslip_run_form
+msgid "<span class=\"o_stat_text\">Payslips</span>"
+msgstr "<span class=\"o_stat_text\">Nóminas</span>"
+
+#. module: hr_payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll.view_hr_payslip_by_employees
+msgid "Payslips by Employees"
+msgstr "Nóminas por empleados"
+
+#. module: hr_payroll
+#: model:ir.actions.act_window,name:hr_payroll.action_view_hr_payslip_form
+#: model:ir.actions.act_window,name:hr_payroll.action_view_hr_payslip_month_form
+msgid "Employee Payslips"
+msgstr "Nóminas del empleado"
+
+#. module: hr_payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll.hr_payslip_run_form
+msgid "Generated Payslips"
+msgstr "Nóminas generadas"
+
+#. module: hr_payroll
+#. openerp-web
+#: code:addons/hr_payroll/static/src/js/work_entries_controller_mixin.js:0
+#: model:ir.actions.act_window,name:hr_payroll.action_hr_payslip_by_employees
+#: model_terms:ir.ui.view,arch_db:hr_payroll.hr_payslip_run_form
+#, python-format
+msgid "Generate Payslips"
+msgstr "Generar nóminas"
+
+#. module: hr_payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll.payroll_report_view_search
+msgid "Last 365 Days Payslip"
+msgstr "Nóminas de los últimos 365 días"
+
+#. module: hr_payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll.view_hr_payslip_by_employees
+msgid ""
+"<span colspan=\"4\" nolabel=\"1\">This wizard will generate payslips for all"
+" selected employee(s) based on the dates and credit note specified on "
+"Payslips Run.</span>"
+msgstr ""
+"<span colspan=\"4\" nolabel=\"1\">Este asistente generará las nóminas"
+" para todos los empleados seleccionados en función de las fechas y notas de "
+"crédito especificadas en la ejecución de la nómina.</span>"
+
+#. module: hr_payroll
+#: model:ir.model,name:hr_payroll.model_hr_payslip_line
+#: model_terms:ir.ui.view,arch_db:hr_payroll.view_hr_payslip_form
+#: model_terms:ir.ui.view,arch_db:hr_payroll.view_hr_payslip_line_form
+msgid "Payslip Line"
+msgstr "Línea de la nómina"
+
+#. module: hr_payroll
+#: model:ir.actions.act_window,name:hr_payroll.act_contribution_reg_payslip_lines
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip__line_ids
+#: model_terms:ir.ui.view,arch_db:hr_payroll.hr_payslip_line_view_search_register
+#: model_terms:ir.ui.view,arch_db:hr_payroll.view_hr_payslip_line_filter
+msgid "Payslip Lines"
+msgstr "Líneas de la nómina"
+
+#. module: hr_payroll
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payroll_report__name
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payroll_structure__payslip_name
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip__name
+msgid "Payslip Name"
+msgstr "Nombre de la nómina"
+
+#. module: hr_payroll
+#: model:ir.actions.act_window,name:hr_payroll.action_view_hr_payslip_input_type
+msgid "Payslip Other Input Types"
+msgstr "Otros tipos de entrada de la nómina"
+
+#. module: hr_payroll
+#: model:ir.model,name:hr_payroll.model_hr_payslip_worked_days
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip__worked_days_line_ids
+msgid "Payslip Worked Days"
+msgstr "Días trabajados en la nómina"
+
+#. module: hr_payroll
+#: model_terms:ir.ui.view,arch_db:hr_payroll.view_hr_payslip_form
+msgid "Cancel Payslip"
+msgstr "Cancelar nómina"
+
+#. module: hr_payroll
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip__date_from
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip_line__date_from
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_rule_parameter_value__date_from
+msgid "From"
+msgstr "Fecha desde"
+
+#. module: hr_payroll
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip__date_to
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip_line__date_to
+msgid "To"
+msgstr "Fecha hasta"
+
+#. module: hr_payroll
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip_line__appears_on_payslip
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_salary_rule__appears_on_payslip
+msgid "Appears on Payslip"
+msgstr "Aparece en la nómina"
+
+#. module: hr_payroll
+#: model:hr.salary.rule.category,name:hr_payroll.ALW
+msgid "Allowance"
+msgstr "Prima"
+
+#. module: hr_payroll
+#: model:hr.salary.rule.category,name:hr_payroll.COMP
+msgid "Company Part"
+msgstr "Contribución compañía"
+
+#. module: hr_payroll
+#: code:addons/hr_payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid "Basic Salary"
+msgstr "Salario Básico"
+
+#. module: hr_payroll
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payroll_report__basic_wage
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip__basic_wage
+#: model_terms:ir.ui.view,arch_db:hr_payroll.payroll_report_view_dashboard
+msgid "Basic Wage"
+msgstr "Salario Básico"
+
+#. module: hr_payroll
+#: code:addons/hr_payroll/models/hr_salary_rule.py:0
+#, python-format
+msgid "Net Salary"
+msgstr "Salario Neto Devengado"
+
+#. module: hr_payroll
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payroll_report__net_wage
+#: model:ir.model.fields,field_description:hr_payroll.field_hr_payslip__net_wage
+msgid "Net Wage"
+msgstr "Salario Neto Devengado"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_payslip_run_form_inherit
+msgid "Payslips"
+msgstr "Nóminas"
+
+#. module: isjo_hr_payroll
+#: model:ir.actions.server,name:isjo_hr_payroll.hr_salary_rule_clone_action_server
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_clone_salary_rule_wizard_form
+msgid "Clone"
+msgstr "Clonar"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_clone_salary_rule_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_salary_rule__cloned_salary_rule_id
+msgid "Cloned rule"
+msgstr "Regla clonada"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_salary_rule__column_display_total_on_report
+msgid "Column showing the total in the report"
+msgstr "Columna que muestra el total en el reporte"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_salary_rule__is_clone
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_salary_rule_form_inherit
+msgid "Is a clone"
+msgstr "Es un clon"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_salary_rule_form_inherit
+msgid "Clone"
+msgstr "Clon"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_salary_rule_form_inherit
+msgid "Clones"
+msgstr "Clones"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_clone_salary_rule_wizard__struct_id
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_payslip_run__struct_id
+msgid "Salary Structure"
+msgstr "Estructura salarial"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_contract_form_inherit
+msgid "Monthly Advantages"
+msgstr "Beneficios Mensuales"
+
+#. module: isjo_hr_payroll
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_contract_form_inherit
+msgid "<span>/ month</span>"
+msgstr "<span>/ mes</span>"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__house_rent_allowance
+msgid "House Rent Allowance"
+msgstr "Beneficio De Alquiler Casa"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__dearness_allowance
+msgid "Dearness Allowance"
+msgstr "Beneficio De Vida"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__travel_allowance
+msgid "Travel Allowance"
+msgstr "Beneficio De Viaje"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__meal_allowance
+msgid "Meal Allowance"
+msgstr "Beneficio De Comida"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__medical_allowance
+msgid "Medical Allowance"
+msgstr "Beneficios Médicos"
+
+#. module: isjo_hr_payroll
+#: model:ir.model.fields,field_description:isjo_hr_payroll.field_hr_contract__other_allowance
+msgid "Other Allowance"
+msgstr "Otros Beneficios"
+
+#. module: isjo_hr_payroll
+#: model:ir.actions.report,name:isjo_hr_payroll.action_report_payslip
+#: model_terms:ir.ui.view,arch_db:isjo_hr_payroll.view_hr_payslip_form
+msgid "Payslip"
+msgstr "Comprobante de Pago del Empleado"
+
+#. module: isjo_hr_payroll
+#: model:ir.actions.report,print_report_name:isjo_hr_payroll.action_report_payslip
+msgid "'Payslip - %s' % (object.employee_id.name or 'Employee').replace('/', '')"
+msgstr "'Comprobante de Pago - %s' % (object.employee_id.name or 'Empleado').replace('/', '')"
+
+#. module: isjo_hr_payroll
+#: model:ir.actions.report,name:isjo_hr_payroll.payslip_run_datailed_action_report
+msgid "Payslip Batch Detailed"
+msgstr "Reporte de Lote de Nóminas"

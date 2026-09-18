@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Salary Rules -->
+	<function model="hr.salary.rule" name="write">
+            <value model="hr.salary.rule" search="[('code', '=', 'BASIC')]"/>
+	    <value eval="{'amount_python_compute': '''
+dias_no_trabajados = inputs.DNOT.amount if inputs.DNOT else 0
+monto_dnot = (contract.wage / 23.83) * dias_no_trabajados
+monto = (contract.wage / 2) - monto_dnot
+if payslip.to_force:
+    monto = 0
+result = monto''', 'sequence': '1'}"/>
+        </function>
+        <function model="hr.salary.rule" name="write">
+            <value model="hr.salary.rule" search="[('code', '=', 'GROSS')]"/>
+            <value eval="{'amount_python_compute': 'result = categories.BASIC + categories.ALW + categories.INT + categories.INIT', 'sequence': '100'}"/>
+        </function>
+        <function model="hr.salary.rule" name="write">
+            <value model="hr.salary.rule" search="[('code', '=', 'NET')]"/>
+            <value eval="{'amount_python_compute': 'result = categories.GROSS - (categories.TSS + categories.ISR + categories.DED)', 'sequence': '200'}"/>
+        </function>
+        <record id="salary_rule_vaca" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Vacaciones</field>
+            <field name="code">VACA</field>
+            <field name="sequence">2</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.VACA.amount if inputs.VACA else 0
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+        
+        <record id="salary_rule_com" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Comision</field>
+            <field name="code">COM</field>
+            <field name="sequence">3</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.COM.amount if inputs.COM else 0
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+             
+        <record id="salary_rule_he35" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_do_hr_payroll.hr_payroll_he"/>
+            <field name="name">Horas Extras Diurnas al 35%</field>
+            <field name="code">HE35</field>
+            <field name="sequence">17</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+HE35 = inputs.HE35.amount if inputs.HE35 else 0
+# Salario Diario
+sal_dia = (contract.wage / 23.83)
+
+# Horas Ordinarias de Trabajo
+hora_ord = sal_dia / 8
+
+result_qty = HE35
+result = (hora_ord * 1.35) #* HE35
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+              
+        <record id="salary_rule_he100" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_do_hr_payroll.hr_payroll_he"/>
+            <field name="name">Horas Extras Diurnas al 100%</field>
+            <field name="code">HE100</field>
+            <field name="sequence">18</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+HE100 = inputs.HE100.amount if inputs.HE100 else 0
+# Salario Diario
+sal_dia = (contract.wage / 23.83)
+
+# Horas Ordinarias de Trabajo
+hora_ord = sal_dia / 8
+result_qty = HE100
+result = (hora_ord * 2) #* HE100
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+              
+        <record id="salary_rule_hen35" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_do_hr_payroll.hr_payroll_he"/>
+            <field name="name">Horas Extras Nocturna al 35 + 15%</field>
+            <field name="code">HEN35</field>
+            <field name="sequence">19</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+HE35 = inputs.HEN35.amount if inputs.HEN35 else 0
+# Salario Diario
+sal_dia = (contract.wage / 23.83)
+
+# Horas Ordinarias de Trabajo
+hora_ord = sal_dia / 8
+
+result_qty = HEN35
+result = (hora_ord * 1.50) #* HE35
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+              
+        <record id="salary_rule_hen100" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_do_hr_payroll.hr_payroll_he"/>
+            <field name="name">Horas Extras Diurnas al 100 + 15%</field>
+            <field name="code">HEN100</field>
+            <field name="sequence">20</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+HEN100 = inputs.HEN100.amount if inputs.HEN100 else 0
+# Salario Diario
+sal_dia = (contract.wage / 23.83)
+
+# Horas Ordinarias de Trabajo
+hora_ord = sal_dia / 8
+result_qty = HEN100
+result = ((hora_ord * 2) + (hora_ord * 0.15)) #* HEN100
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+              
+        <record id="salary_rule_he" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Total Horas Extras</field>
+            <field name="code">HE</field>
+            <field name="sequence">25</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = HE35 + HE100 + HEN35 + HEN100
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+               
+        <record id="salary_rule_bon" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_do_hr_payroll.hr_payroll_init"/>
+            <field name="name">Bonificacion</field>
+            <field name="code">BON</field>
+            <field name="sequence">4</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.BON.amount if inputs.BON else 0
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+        
+        <record id="salary_rule_inc" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_do_hr_payroll.hr_payroll_init"/>
+            <field name="name">Incentivo</field>
+            <field name="code">INC</field>
+            <field name="sequence">5</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.INC.amount if inputs.INC else 0
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+        
+        <record id="salary_rule_depad" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="name">Dependientes Adicionales</field>
+            <field name="code">DEPAD</field>
+            <field name="sequence">101</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = inputs.DEPAD.amount if inputs.DEPAD else 0
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+        
+        <record id="salary_rule_afp" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_do_hr_payroll.hr_payroll_tss"/>
+            <field name="name">Fondo de Pensiones</field>
+            <field name="code">AFP</field>
+            <field name="sequence">102</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+tope = 325250.00
+
+date_to = payslip.date_from
+date_from = date_to.replace(day=1)
+
+ingresos = categories.ALW 
+ingresos += categories.BASIC
+ingresos += payslip.sum("BASIC", date_from, date_to)
+ingresos += payslip.sum_category("ALW", date_from, date_to))
+
+afp_anterior =  payslip.sum("AFP", date_from, date_to)
+
+if ingresos &lt;= tope:
+    result = (ingresos * 0.0287) - afp_anterior
+else:
+    result = (tope * 0.0287) - afp_anterior
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+        
+        <record id="salary_rule_sfs" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_do_hr_payroll.hr_payroll_tss"/>
+            <field name="name">Seguro Familiar de Salud</field>
+            <field name="code">SFS</field>
+            <field name="sequence">103</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+tope = 162625.00
+
+date_to = payslip.date_from
+date_from = date_to.replace(day=1)
+
+
+ingresos = categories.ALW 
+ingresos += categories.BASIC
+ingresos += payslip.sum("BASIC", date_from, date_to)
+ingresos += payslip.sum_category("ALW", date_from, date_to)
+
+sfs_anterior = payslip.sum("SFS", date_from, date_to)
+
+if ingresos &lt;= tope:
+    result = (ingresos * 0.0304) - sfs_anterior
+else:
+    result = (tope * 0.0304) - sfs_anterior
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+
+        <record id="salary_rule_isr" model="hr.salary.rule">
+            <field name="category_id" ref="l10n_do_hr_payroll.hr_payroll_isr"/>
+            <field name="name">Impuesto Sobre la Renta</field>
+            <field name="code">ISR</field>
+            <field name="sequence">104</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+date_to = payslip.date_from
+date_from = date_to.replace(day=1)
+
+ingresos = categories.BASIC
+if payslip.apply_on == "1":
+    ingresos += contract.wage / 2
+
+ingresos += categories.ALW
+ingresos += categories.INT
+ingresos += payslip.sum_category("BASIC", date_from, date_to)
+ingresos += payslip.sum_category("ALW", date_from, date_to)
+ingresos += payslip.sum_category("INT", date_from, date_to)
+
+
+sfs_tope = 4742.4
+afp_tope = 8954.4
+
+tss = 0
+
+sfs_actual = payslip.sum("SFS", date_from, date_to) + SFS
+if sfs_actual > sfs_tope:
+    tss += sfs_tope
+else:
+    tss += sfs_actual
+
+afp_actual = payslip.sum("AFP", date_from, date_to) + AFP
+if afp_actual > afp_tope:
+    tss += afp_tope
+else:
+    tss += afp_actual
+
+if payslip.apply_on == '1':
+    tss += (contract.wage * 0.0304) / 2
+    tss += (contract.wage * 0.0287) / 2
+
+total_dependiente = DEPAD or 0
+if payslip.apply_on == '1':
+    total_dependiente *= 2
+
+total_dependiente += payslip.sum('DEPAD', date_from, date_to)
+
+deducible_anual = (ingresos - tss - total_dependiente) * 12
+
+tope_mayor = 867123.01
+tope_medio = 624329.01
+tope_minimo = 416220.01
+
+div = 2 if payslip.apply_on == "1" else 1
+
+isr_anterior = payslip.sum('ISR', date_from, date_to)
+
+if deducible_anual &gt;= tope_mayor and deducible_anual &lt;= 999999999:
+    result = (((((deducible_anual - tope_mayor) * 0.25) + 79776) / 12) / div) - isr_anterior
+
+elif deducible_anual &gt;= tope_medio and deducible_anual &lt;= 867123:
+    result = (((((deducible_anual - tope_medio) * 0.20) + 31216) / 12) / div) - isr_anterior
+
+elif deducible_anual &gt;= tope_minimo and deducible_anual &lt;= 624329:
+    result = ((((deducible_anual - tope_minimo) * 0.15) / 12) / div) - isr_anterior
+
+else:
+    result = 0
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+        
+        <record id="salary_rule_afpe" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="name">Contribucion Fondo de Pensiones</field>
+            <field name="code">AFPE</field>
+            <field name="sequence">105</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = ((AFP * 100)/2.87) * 0.0710
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+        
+        <record id="salary_rule_sfse" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="name">Contribucion Seguro Familiar de Salud</field>
+            <field name="code">SFSE</field>
+            <field name="sequence">106</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = ((SFS * 100)/3.04) * 0.0709
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+
+        <record id="salary_rule_infotep" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="name">INFOTEP</field>
+            <field name="code">INFOTEP</field>
+            <field name="sequence">107</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = (categories.BASIC + categories.ALW) * 0.01
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+
+        <record id="salary_rule_rl" model="hr.salary.rule">
+            <field name="category_id" ref="hr_payroll.COMP"/>
+            <field name="name">Riesgo Laboral</field>
+            <field name="code">RL</field>
+            <field name="sequence">108</field>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+result = (categories.BASIC + categories.ALW) * 0.0115
+            </field>
+            <field name="struct_id" ref="l10n_do_hr_payroll.hr_payroll_structure_regular"/>
+        </record>
+
+    </data>
+</odoo>
+

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+
+        <!-- AcciÃ³n de servidor para asignar las novedades seleccionadas -->
+        <record id="action_assign_rule_in_lote" model="ir.actions.server">
+            <field name="name">Asignar Novedad a Lote</field>
+            <field name="model_id" ref="model_payslip_input_import"/>
+            <field name="binding_model_id" ref="model_payslip_input_import"/>
+            <field name="state">code</field>
+            <field name="code">
+# Lista para almacenar los registros que no cumplen con el estado 'confirm'
+non_confirm_records = []
+
+# Iterar sobre cada registro seleccionado
+for record in records:
+    if record.state != 'confirm':
+        # AÃ±adir los registros que no estÃ¡n en 'confirm' a la lista
+        non_confirm_records.append(record.display_name)
+    else:
+        # Llamar al mÃ©todo assign_rule_in_lote solo si el registro estÃ¡ en estado 'confirm'
+        record.assign_rule_in_lote()
+
+# Si hay registros que no estÃ¡n en estado 'confirm', mostrar un mensaje de advertencia
+if non_confirm_records:
+    record_names = ", ".join(non_confirm_records)
+    raise UserError("Los siguientes registros no estÃ¡n en estado 'Confirmado' y no se pueden procesar: %s" % record_names)
+            </field>
+        </record>
+
+
+        <!-- AcciÃ³n de servidor para confirmar las novedades seleccionadas -->
+        <record id="action_confirm_payslip_input_import" model="ir.actions.server">
+            <field name="name">Confirmar Novedades</field>
+            <field name="model_id" ref="model_payslip_input_import"/>
+            <field name="binding_model_id" ref="model_payslip_input_import"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_confirm()</field>
+        </record>
+        
+        <!-- AcciÃ³n de servidor para cancelar las novedades seleccionadas -->
+        <record id="button_cancel_payslip_input_import" model="ir.actions.server">
+            <field name="name">Cancelar Novedades</field>
+            <field name="model_id" ref="model_payslip_input_import"/>
+            <field name="binding_model_id" ref="model_payslip_input_import"/>
+            <field name="state">code</field>
+            <field name="code">action = records.button_cancel()</field>
+        </record>
+        
+        <!-- AcciÃ³n de servidor para colocar en Cerrar las novedades seleccionadas -->
+        <record id="button_closed_payslip_input_import" model="ir.actions.server">
+            <field name="name">Cerrar Novedades</field>
+            <field name="model_id" ref="model_payslip_input_import"/>
+            <field name="binding_model_id" ref="model_payslip_input_import"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_closed()</field>
+        </record>
+        
+        <!-- AcciÃ³n de servidor para colocar en Borrador las novedades seleccionadas -->
+        <record id="button_draft_payslip_input_import" model="ir.actions.server">
+            <field name="name">Borrador Novedades</field>
+            <field name="model_id" ref="model_payslip_input_import"/>
+            <field name="binding_model_id" ref="model_payslip_input_import"/>
+            <field name="state">code</field>
+            <field name="code">action = records.button_draft()</field>
+        </record>
+
+        
+        <record id="payslip_input_import_tree_view" model="ir.ui.view">
+            <field name="name">payslip_input_import_tree_view</field>
+            <field name="model">payslip.input.import</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" optional="show"/>
+                    <field name="emp_id" optional="show"/>
+                    <field name="employee_id" optional="show"/>
+                    <field name="structure_class_id"  string="Clase" optional="show"/>
+                    <field name="input_id" optional="show"/>
+                    <field name="frecuency_type" optional="show"/>
+                    <field name="start_date" optional="show"/>
+                    <field name="end_date" optional="hide"/>
+                    <field name="apply_in" optional="show"/>
+                    <field name="splid_id" optional="show"/>
+                    <field name="amount" optional="show"/>
+                    <field name="state" widget="badge" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="payslip_input_import_form_view" model="ir.ui.view">
+            <field name="name">payslip_input_import_form_view</field>
+            <field name="model">payslip.input.import</field>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_confirm" invisible="state in ('cancel', 'confirm', 'assign', 'detained')" string="Confirmado" type="object" class="oe_highlight"/>
+                        <button name="assign_rule_in_lote" invisible="state in ('cancel', 'assign', 'detained', 'draft')" string="Procesar" type="object" class="oe_highlight"/>
+                        <button name="button_draft" invisible="state != 'cancel'" string="Establecer a Borrador" type="object"/>
+                        <button name="button_cancel" invisible="state in ('draft','cancel')" string="Cancel" type="object"/>
+                        <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,confirm,assign,detained,cancel"/>
+                    </header>
+                    <sheet>
+                        <div>
+                            <label for="employee_id" class="oe_edit_only"/>
+                            <h2>
+                                <field name="emp_id" style="width: 5% !important;"/>
+                                <field
+                                    name="employee_id"
+                                    style="width: 50% !important;"
+                                    options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"
+                                    readonly="state in ['confirm', 'assign', 'detained', 'cancel']"/>
+                            </h2>
+                            <field name="name" />
+                            <!-- <field name="active" invisible="1"/>-->
+                        </div>
+                        <field name="structure_class_id" string="Clase"/>
+
+
+                        <group string="Concepto">
+                            <group>
+                                <field
+                                    name="input_id"
+                                    required="1"
+                                    options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"
+                                    readonly="state in ['confirm', 'assign', 'detained', 'cancel']"/>
+                                <field name="code" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="amount" required="1" readonly="state in ['confirm', 'assign', 'detained', 'cancel']"/>
+                                <!--<field name="to_force"/>-->
+                                <field name="frecuency_type" required="1" readonly="state in ['confirm', 'assign', 'detained', 'cancel']"/>
+                                <field
+                                    name="apply_in"
+                                    required="frecuency_type == 'variable'"
+                                    invisible="frecuency_type != 'variable'"
+                                    options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"
+                                    readonly="state in ['confirm', 'assign', 'detained', 'cancel']"/>
+                                <field
+                                    name="splid_id"
+                                    required="frecuency_type == 'slip'"
+                                    readonly="state in ['confirm', 'assign', 'detained', 'cancel']"
+                                    options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"
+                                    domain="[('employee_id', '=', employee_id)]"
+                                    invisible="frecuency_type != 'slip'"
+                                    string="Recibo"/>
+                            </group>
+                        </group>
+
+                        <div class="o_row" invisible="frecuency_type != 'fixed'">
+
+                            <label for="start_date" string="Fecha Inicial" invisible="frecuency_type != 'fixed'"/>
+                            <field name="start_date"
+                                   required="frecuency_type == 'fixed'"
+                                   readonly="state in ['confirm', 'assign', 'detained', 'cancel']"
+                                   placeholder="Fecha de inicio"
+                                    style="width: 30% !important;"/>
+
+                            <small style="color: #777;">AquÃ­ se define la regla, especificando su fecha de inicio y, opcionalmente, su fecha de tÃ©rmino. Si no se establece una fecha de tÃ©rmino, la regla se considerarÃ¡ indefinida y se mantendrÃ¡ activa de manera continua..</small>
+
+                            <label for="end_date" string="Fecha Final"/>
+                            <field name="end_date"
+                                   readonly="state in ['confirm', 'assign', 'detained', 'cancel']"
+                                   placeholder="Fecha de tÃ©rmino" style="width: 30% !important;"/>
+
+                        </div>
+                        <div class="oe_row">
+                            <label for="notes"/>
+                            <field name="notes" nolabel="1" placeholder="Descripcion . . ." readonly="state in ['confirm', 'assign', 'detained', 'cancel']"/>
+                        </div>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="payslip_input_import_search_view" model="ir.ui.view">
+            <field name="name">payslip_input_import_search_view</field>
+            <field name="model">payslip.input.import</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <search string="Search Novedades">
+                    <field name="name" string="Buscar NÃºmero Novedad/Empleado/CÃ³digo Empleado" filter_domain="['|','|',('name','ilike',self),('emp_id','ilike', self),('employee_id.name','ilike', self)]"/>
+                    <separator orientation="vertical"/>
+                    <filter name="start_date" string="Fecha Inicial" date="start_date"/>
+                    <filter name="end_date" string="Fecha Final" date="end_date"/>
+                    <separator orientation="vertical"/>
+                    <filter name="structure_class_id" string="Administrativa" domain="[('structure_class_id','=','JF-01')]"/>
+                    <filter name="structure_class_id" string="Supervisores" domain="[('structure_class_id','=','JF-02')]"/>
+                    <filter name="structure_class_id" string="General" domain="[('structure_class_id','in',('JI-02', 'JI-03','JI-04','JI-07','JI-08'))]"/>
+                    <filter name="structure_class_id" string="Gildan" domain="[('structure_class_id','=','JI-06')]"/>
+                    <filter name="structure_class_id" string="Alcoholes" domain="[('structure_class_id','=','JI-05')]"/>
+                    <separator orientation="vertical"/>
+                    <filter name="last_15_days" string="Ãšltimos 15 dÃ­as"
+                                domain="[('create_date', '>=', (context_today() - relativedelta(days=15)).strftime('%%Y-%%m-%%d 00:00:00'))]"/>
+                    <filter name="last_30_days" string="Ãšltimos 30 dÃ­as"
+                                domain="[('create_date', '>=', (context_today() - relativedelta(days=30)).strftime('%%Y-%%m-%%d 00:00:00'))]"/>
+                    <separator orientation="vertical"/>
+                    <filter name="state" string="Confirmado" domain="[('state','=','confirm')]"/>
+                    <filter name="state" string="Cerrado" domain="[('state','=','closed')]"/>
+                    <filter name="assign_domain" string="Asignado" domain="[('state','=','assign')]"/>
+                    <filter name="state" string="Cancelado" domain="[('state','=','cancel')]"/>
+                    <separator orientation="vertical"/>
+                    <field name="employee_id" string="Empleado" filter_domain="[('employee_id.name','ilike',self)]"/>
+                    <field name="structure_class_id" string="Clase" filter_domain="[('structure_class_id','ilike',self)]"/>
+                    <field name="input_id" string="Entrada" filter_domain="[('input_id.name','ilike',self)]"/>
+                    <filter name="apply_in" string="Batch/Lote" domain="[('apply_in', '!=', False)]"/>
+                    <separator/>
+                    <group expand="0" string="Agrupar por">
+                        <filter name="state" string="Estado" domain="[]" context="{'group_by': 'state'}"/>
+                        <filter name="apply_in" string="Batch/Lote" domain="[]" context="{'group_by': 'input_id'}"/>
+                        <filter string="Empleado" name="employee_id" domain="[]" context="{'group_by': 'employee_id'}"/>
+                        <filter string="Clase" name="structure_class_id" domain="[]" context="{'group_by': 'structure_class_id'}"/>
+                        <filter string="Novedad" name="input_id" domain="[]" context="{'group_by': 'input_id'}"/>
+                        <filter string="Fecha Inicial" name="start_date" context="{'group_by': 'start_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_window">
+            <field name="name">Novedades</field>
+            <field name="res_model">payslip.input.import</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{
+                'search_default_assign_domain': 1
+            }
+            </field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Haga clic para crear una novedad a un Empleado.</p>
+            </field>
+        </record>
+
+        <menuitem name="Novedades" id="menu_novedades_root"
+                  sequence="71"
+                  parent="hr_work_entry_contract_enterprise.menu_hr_payroll_root"
+                  groups="hr_payroll.group_hr_payroll_user"/>
+
+        <menuitem name="Novedades Empleados" id="menu_novedades"
+                  parent="menu_novedades_root"
+                  action="action_window"/>
+
+        <record id="inherit_view_id_inherit_hr_payroll" model="ir.ui.view">
+            <field name="name">res.company.view.form.inherit.electronic.payroll</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_registry']" position="after">
+                    <field name="hr_payroll_account_pay" options="{'no_open': True, 'no_create': True, 'no_edit_create': True}"/>
+                    <field name="hr_payroll_account_charge" options="{'no_open': True, 'no_create': True, 'no_edit_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Â© 2024 ISJO TECHNOLOGY, SRL (Daniel Diaz <daniel.diaz@isjo-technology.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+        <!-- hr.zone tree -->
+
+        <record model="ir.ui.view" id="view_hr_zone_tree">
+            <field name="name">HR ZONE TREE</field>
+            <field name="model">hr.zone</field>
+            <field name="arch" type="xml">
+                <tree string='Zone' editable="top">
+                    <field name="id" widget="handle"/>
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="region_id" options="{'no_open': True, 'no_create': True}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_zone_filter" model="ir.ui.view">
+            <field name="name">HR ZONE FILTER</field>
+            <field name="model">hr.zone</field>
+            <field name="arch" type="xml">
+                <search string="Search Zone">
+                    <separator orientation="vertical"/>
+                    <field name="name" filter_domain="[('name','ilike',self),('code','ilike',self)]"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <!-- <filter name="line_id" string="LÃ­nea de Venta" icon="terp-personal" domain="[]"
+                                context="{'group_by':'line_id'}"
+                        /> -->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_zone_action" model="ir.actions.act_window">
+            <field name="name">zone SEGASA</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.zone</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" ref="view_hr_zone_filter"/>
+            <field name="domain">[]</field>
+            <!-- <field name="context">{"search_default_type": 1,}</field> -->
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new zone.
+                </p><p>
+                With zone display, you can add different.
+            </p>
+            </field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem
+            action="hr_zone_action"
+            name="Zone Segasa"
+            sequence="13"
+            id="main_menu_hr_zone"
+            parent="hr.menu_config_employee" />
+
+
+    </odoo>

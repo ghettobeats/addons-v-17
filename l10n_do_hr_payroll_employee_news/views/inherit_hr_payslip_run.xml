@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+        <record id="inherit_hr_payslip_run_form" model="ir.ui.view">
+            <field name="name">inherit_hr_payslip_run_form</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header/widget[@name='add_payslips']" position="before">
+                  <button name="assign_rule_in_lote" string="Refrescar Novedades"
+                          invisible="state in ('paid', 'done', 'cancel')" type="object" icon="fa-refresh"/>
+                </xpath>
+
+                <!-- Campo name solo lectura para base.group_user -->
+                <field name="name" position="attributes">
+                    <attribute name="readonly">[('groups', 'not in', ['base.group_user'])]</attribute>
+                </field>
+                <!--<field name="name" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                    <attribute name="groups">base.group_user</attribute>
+                </field>-->
+
+                <!-- Campo name editable para group_access_change_name_in_batch -->
+                <field name="name" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                    <attribute name="groups">l10n_do_hr_payroll_employee_news.group_access_change_name_in_batch</attribute>
+                </field>
+
+                <!--<field name="name" position="attributes">
+                    <attribute name="groups">l10n_do_hr_payroll_employee_news.group_access_change_name_in_batch</attribute>
+                </field>
+
+                <field name="name" position="attributes">
+                    <attribute name="readonly">[('groups', 'not in', ['l10n_do_hr_payroll_employee_news.group_access_change_name_in_batch'])]</attribute>
+                </field>-->
+
+            </field>
+        </record>
+    </odoo>

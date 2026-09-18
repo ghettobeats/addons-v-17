@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+ License MIT (https://opensource.org/licenses/MIT).
+-->
+<odoo>
+    <data noupdate="1">
+
+        <!-- Grupo exclusivo -->
+        <record id="group_custom_model_account_manager" model="res.groups">
+            <field name="name">Gestor de cuentas contables en las reglas de nómina</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+        
+        <record id="group_hr_payslip_date_editor" model="res.groups">
+            <field name="name">Permitir editar fecha contable de recibo nómina</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+
+    </data>
+</odoo>

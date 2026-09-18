@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+        <!--<record id="inherit_hr_salary_rule_form" model="ir.ui.view">
+            <field name="name">inherit.hr.salary.rule.form</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='appears_on_payslip']" position="after">
+                    <field name="appears_on_report"/>
+                </xpath>
+            </field>
+        </record>-->
+        
+        <record id="wizard_payroll_report_form_view" model="ir.ui.view">
+            <field name="name">wizard_payroll_report_form_view</field>
+            <field name="model">wizard.payroll_report.xlsx</field>
+            <field name="arch" type="xml">
+                <form string="Report Payroll">
+                    <div class="jumbotron">
+                        <p>Seleccione 1 o varias nomina a generar, en caso de seleccionar varias nominas estas se sumaran en un unico reporte.</p>
+                    </div>
+                        <field name="payslip_run_ids" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="wizard_id" invisible="1" optional="hide"/>
+                                <field name="run_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}" required='1' optional="show"/>
+                            </tree>
+                        </field>
+                        <notebook>
+                            <page string="Visualization" name="visualization">
+
+                                <group>
+                                    <group>
+                                        <field name="num_document"/>
+                                        <field name="department"/>
+                                    </group>
+                                    <group>
+                                        <field name="job"/>
+                                        <field name="wage"/>
+                                    </group>
+                                </group>
+
+                            </page>
+
+                            <page string="Filters" invisible="1">
+                                <group>
+                                    <group>
+                                        <field name="filter_by"/>
+                                    </group>
+                                    <group>
+                                        <field name="department_id" /> <!--attrs="{'invisible':[('filter_by','!=','department')], 'required':[('filter_by','=','department')]}"-->
+                                        <field name="job_id" /> <!--attrs="{'invisible':[('filter_by','!=','job')], 'required':[('filter_by','=','job')]}"-->
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    <footer>
+                        <button type="object" name="generate_report"
+                                string="Generate XLSX" class="oe_highlight"/>
+
+                        o
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="actions_wizard_payroll_report">
+            <field name="name">Reporte de Nomina XLSX</field>
+            <field name="res_model">wizard.payroll_report.xlsx</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Reporte de Nomina XLSX"
+                  action="actions_wizard_payroll_report"
+                  parent="hr_payroll.menu_hr_payroll_report"
+                  id="menu_wizard_payroll_report"
+                  sequence="16"/>
+    </odoo>

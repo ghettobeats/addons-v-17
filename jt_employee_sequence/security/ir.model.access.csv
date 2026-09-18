@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee,access_hr_employee,model_hr_employee,jt_employee_sequence.group_access_emp_id,0,0,0,0

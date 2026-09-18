@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    <data noupdate="0">
+        <record id="set_payroll_accounting_default" model="res.config.settings">
+            <field name="module_hr_payroll_account">True</field>
+        </record>
+    </data>
+</odoo>

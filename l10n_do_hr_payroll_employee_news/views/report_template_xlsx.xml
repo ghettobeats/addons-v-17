@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+        <report id="template_xlsx"
+                model="wizard.payroll_report.xlsx"
+                string="Payroll Report"
+                report_type="xlsx"
+                name="payroll_report.template_xlsx"
+                file="payroll_report.template_xlsx"
+                attachment_use="False"
+        />
+    </odoo>

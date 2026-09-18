@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+        <template id="INVOICE_7_document" name="Military Template">
+            <!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <div class="header" t-attf-style="color:{{style.text_color}} !important;font-size:{{int(style.header_font)}}px !important;font-family:{{style.font_family}} !important;">
+                <t t-if="style.header">
+                    <!-- Fila principal: logo+empresa izquierda | fiscal derecha -->
+                    <div class="row mb-0 p-0" style="align-items: flex-start;">
+                        <!-- Izquierda: logo + nombre empresa + RNC -->
+                        <div class="col-4">
+                            <div style="margin-bottom: 3px;">
+                                <img t-if="style.logo" t-att-src="image_data_uri(style.logo)" alt="Logo" style="max-height:55px; max-width:100%;"/>
+                                <img t-if="not style.logo and company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo" style="max-height:55px; max-width:100%;"/>
+                            </div>
+                            <div t-attf-style="font-size:{{int(style.header_font)}}px !important;">
+                                <strong t-attf-style="color:{{style.name_color}};"><span t-field="company.display_name"/></strong><br/>
+                                <t t-if="company.company_registry">RNC: <span t-field="company.company_registry"/></t>
+                            </div>
+                        </div>
+                        <!-- Centro: título con estrellas (estilo militar conservado) -->
+                        <div class="col-4 text-center">
+                            <h3 t-attf-style="color:{{style.theme_color}}; margin: 0;">
+                                <span><i class="fa fa-star"/></span>
+                                <span t-if="o.state == 'draft'"> BORRADOR </span>
+                                <span t-if="o.state == 'cancel'"> CANCELADO </span>
+                                <span t-if="o.move_type == 'out_invoice'"> FACTURA </span>
+                                <span t-if="o.move_type == 'out_refund'"> NOTA CRÉDITO </span>
+                                <span t-if="o.move_type == 'in_refund'"> N/C PROVEEDOR </span>
+                                <span t-if="o.move_type == 'in_invoice'"> FACT. PROVEEDOR </span>
+                                <span><i class="fa fa-star"/></span>
+                            </h3>
+                        </div>
+                        <!-- Derecha: bloque fiscal -->
+                        <div class="col-4" style="text-align: right; padding-top: 2px;">
+                            <t t-if="o.move_type == 'out_invoice' and o.state in ('posted','ready_to_post')">
+                                <t t-if="'fiscal_type_id' in o._fields and o.fiscal_type_id">
+                                    <t t-set="fiscal_name" t-value="o.fiscal_type_id.name"/>
+                                    <h3 style="margin: 0 0 2px 0; font-weight: bold; text-transform: uppercase; line-height: 1.2;">
+                                        <t t-esc="fiscal_name.upper()"/>
+                                    </h3>
+                                </t>
+                                <t t-else="">
+                                    <h3 style="margin: 0 0 2px 0; font-weight: bold;">FACTURA</h3>
+                                </t>
+                                <hr style="margin: 3px 0; border-top: 1px solid black;"/>
+                                <div style="margin-bottom: 2px;" t-if="o.name or o.ref">
+                                    <b style="font:14px lucida-console,sans-serif !important;">NCF :</b>
+                                    <t t-if="o.ref"><span style="font:14px lucida-console,sans-serif !important;" t-field="o.ref"/></t>
+                                    <t t-else=""><span style="font:14px lucida-console,sans-serif !important;" t-field="o.name"/></t>
+                                </div>
+                                <div t-if="o.fiscal_sequence_expiration">
+                                    <span style="font:14px lucida-console,sans-serif !important; font-weight: bold;">Valida Hasta :</span>
+                                    <span style="font:14px lucida-console,sans-serif !important;" t-field="o.fiscal_sequence_expiration" t-options='{"format": "dd/MM/yyyy"}'/>
+                                </div>
+                            </t>
+                            <t t-if="o.move_type == 'out_refund'">
+                                <h3 style="margin: 0 0 2px 0; font-weight: bold;">NOTA DE CRÉDITO</h3>
+                                <hr style="margin: 3px 0; border-top: 1px solid black;"/>
+                                <div t-if="o.name or o.ref">
+                                    <b style="font:14px lucida-console,sans-serif !important;">NCF :</b>
+                                    <t t-if="o.ref"><span style="font:14px lucida-console,sans-serif !important;" t-field="o.ref"/></t>
+                                    <t t-else=""><span style="font:14px lucida-console,sans-serif !important;" t-field="o.name"/></t>
+                                </div>
+                            </t>
+                            <t t-if="o.move_type == 'in_invoice'">
+                                <t t-if="'l10n_do_expense_type' in o._fields and o.l10n_do_expense_type">
+                                    <h3 style="margin: 0 0 2px 0; font-weight: bold; text-transform: uppercase;">
+                                        <span t-field="o.l10n_do_expense_type"/>
+                                    </h3>
+                                </t>
+                                <t t-else="">
+                                    <h3 style="margin: 0 0 2px 0; font-weight: bold;">FACTURA PROVEEDOR</h3>
+                                </t>
+                                <hr style="margin: 3px 0; border-top: 1px solid black;"/>
+                                <t t-if="o.ref">
+                                    <t t-set="vendor_ncf" t-value="o.ref.split(' - ')[-1].strip() if ' - ' in o.ref else o.ref"/>
+                                    <div style="margin-bottom: 2px;">
+                                        <b style="font:14px lucida-console,sans-serif !important;">NCF :</b>
+                                        <span style="font:14px lucida-console,sans-serif !important;"><t t-esc="vendor_ncf"/></span>
+                                    </div>
+                                </t>
+                                <div t-if="'ncf_expiration_date' in o._fields and o.ncf_expiration_date">
+                                    <span style="font:14px lucida-console,sans-serif !important; font-weight: bold;">Valida Hasta :</span>
+                                    <span style="font:14px lucida-console,sans-serif !important;" t-field="o.ncf_expiration_date" t-options='{"format": "dd/MM/yyyy"}'/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <!-- Línea separadora militar (dashed) -->
+                    <div t-attf-style="border-bottom:2px dashed {{style.theme_color}}; margin: 6px 0;"/>
+                </t>
+            </div> <!--end of Header-->
+            <div class="article page" t-attf-data-oe-model="account.move" t-attf-data-oe-id="{{o.id}}" t-attf-style="color:{{style.text_color}} !important;font-size:{{int(style.body_font)}}px !important;font-family:{{style.font_family}} !important;">
+                <div class="col-12" t-attf-style="white-space:pre-line;color:#{style.wm_color};left:#{style.leftpadding}mm; top:#{style.toppadding}mm;font-size:#{style.fontsize}px; opacity:#{style.opacity};z-index:-99; -webkit-transform:rotate(-#{style.rotate}deg);position:fixed;"><t t-esc="style.wm_eval(o, time, user, res_company)"/></div>
+                <!-- Cliente -->
+                <div class="row mb-1">
+                    <div class="col-6">
+                        <div t-if="o.partner_shipping_id and o.partner_shipping_id != o.partner_id" t-attf-style="font-size:{{int(style.body_font)+2}}px; font-weight:bold;">Bill To:</div>
+                        <div t-if="o.partner_shipping_id == o.partner_id or not o.partner_shipping_id" t-attf-style="font-size:{{int(style.body_font)+2}}px; font-weight:bold;">Bill&#160;&amp;&#160;Ship To:</div>
+                        <div t-if="o.partner_id" t-attf-style="color:{{style.cust_color}};font-size:{{int(style.body_font)+2}}px;font-weight:500;">
+                            <t t-if="o.partner_id.parent_id">
+                                <span t-field="o.partner_id.parent_id"/>, <span t-if="o.partner_id.title" t-field="o.partner_id.title"/> <span t-field="o.partner_id.name"/>
+                            </t>
+                            <t t-if="not o.partner_id.parent_id">
+                                <span t-if="o.partner_id.title" t-field="o.partner_id.title"/> <span t-field="o.partner_id"/>
+                            </t>
+                        </div>
+                        <div t-field="o.partner_id" t-options='{"widget": "contact", "fields":["address","phone"],"no_marker": false}'/>
+                        <div t-if="o.partner_id.vat">RNC/Cédula: <span t-field="o.partner_id.vat"/></div>
+                    </div>
+                    <div class="col-6" t-if="o.partner_shipping_id and o.partner_shipping_id != o.partner_id">
+                        <div t-attf-style="font-size:{{int(style.body_font)+2}}px;font-weight:bold;">Ship To:</div>
+                        <div t-field="o.partner_shipping_id" t-options='{"widget": "contact", "fields":["name","address","phone"],"no_marker": false}'/>
+                    </div>
+                </div>
+                <!-- Cajas horizontales: No. Factura | Fecha | Vencimiento | Referencia -->
+                <div class="row mb-2" t-attf-style="border-top:1px solid {{style.theme_color}}; border-bottom:1px solid {{style.theme_color}};">
+                    <div class="col-3" t-attf-style="border-right:1px solid {{style.theme_color}}; padding: 4px 6px;">
+                        <div style="font-weight:bold; font-size:9px; text-transform:uppercase; color:#888;">
+                            <t t-if="o.move_type == 'out_invoice'">No. Factura</t>
+                            <t t-elif="o.move_type == 'out_refund'">No. Nota Crédito</t>
+                            <t t-elif="o.move_type == 'in_invoice'">No. Factura Prov.</t>
+                            <t t-else="">No. Documento</t>
+                        </div>
+                        <div style="font-weight:bold;"><span t-field="o.name"/></div>
+                    </div>
+                    <div class="col-3" t-attf-style="border-right:1px solid {{style.theme_color}}; padding: 4px 6px;" t-if="o.invoice_date">
+                        <div style="font-weight:bold; font-size:9px; text-transform:uppercase; color:#888;">
+                            <t t-if="o.move_type == 'out_invoice'">Fecha Factura</t>
+                            <t t-elif="o.move_type == 'out_refund'">Fecha N. Crédito</t>
+                            <t t-else="">Fecha</t>
+                        </div>
+                        <div><span t-field="o.invoice_date"/></div>
+                    </div>
+                    <div class="col-3" t-attf-style="border-right:1px solid {{style.theme_color}}; padding: 4px 6px;" t-if="o.invoice_date_due">
+                        <div style="font-weight:bold; font-size:9px; text-transform:uppercase; color:#888;">Fecha Vencimiento</div>
+                        <div><span t-field="o.invoice_date_due"/></div>
+                    </div>
+                    <div class="col-3" style="padding: 4px 6px;" t-if="o.ref">
+                        <div style="font-weight:bold; font-size:9px; text-transform:uppercase; color:#888;">Referencia</div>
+                        <div><span t-field="o.ref"/></div>
+                    </div>
+                </div>
+                    <!-- DATA-->
+                    <t t-call="isjo_professional_templates.invoice_lines"/>
+                        <!--/DATA-->
+                </div><!--End of PAGE-->
+                <!--FOOTER -->
+                <div class="footer" t-attf-style="font-size:{{style.footer_font}}px !important;font-family:{{style.font_family}} !important;">
+                    <div class="row text-end" t-attf-style="color:{{style.theme_color}}">
+                        <h4>Thank You.</h4>
+                    </div>
+                    <t t-call="isjo_professional_templates.company_footer"/>
+                </div>
+                <!--/FOOTER-->
+            </template>
+
+        
+    </odoo>

@@ -1,0 +1,265 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* employee_additional_fields_customized_to_segasa
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20240924\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-30 20:16+0000\n"
+"PO-Revision-Date: 2024-09-30 16:19-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_DO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.inherit_hr_view_employee_form
+msgid "000-0000000-0"
+msgstr "000-0000000-0"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_employee__structure_class_id
+msgid "Clase"
+msgstr "Clase"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.actions.act_window,help:employee_additional_fields_customized_to_segasa.hr_region_action
+msgid "Click to add a new region."
+msgstr "Haga clic para agregar una nueva región."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.actions.act_window,help:employee_additional_fields_customized_to_segasa.hr_structure_class_action
+msgid "Click to add a new structure class."
+msgstr "Haga clic para agregar una nueva clase de estructura."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.actions.act_window,help:employee_additional_fields_customized_to_segasa.hr_zone_action
+msgid "Click to add a new zone."
+msgstr "Haga clic para agregar una nueva zona."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_region__create_uid
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_structure_class__create_uid
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_zone__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_region__create_date
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_structure_class__create_date
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_zone__create_date
+msgid "Created on"
+msgstr "Creado sobre:"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_region__code
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_structure_class__code
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_zone__code
+msgid "Código"
+msgstr "Código"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_zone__name
+msgid "Description"
+msgstr "Descripción"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_region__name
+msgid "Description Region"
+msgstr "Descripción Región"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_region__display_name
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_structure_class__display_name
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_zone__display_name
+msgid "Display Name"
+msgstr "Nombre Completo"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model,name:employee_additional_fields_customized_to_segasa.model_hr_employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.view_hr_region_filter
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.view_hr_structure_class_filter
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.view_hr_zone_filter
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_region__id
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_structure_class__id
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_zone__id
+msgid "ID"
+msgstr "Id"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_employee__identification_id
+msgid "Identification No"
+msgstr "No. Cédula"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_region__write_uid
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_structure_class__write_uid
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_zone__write_uid
+msgid "Last Updated by"
+msgstr "Ultima actualización por"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_region__write_date
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_structure_class__write_date
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_zone__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.inherit_hr_view_employee_form
+msgid "No. Identification"
+msgstr "No. Cédula"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.view_hr_region_tree
+msgid "Region"
+msgstr "Región"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.actions.act_window,name:employee_additional_fields_customized_to_segasa.hr_region_action
+msgid "Region SEGASA"
+msgstr "Región SEGASA"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.ui.menu,name:employee_additional_fields_customized_to_segasa.main_menu_hr_region
+msgid "Region Segasa"
+msgstr "Región SEGASA"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.view_hr_region_filter
+msgid "Search Region"
+msgstr "Buscar  Región"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.view_hr_structure_class_filter
+msgid "Search Structure Class"
+msgstr "Clase de estructura de búsqueda"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.view_hr_zone_filter
+msgid "Search Zone"
+msgstr "Zona de búsqueda"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.view_hr_structure_class_tree
+msgid "Structure Class"
+msgstr "Clase de estructura"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.ui.menu,name:employee_additional_fields_customized_to_segasa.main_menu_hr_structure_class
+msgid "Structure Class Segasa"
+msgstr "Clase de estructura Segasa"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_structure_class__name
+msgid "Structure Description Class"
+msgstr "Estructura Descripción Clase"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.constraint,message:employee_additional_fields_customized_to_segasa.constraint_hr_region_name_uniq
+#: model:ir.model.constraint,message:employee_additional_fields_customized_to_segasa.constraint_hr_structure_class_name_uniq
+msgid "The name to structure class must be unique"
+msgstr "El nombre de la clase estructurada debe ser único."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.constraint,message:employee_additional_fields_customized_to_segasa.constraint_hr_zone_name_uniq
+msgid "The zone name must be unique"
+msgstr "El nombre de la zona debe ser único."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.actions.act_window,help:employee_additional_fields_customized_to_segasa.hr_region_action
+msgid "With region display, you can add different."
+msgstr "Con la visualización de regiones, puede agregar diferentes."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.actions.act_window,help:employee_additional_fields_customized_to_segasa.hr_structure_class_action
+msgid "With structure class display, you can add different."
+msgstr "Con la visualización de clases de estructura, puede agregar diferentes."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.actions.act_window,help:employee_additional_fields_customized_to_segasa.hr_zone_action
+msgid "With zone display, you can add different."
+msgstr "Con la visualización de zonas, puede agregar diferentes."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,field_description:employee_additional_fields_customized_to_segasa.field_hr_employee__zone_id
+msgid "Zona"
+msgstr "Zona"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model_terms:ir.ui.view,arch_db:employee_additional_fields_customized_to_segasa.view_hr_zone_tree
+msgid "Zone"
+msgstr "Zona."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.ui.menu,name:employee_additional_fields_customized_to_segasa.main_menu_hr_zone
+msgid "Zone Segasa"
+msgstr "Zona Segasa"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model,name:employee_additional_fields_customized_to_segasa.model_hr_region
+msgid "hr.region"
+msgstr "hr.region"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model,name:employee_additional_fields_customized_to_segasa.model_hr_structure_class
+msgid "hr.structure.class"
+msgstr "hr.structure.class"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model,name:employee_additional_fields_customized_to_segasa.model_hr_zone
+msgid "hr.zone"
+msgstr "hr.zone"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,help:employee_additional_fields_customized_to_segasa.field_hr_structure_class__name
+msgid "i.e. the name of the class structure."
+msgstr "es decir, el nombre de la estructura de clases."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,help:employee_additional_fields_customized_to_segasa.field_hr_region__name
+msgid "i.e. the name of the region."
+msgstr "es decir, el nombre de la región."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.actions.act_window,name:employee_additional_fields_customized_to_segasa.hr_structure_class_action
+msgid "structure class SEGASA"
+msgstr "clase de estructura SEGASA"
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,help:employee_additional_fields_customized_to_segasa.field_hr_structure_class__code
+msgid "that is, code according of the class structure."
+msgstr "es decir, codificar según la estructura de clases."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,help:employee_additional_fields_customized_to_segasa.field_hr_region__code
+msgid "that is, code according of the region."
+msgstr "es decir, codificar según la región."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,help:employee_additional_fields_customized_to_segasa.field_hr_zone__code
+msgid "that is, code according to your area."
+msgstr "es decir, codifica según tu zona."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.model.fields,help:employee_additional_fields_customized_to_segasa.field_hr_zone__name
+msgid "that is, name of the areas."
+msgstr "es decir, nombre de las áreas."
+
+#. module: employee_additional_fields_customized_to_segasa
+#: model:ir.actions.act_window,name:employee_additional_fields_customized_to_segasa.hr_zone_action
+msgid "zone SEGASA"
+msgstr "zona SEGASA"

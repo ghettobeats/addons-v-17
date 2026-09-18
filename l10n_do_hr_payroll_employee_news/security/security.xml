@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+     Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+     License MIT (https://opensource.org/licenses/MIT).
+-->
+<odoo>
+       <!-- Category main Cambiar nombre a los lotes creados -->
+        <record model="ir.module.category" id="module_change_batch_receive_name">
+            <field name="name">Access Change Name in Batch Receive</field>
+            <field name="sequence">20</field>
+        </record>
+
+       <!-- view user Group -->
+        <record id='group_access_change_name_in_batch' model="res.groups">
+            <field name="name">Permit change name in batch receive</field>
+            <field name="category_id" ref="module_change_batch_receive_name" />
+        </record>
+
+       <!--*********************************************************************-->
+
+    </odoo>

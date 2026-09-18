@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+        <!-- Crear novedades masivas para empleados -->
+        <record id="view_wizard_input_import_form" model="ir.ui.view">
+            <field name="name">wizard.input.import.form</field>
+            <field name="model">wizard.input.import</field>
+            <field name="arch" type="xml">
+                <form string="Importar Novedades en Lote">
+                    <div>
+                        <field name="hide"/>
+                        <label for="hide" string="Cargar por Archivo"/>
+                    </div>
+                    <newline/>
+                    <div invisible="hide == True">
+                        <label for="employee_ids" class="oe_edit_only"/>
+                        <h2>
+                            <field 
+                                name="employee_ids"
+                                widget="many2many_tags"
+                                required="hide != True"
+                                style="width: 50% !important;"
+                                options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                        </h2>
+                    </div>
+                    <group invisible="hide == True">
+                        <group string="Concepto">
+                            <field 
+                                name="input_id"
+                                required="hide != True"
+                                options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                        </group>
+                        <newline/>
+                        <group>
+                            <field name="amount" required="hide != True" />
+                            <field name="frecuency_type" required="hide != True" />
+                            <field
+                                name="apply_in"
+                                required="frecuency_type == 'variable' and hide != True"
+                                invisible="frecuency_type != 'variable'"
+                                options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                        </group>
+                        <div class="o_row" invisible="frecuency_type != 'fixed'">
+                            <label for="start_date" string="Fecha Inicial" invisible="frecuency_type != 'fixed'"/>
+                            <field name="start_date"
+                                   required="frecuency_type == 'fixed' and hide != True"
+                                   placeholder="Fecha de inicio"
+                                   style="width: 30% !important;"/>
+                            <small style="color: #777;">AquÃ­ se define la regla, especificando su fecha de inicio y, opcionalmente, su fecha de tÃ©rmino. Si no se establece una fecha de tÃ©rmino, la regla se considerarÃ¡ indefinida y se mantendrÃ¡ activa de manera continua..</small>
+                            <label for="end_date" string="Fecha Final"/>
+                            <field name="end_date"
+                                   placeholder="Fecha de tÃ©rmino" style="width: 30% !important;"/>
+                        </div>
+                    </group>
+                    <group string="Carga de Excel" invisible="hide == False">
+                        <field name="file_binary" filename="file_name" />
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                    <footer invisible="hide == False">
+                        <button string="Procesar Excel" type="object" name="action_process_excel" class="btn-secondary" />
+                        <button string="Cancelar" class="btn-secondary" special="cancel" />
+                    </footer>
+                    <footer invisible="hide == True">
+                        <button string="Confirmar" type="object" name="action_create_massive_news" class="btn-primary" />
+                        <button string="Cancelar" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Action para abrir el asistente -->
+        <record id="action_wizard_input_import" model="ir.actions.act_window">
+            <field name="name">Importar Novedades en Lote</field>
+            <field name="res_model">wizard.input.import</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_wizard_input_import_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Crear novedades masivas para empleados -->
+        <menuitem 
+            name="Crear novedades masivas empleados"
+            action="action_wizard_input_import"
+            groups="hr_payroll.group_hr_payroll_user"
+            parent="l10n_do_hr_payroll_employee_news.menu_novedades_root"
+            id="menu_input_import_wizard"
+            sequence="16"/>
+        
+    </odoo>

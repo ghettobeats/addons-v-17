@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fleet_approval_wizard_form" model="ir.ui.view">
+        <field name="name">fleet.approval.wizard.form</field>
+        <field name="model">fleet.approval.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Aprobacion de Movimiento">
+                <group>
+                    <field name="vehicle_id" readonly="1"/>
+                    <field name="movement_state" readonly="1" widget="badge"/>
+                    <field name="pending_assignee_id" readonly="1" invisible="not pending_assignee_id"/>
+                    <field name="assigned_person_id" readonly="1" invisible="not assigned_person_id"/>
+                </group>
+                <group string="Decision">
+                    <field name="action" readonly="0" widget="radio"/>
+                    <field name="comment" placeholder="Ingrese un comentario obligatorio..."/>
+                </group>
+                <footer>
+                    <button name="action_confirm" string="Confirmar" type="object" class="oe_highlight"/>
+                    <button special="cancel" string="Cancelar" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

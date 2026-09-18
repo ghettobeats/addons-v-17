@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    
+        <record id="inherit_hr_view_employee_form" model="ir.ui.view">
+            <field name="name">inherit.hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='job_title']" position="replace">
+                  <label for="identification_id" string="No. Identification"/>
+                  <div class="o_row">
+                      <field name="identification_id" required="1" placeholder="000-0000000-0"/>
+                  </div>
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="before">
+                  <xpath expr="//field[@name='job_id']" position="move"/>
+                </xpath>
+                <xpath expr="//field[@name='coach_id']" position="after">
+                  <field name="region_id" options="{'no_open': True, 'no_create': True}"/>
+                  <field name="zone_id" options="{'no_open': True, 'no_create': True}"/>
+                </xpath>
+                <xpath expr="//group/group[1]" position="inside">
+                  <field name="structure_class_id" options="{'no_open': True, 'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Herencia de la vista de bÃºsqueda hr.view_employee_filter -->
+        <record id="view_employee_filter_inherit_identification_id" model="ir.ui.view">
+            <field name="name">hr.employee.search.inherit.identification</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+                <!-- Agregar el campo identification_id antes del campo 'name' -->
+                <xpath expr="//search/field[@name='name']" position="before">
+                    <field name="identification_id" string="CÃ©dula" filter_domain="[('identification_id', 'ilike', self)]"/>
+                    <field name="structure_class_id" string="Clase" filter_domain="[('structure_class_id.name', 'ilike', self)]"/>
+                    <field name="region_id" string="RegiÃ³n" filter_domain="[('region_id.name', 'ilike', self)]"/>
+                    <field name="zone_id" string="Zona" filter_domain="[('zone_id.name', 'ilike', self)]"/>
+                </xpath>
+                <xpath expr="//search" position="inside">
+                    <!-- Agregar los campos al Ã¡rea de agrupaciÃ³n -->
+                    <group expand="1" string="Agrupar por">
+                        <filter string="Clase de Estructura" name="group_by_structure_class" context="{'group_by': 'structure_class_id'}"/>
+                        <filter string="RegiÃ³n" name="group_by_region" context="{'group_by': 'region_id'}"/>
+                        <filter string="Zona" name="group_by_zone" context="{'group_by': 'zone_id'}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+              
+        <!-- Herencia de la vista Kanban -->
+        <!--<record id="view_employee_kanban_inherit_identification_id" model="ir.ui.view">
+            <field name="name">hr.employee.kanban.inherit.identification</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_kanban"/>
+            <field name="arch" type="xml">
+                &lt;!&ndash; Insertar el campo identification_id en el lugar adecuado dentro de la vista Kanban &ndash;&gt;
+                <xpath expr="//kanban" position="inside">
+                    <field name="identification_id"/>
+                </xpath>
+        
+                &lt;!&ndash; AÃ±adir el campo identification_id despuÃ©s del nombre del empleado &ndash;&gt;
+                <xpath expr="//kanban/templates/div/div[@class='oe_kanban_details']/div/div/strong" position="after">
+                    <span t-if="record.identification_id.raw_value">
+                        <field name="identification_id"/>
+                    </span>
+                </xpath>
+                
+            </field>
+        </record>-->
+
+                
+        <!-- Herencia de la vista Tree -->
+        <record id="view_employee_tree_inherit_identification_id" model="ir.ui.view">
+            <field name="name">hr.employee.tree.inherit.identification</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <!-- Agregar la columna de cÃ©dula -->
+                <field name="name" position="before">
+                    <field name="identification_id" string="CÃ©dula" optional="show"/>
+                    <field name="structure_class_id" string="Clase" optional="show"/>
+                    <field name="region_id" string="Region" optional="show"/>
+                    <field name="zone_id" string="Zona" optional="show"/>
+                </field>
+            </field>
+        </record>
+    
+    </odoo>

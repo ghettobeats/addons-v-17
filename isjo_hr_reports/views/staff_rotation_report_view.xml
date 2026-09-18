@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_isjo_staff_rotation_report_tree" model="ir.ui.view">
+        <field name="name">isjo.staff.rotation.report.tree</field>
+        <field name="model">isjo.staff.rotation.report</field>
+        <field name="arch" type="xml">
+            <tree string="Rotación de Personal"
+                  create="false" delete="false" edit="false"
+                  decoration-success="x_tipo_movimiento == 'ingreso'"
+                  decoration-danger="x_tipo_movimiento == 'salida'">
+
+                <field name="x_fecha_mov_str"     string="Fecha"              />
+                <field name="x_tipo_movimiento"   string="Movimiento"         />
+                <field name="x_cod_card"          string="Código"             optional="show"/>
+                <field name="x_employee_name"     string="Empleado"           />
+                <field name="x_cedula"            string="Cédula"             optional="show"/>
+                <field name="x_gender"            string="Género"             optional="hide"/>
+                <field name="x_department_name"   string="Departamento"       optional="show"/>
+                <field name="x_puesto"            string="Puesto"             optional="show"/>
+                <field name="x_clase"             string="Clase"              optional="show"/>
+                <field name="x_region"            string="Región"             optional="show"/>
+                <field name="x_zona"              string="Zona"               optional="show"/>
+                <field name="x_motivo_salida"     string="Motivo de Salida"   optional="show"/>
+                <field name="x_mes_movimiento"    string="Mes"                optional="hide"/>
+                <field name="x_ano_movimiento"    string="Año"                optional="hide"/>
+                <field name="x_fecha_movimiento"                               invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="search_isjo_staff_rotation_report" model="ir.ui.view">
+        <field name="name">isjo.staff.rotation.report.search</field>
+        <field name="model">isjo.staff.rotation.report</field>
+        <field name="arch" type="xml">
+            <search string="Buscar">
+                <field name="x_employee_name"   string="Empleado"/>
+                <field name="x_cedula"          string="Cédula"/>
+                <field name="x_cod_card"        string="Código"/>
+                <field name="x_department_name" string="Departamento"/>
+                <field name="x_puesto"          string="Puesto"/>
+                <field name="x_zona"            string="Zona"/>
+                <field name="x_region"          string="Región"/>
+                <field name="x_clase"           string="Clase"/>
+                <field name="x_mes_movimiento"  string="Mes"/>
+
+                <!-- Filtros por tipo de movimiento -->
+                <filter string="Ingresos"
+                        name="filter_ingresos"
+                        domain="[('x_tipo_movimiento','=','ingreso')]"/>
+                <filter string="Salidas"
+                        name="filter_salidas"
+                        domain="[('x_tipo_movimiento','=','salida')]"/>
+                <separator/>
+
+                <!-- Filtros por período -->
+                <filter string="Últimos 30 días"
+                        name="filter_30d"
+                        domain="[('x_fecha_movimiento','&gt;=',(context_today()-datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Últimos 3 meses"
+                        name="filter_3m"
+                        domain="[('x_fecha_movimiento','&gt;=',(context_today()-datetime.timedelta(days=90)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Este año"
+                        name="filter_year"
+                        domain="[('x_ano_movimiento','=',context_today().strftime('%Y'))]"/>
+
+                <group expand="0" string="Agrupar por">
+                    <filter string="Tipo de Movimiento" name="group_tipo"   context="{'group_by': 'x_tipo_movimiento'}"/>
+                    <filter string="Mes"                name="group_mes"    context="{'group_by': 'x_mes_movimiento'}"/>
+                    <filter string="Año"                name="group_ano"    context="{'group_by': 'x_ano_movimiento'}"/>
+                    <filter string="Departamento"       name="group_dept"   context="{'group_by': 'x_department_name'}"/>
+                    <filter string="Puesto"             name="group_job"    context="{'group_by': 'x_puesto'}"/>
+                    <filter string="Clase"              name="group_clase"  context="{'group_by': 'x_clase'}"/>
+                    <filter string="Región"             name="group_region" context="{'group_by': 'x_region'}"/>
+                    <filter string="Zona"               name="group_zona"   context="{'group_by': 'x_zona'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_isjo_staff_rotation_report" model="ir.actions.act_window">
+        <field name="name">Rotación de Personal</field>
+        <field name="res_model">isjo.staff.rotation.report</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="search_isjo_staff_rotation_report"/>
+        <field name="context">{'search_default_filter_30d': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No hay movimientos de personal en el período seleccionado.
+            </p>
+            <p>
+                Este reporte muestra los ingresos y salidas de personal.
+                Agrupa por Mes, Zona o Departamento para ver los totales.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_isjo_staff_rotation_report"
+              name="Rotación de Personal"
+              parent="menu_isjo_hr_reports_root"
+              action="action_isjo_staff_rotation_report"
+              sequence="20"/>
+
+</odoo>

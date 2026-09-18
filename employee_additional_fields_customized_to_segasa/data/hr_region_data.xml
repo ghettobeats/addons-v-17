@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Â© 2024 ISJO TECHNOLOGY, SRL (Daniel Diaz <daniel.diaz@isjo-technology.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+        <record id="hr_region_north" model="hr.region">
+            <field name="name">NORTE</field>
+            <field name="code">north</field>
+        </record>
+
+        <record id="hr_region_east" model="hr.region">
+            <field name="name">ESTE</field>
+            <field name="code">east</field>
+        </record>
+
+        <record id="hr_region_south" model="hr.region">
+            <field name="name">SUR</field>
+            <field name="code">south</field>
+        </record>
+
+    </odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+   
+    <record id="view_hr_payslip_employees_extend_form_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.employees.extend.form.inherit</field>
+        <field name="model">hr.payslip.employees</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_by_employees" />
+        <field name="arch" type="xml">
+            <!-- Añade el campo structure_class_ids después del campo department_id -->
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="structure_class_ids" widget="many2many_tags" />
+            </xpath>
+            <xpath expr="//field[@name='employee_ids']" position="replace">
+                <field name="employee_ids" nolabel="1" options="{'create': False, 'quick_create': False, 'no_open': True}">
+                    <tree edit="0" limit="100" >
+                        <field name="name" optional="show"/>
+                        <field name="department_id" string="Departamento" optional="show"/>
+                        <field name="structure_class_id" string="Clase" optional="show"/>
+                        <field name="job_id" optional="show"/>
+                        <field name="parent_id" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

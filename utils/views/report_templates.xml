@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Â© 2024 Daniel Eduardo Diaz Mateo <daniel.diaz@isjo-technology.com>
+
+  Report Templates:
+   - utils.basic_layout
+   - utils.header_title
+   - utils.basic_header
+   - utils.footer_page
+   - utils.basic_footer
+   - utils.table_css
+
+  Report Parameters:
+   - report_title (def: '')
+   - report_subtitle (def: '')
+   - font_family
+   - font_size (def: '0.75rem' or '12px')
+   - header_height (def: '120px')
+   - hide_header (def: False)
+   - hide_header_user_and_date (def: False)
+   - footer_font_size (def: '0.75rem' or '12px')
+   - hide_footer (def: False)
+   - hide_footer_top_line (def: False)
+   - hide_footer_page_number (def: False)
+   - th_font_size (def: '0.875rem' or '14px') // table thead font size
+   - th_color // table thead font color
+   - th_bg_color // table thead background color
+-->
+<odoo>
+        <template id="table_css">
+            <t t-set="th_bg_color" t-value="th_bg_color or '#009879'"/>
+            <t t-set="_font_size" t-value="'font-size: %s;' % (font_size or '0.75rem')"/>
+            <t t-set="th_border" t-value="'border: 1px solid %s;' % (th_bg_color or '#009879')"/>
+            <t t-set="th_border_top" t-value="'border-top: 1px solid %s;' % (th_bg_color or '#009879')"/>
+            <t t-set="_th_bg_color" t-value="'background-color: %s;' % (th_bg_color or '#009879')"/>
+            <t t-set="_th_color" t-value="'color: %s;' % (th_color or '#ffffff')"/>
+            <t t-set="_th_font_size" t-value="'font-size: %s;' % (th_font_size or '0.875rem')"/>
+            <style type="text/css">
+                .styled-table {
+                    border-collapse: collapse;
+                    min-width: 400px;
+                    width: 100%;
+                }
+
+                .styled-table tr.head,
+                .styled-table thead tr.head {
+                <t t-esc="th_border_top"/>
+                <t t-esc="_th_bg_color"/>
+                <t t-esc="_th_color"/>
+                }
+
+                .styled-table tr.head-normal {
+                    background-color: unset;
+                    color: black;
+                }
+
+                .styled-table td.head-gray,
+                .styled-table tr.head-gray {
+                    background-color: #f3f3f3;
+                    color: black;
+                }
+
+                .styled-table td.head-darkgray,
+                .styled-table tr.head-darkgray {
+                    background-color: #dddddd;
+                    color: black;
+                }
+
+                .head-normal,
+                .head-darkgray,
+                .head-gray,
+                .styled-table tbody tr.head-normal,
+                .styled-table tbody tr.head-darkgray,
+                .styled-table tbody tr.head-gray {
+                    border-top: 1px solid black;
+                }
+
+                .styled-table thead tr.head-normal,
+                .styled-table thead tr.head-darkgray,
+                .styled-table thead tr.head-gray {
+                    border-top: 0.2px solid black;
+                    border-bottom: 0.2px solid black;
+                }
+
+                .head-normal,
+                .head-darkgray,
+                .head-gray,
+                .styled-table tr.head-normal td,
+                .styled-table tr.head-darkgray td,
+                .styled-table tr.head-gray td,
+                .styled-table th {
+                    font-weight: bold;
+                    padding: 4px 6px;
+                    vertical-align: middle;
+                <t t-esc="_th_font_size"/>
+                }
+
+                .styled-table td {
+                    padding: 1px 6px;
+                    vertical-align: middle;
+                <t t-esc="_font_size"/>
+                }
+
+                .styled-table tr.borderless,
+                .styled-table tr.separator {
+                    border: none;
+                }
+
+                .styled-table tr.separator td {
+                    padding-bottom: 1rem;
+                }
+
+                .styled-table tbody tr {
+                    border-bottom: 1px solid #dddddd;
+                }
+
+                .styled-table tfoot td {
+                    font-weight: bold;
+                }
+
+                .styled-table.striped tbody tr:nth-of-type(odd) {
+                    background-color: #f3f3f3;
+                }
+
+                .styled-table.bordered tr.head,
+                .styled-table.bordered thead tr {
+                <t t-esc="th_border"/>
+                }
+
+                .styled-table.bordered tr.head-darkgray,
+                .styled-table.bordered tbody tr {
+                    border: 1px solid #dddddd;
+                }
+
+                .primary-color {
+                    color: #009879;
+                }
+
+                .secondary-color {
+                    color: #875a7b;
+                }
+
+                .text-right {
+                    text-align: right;
+                }
+
+                .col-label-right,
+                .col-label {
+                    font-weight: bold;
+                    text-transform: capitalize;
+                }
+
+                .col-label-normal {
+                    text-transform: capitalize;
+                }
+
+                .col-label-right,
+                .col-value {
+                    text-align: right;
+                }
+
+                .font-size-report {
+                <t t-esc="_font_size"/>
+                }
+            </style>
+        </template>
+        <template id="header_title">
+            <div class="header_title text-center">
+                <h4 class="primary-color company-name font-weight-bold mb-2" t-esc="res_company.name.upper()"/>
+                <h5 class="report-title mb-3" t-esc="report_title"/>
+                <h6 t-if="report_subtitle" t-raw="report_subtitle" class="report-subtitle"/>
+            </div>
+        </template>
+
+        <template id="basic_header">
+            <t t-set="_font_family" t-value="'font-family: %s;' % font_family if font_family else ''"/>
+            <t t-set="_font_size" t-value="'font-size: %s;' % (font_size or '0.75rem')"/>
+            <t t-set="header_height" t-value="header_height or ('155px' if hide_header_user_and_date else '120px')"/>
+            <div class="header" t-attf-style="height: {{header_height}};">
+                <style type="text/css">
+                    .header {
+                        position: relative;
+                        padding-top: 2px;
+                    <t t-esc="_font_family"/>
+                    }
+
+                    .user-and-date {
+                        position: absolute;
+                        bottom: 4px;
+                        border-bottom: 1px solid black;
+                    <t t-esc="_font_size"/>
+                    }
+                    
+                    .primary-color {
+                        color: #009879;
+                    }
+
+                    .secondary-color {
+                        color: #875a7b;
+                    }
+                </style>
+                <t t-call="utils.header_title"/>
+                <t t-raw="0"/>
+                <div t-if="not hide_header_user_and_date" class="container user-and-date">
+                    <div class="row">
+                        <div class="col-7 pl-0">
+                            <b>Usuario: </b>
+                            <span t-esc="user.name"/>
+                        </div>
+                        <div class="col-5 text-right pr-0">
+                            <b>Fecha: </b>
+                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y - %I:%M %p')"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="footer_page_number">
+            <div class="footer_page_number mt-2">
+                PÃ¡gina
+                <span class="page"/>
+                /
+                <span class="topage"/>
+                <t t-raw="0"/>
+            </div>
+        </template>
+
+        <template id="basic_footer">
+            <t t-set="_font_family" t-value="'font-family: %s;' % font_family if font_family else ''"/>
+            <t t-set="_footer_font_size" t-value="'font-size: %s;' % (footer_font_size or '0.75rem')"/>
+            <t t-set="_footer_top_line" t-value="'' if hide_footer_top_line else ' footer-top-line'"/>
+            <div t-attf-class="footer{{_footer_top_line}}">
+                <style type="text/css">
+                    .footer {
+                        position: relative;
+                        text-align: center;
+                    <t t-esc="_footer_font_size"/>
+                    <t t-esc="_font_family"/>
+                    }
+
+                    .footer-top-line {
+                        border-top: 1px solid black;
+                    }
+                </style>
+                <t t-raw="0"/>
+                <t t-if="not hide_footer_page_number" t-call="utils.footer_page_number"/>
+            </div>
+        </template>
+
+        <template id="basic_layout">
+            <t t-call="web.basic_layout">
+                <t t-set="_font_family" t-value="'font-family: %s;' % font_family if font_family else ''"/>
+                <div t-attf-style="{{_font_family}}">
+                    <t t-if="not hide_header" t-call="utils.basic_header"/>
+                    <t t-call="utils.table_css"/>
+                    <t t-raw="0"/>
+                    <t t-if="not hide_footer" t-call="utils.basic_footer"/>
+                </div>
+            </t>
+        </template>
+    </odoo>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+        <record id="view_hr_salary_rule_list_inherit" model="ir.ui.view">
+            <field name="name">hr.salary.rule.list.inherit</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll.hr_salary_rule_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree[1]" position="attributes">
+                    <attribute name="decoration-muted">is_clone == True</attribute>
+                    <attribute name="decoration-bf">is_clone == True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="sequence" optional="show"/>
+                    <field name="appears_on_payslip" optional="hide"/>
+                    <field name="struct_id" optional="hide"/>
+                    <field name="is_clone" widget="boolean_toggle" optional="hide"/>
+                    <field name="column_display_total_on_report" optional="show"/>
+                    <!-- NUEVOS CAMPOS TSS -->
+                    <field name="tss_report_column" string="Columna TSS" optional="show"/>
+                    <field name="tss_sequence" string="Sec. TSS" optional="hide"/>
+                    <field name="tss_sum_in_column" string="Sumar TSS" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="optional">show</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_hr_salary_rule_form_inherit" model="ir.ui.view">
+            <field name="name">hr.salary.rule.form.inherit</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll.hr_salary_rule_form"/>
+            <field name="arch" type="xml">
+                <!-- Agregar campo column_display_total_on_report despuÃ©s de appears_on_payslip -->
+                <xpath expr="//field[@name='appears_on_payslip']" position="after">
+                    <field name="column_display_total_on_report"/>
+                </xpath>
+                
+                <!-- Agregar campos de clonaciÃ³n al final del sheet, antes del notebook -->
+                <xpath expr="//sheet" position="inside">
+                    <group string="ClonaciÃ³n" name="clone_info" col="2" colspan="4">
+                        <group>
+                            <field name="is_clone" widget="boolean_toggle" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="cloned_salary_rule_id" 
+                                   options="{'no_create':True}"
+                                   invisible="'is_clone', '=', False"
+                                   required="'is_clone', '=', True"
+                                   context="{'default_is_clone': False}"/>
+                        </group>
+                    </group>
+                </xpath>
+                
+                <!-- Ribbon para clones -->
+                <xpath expr="//form/sheet/widget[@name='web_ribbon']" position="before">
+                    <widget name="web_ribbon" title="Clone" bg_color="text-bg-info" invisible="not is_clone"/>
+                </xpath>
+                
+                
+                <!-- Hacer readonly los campos de reglas clonadas -->
+                <field name="amount_python_compute" position="attributes">
+                    <attribute name="readonly">is_clone == True</attribute>
+                </field>
+                
+                <!-- Agregar pages en el notebook -->
+                <xpath expr="//notebook" position="inside">
+                    <!-- Primero la pÃ¡gina de TSS -->
+                    <page string="TSS" name="tss_config" autofocus="autofocus">
+                        <group string="ConfiguraciÃ³n para AutodeterminaciÃ³n TSS">
+                            <group string="Mapeo de Columnas">
+                                <field name="tss_report_column" widget="selection" 
+                                       options="{'no_create': True}"
+                                       class="oe_inline"/>
+                                <field name="tss_sum_in_column"/>
+                                <field name="tss_sequence"/>
+                            </group>
+                            <group string="InformaciÃ³n">
+                                <separator string="" colspan="2"/>
+                                <div class="alert alert-info" role="alert" style="margin-top: -70px;width: max-content;">
+                                    <!--<i class="fa fa-info-circle"/>-->  
+                                    <strong>Importante:</strong>
+                                    <ul style="margin-top: 5px; margin-bottom: 0;">
+                                        <li>Las reglas no clonadas deben tener asignaciones Ãºnicas por columna TSS.</li>
+                                        <li>Las reglas clonadas heredan automÃ¡ticamente la configuraciÃ³n TSS de la regla original.</li>
+                                        <li>El campo "Sumar en columna TSS" permite indicar si el valor debe sumarse o restarse del total.</li>
+                                        <li>La secuencia determina el orden de procesamiento (menor nÃºmero = mayor prioridad).</li>
+                                    </ul>
+                                </div>
+                            </group>
+                        </group>
+                    </page>
+                    
+                    <!-- Luego la pÃ¡gina de Clones -->
+                    <page string="Clones" name="clones" invisible="is_clone">
+                        <field name="clones_ids" nolabel="1" options="{'create': false}">
+                            <tree string="Clones" editable="bottom" multi_edit="1">
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="struct_id"/>
+                                <field name="tss_report_column" string="Columna TSS"/>
+                                <field name="tss_sequence" string="Secuencia TSS"/>
+                                <field name="tss_sum_in_column" string="Sumar"/>
+                                <field name="active"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="struct_id"/>
+                                    <field name="tss_report_column"/>
+                                    <field name="tss_sequence"/>
+                                    <field name="tss_sum_in_column"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                    
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Vista para la pÃ¡gina de contabilidad (existente) -->
+        <record id="view_hr_salary_rule_form_inherit_replace_accounting" model="ir.ui.view">
+            <field name="name">hr.salary.rule.form.inherit.accounting</field>
+            <field name="model">hr.salary.rule</field>
+            <field name="inherit_id" ref="hr_payroll_account.hr_salary_rule_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='accounting']" position="replace">
+                    <page string="Contabilidad" name="accounting">
+                        <group>
+                            <group>
+                                <field name="account_debit" string="Cuenta de dÃ©bito" options="{'no_create':True}" 
+                                       groups="isjo_hr_payroll.group_custom_model_account_manager"/>
+                                <field name="account_credit" string="Cuenta de crÃ©dito" options="{'no_create':True}" 
+                                       groups="isjo_hr_payroll.group_custom_model_account_manager"/>
+                            </group>
+                            <group>
+                                <field name="analytic_account_id" options="{'no_create':True}" 
+                                       groups="analytic.group_analytic_accounting"/>
+                                <field name="not_computed_in_net"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- AcciÃ³n server para clonar -->
+        <record id="hr_salary_rule_clone_action_server" model="ir.actions.server">
+            <field name="name">Clonar Regla Salarial</field>
+            <field name="model_id" ref="hr_payroll.model_hr_salary_rule"/>
+            <field name="binding_model_id" ref="hr_payroll.model_hr_salary_rule"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.show_clone_salary_rule_wizard()
+            </field>
+        </record>
+    </odoo>

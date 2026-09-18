@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    <template id="footer">
+        <div class="payslip-footer">
+            <h5 class="mt-3 mb-0">
+                <div class="net-wages-total row mx-0 p-2">
+                    <div class="col-8 p-0">
+                        Monto Total a Pagar de los Salarios Netos Devengados
+                    </div>
+                    <div class="col-4 text-right p-0">
+                        <t t-esc="'{0:,.2f}'.format(net_wages)"/>
+                    </div>
+                </div>
+            </h5>
+            <t t-set="company_expense" t-value="0"/>
+            <div t-if="employer_contrib_lines" class="break-inside-avoid">
+                <t t-set="employer_contrib_total_line" t-value="[line['total'] for line in employer_contrib_lines if line['code'] == 'TCDE001']"/>
+                <t t-set="employer_contrib_total" t-value="employer_contrib_total_line[0] if len(employer_contrib_total_line) else 0"/>
+                <t t-set="company_expense" t-value="company_expense + employer_contrib_total"/>
+                <t t-set="company_net_wages" t-value="net_wages + employer_contrib_total"/>
+                <div class="primary-color font-weight-bold">Más:</div>
+                <table class="styled-table">
+                    <thead>
+                        <tr class="head-gray">
+                            <th>Contribuciones del Empleador a la TSS</th>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="lines" t-value="employer_contrib_lines"/>
+                        <t t-foreach="lines" t-as="line">
+                            <tr t-attf-class="{{'font-weight-bold' if line['category_id_code'] == 'GROSS' else ''}}">
+                                <td>
+                                    <t t-esc="line['name']"/>
+                                </td>
+                                <td class="col-value">
+                                    <t t-esc="'{0:,.2f}'.format(line['total'])"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <h5 t-if="company_net_wages" class="mt-3 mb-0">
+                <div class="net-wages-total row mx-0 p-2">
+                    <div class="col-8 p-0">
+                        Monto Total a Desembolsar por la Empresa
+                    </div>
+                    <div class="col-4 text-right p-0">
+                        <t t-esc="'{0:,.2f}'.format(company_net_wages)"/>
+                    </div>
+                </div>
+            </h5>
+            <div t-if="provision_lines">
+                <t t-set="provision_total" t-value="0"/>
+                <div class="primary-color font-weight-bold">Más:</div>
+                <table class="styled-table">
+                    <thead>
+                        <tr class="head-gray">
+                            <th>Provisiones</th>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="provision_lines" t-as="line">
+                            <t t-set="provision_total" t-value="provision_total + line['total']"/>
+                            <tr>
+                                <td>
+                                    <t t-esc="line['name']"/>
+                                </td>
+                                <td class="col-value">
+                                    <t t-esc="'{0:,.2f}'.format(line['total'])"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr class="head-gray">
+                            <td>
+                                Total Provisiones 
+                            </td>
+                            <td class="col-value">
+                                <t t-esc="'{0:,.2f}'.format(provision_total)"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <t t-set="company_expense" t-value="company_expense + provision_total"/>
+            </div>
+            <h5 t-if="company_expense" class="my-3">
+                <t t-set="company_expense" t-value="company_expense + net_wages"/>
+                <div class="net-wages-total row mx-0 p-2">
+                    <div class="col-8 p-0">
+                        Monto Total del Gasto para la Empresa
+                    </div>
+                    <div class="col-4 text-right p-0">
+                        <t t-esc="'{0:,.2f}'.format(company_expense)"/>
+                    </div>
+                </div>
+            </h5>
+            <div t-if="not hide_signature_container" class="font-size-report text-center break-inside-avoid">
+                <div class="signature-container row pr-0">
+                    <div class="col-4">
+                        <div class="mb-5">Preparado Por</div>
+                        <div class="signature-line">Departamento de RRHH</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="mb-5">Revisado Por</div>
+                        <div class="signature-line">Departamento de Contabilidad</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="mb-5">Aprobado Por</div>
+                        <div class="signature-line">Gerencia Administrativa</div>
+                    </div>
+                </div>
+                <div class="mb-2">Debajo de esta línea no hay nada más escrito</div>
+                <div>*** Fin del documento ***</div>
+            </div>
+        </div>
+    </template>
+
+    <template id="department_summary">
+        <div class="dept-summary">
+            <t t-set="area" t-value=""/>
+            <t t-set="area_count" t-value="0"/>
+            <t t-foreach="department_summary" t-as="summary">
+                <div class="dept-summary-detail">
+                    <t t-if="area != summary['parent_name'] and area != summary['name']">
+                        <t t-set="area" t-value="summary['parent_name'] or summary['name']"/>
+                        <t t-set="area_count" t-value="area_count + 1"/>
+                        <h6 t-attf-class="dept-summary-area-title py-1">
+                            <t t-esc="'%s - %s' % (area_count, area)"/>
+                        </h6>
+                    </t>
+                    <div class="head-normal text-primary">
+                        <t t-esc="'Departamento - %s' % (summary['name'])"/>
+                    </div>
+                    <t t-set="summary_lines" t-value="sorted(summary['lines'].values(), key=lambda r: r['sequence'])"/>
+                    <t t-set="lines" t-value="[item for item in summary_lines if item['appears_on_payslip'] == True]"/>
+                    <table class="styled-table">
+                        <thead>
+                            <tr class="head-gray">
+                                <th>
+                                    <t t-esc="salary_rules_lines_header"/>
+                                </th>
+                                <th class="text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="lines" t-as="line">
+                                <t t-if="line['code'] == 'BASIC'">
+                                    <t t-set="basic_salary" t-value="line['total']"/>
+                                </t>
+                                <t t-elif="line['code'] == 'NET'">
+                                    <t t-set="net_wages" t-value="line['total']"/>
+                                </t>
+                                <t t-else="">
+                                    <tr t-if="line['code'] != 'SADE001' or line['total'] != basic_salary or line['code'] != 'NET'"
+                                        t-attf-class="{{'font-weight-bold' if line['category_id_code'] in ('BASIC','GROSS') else ('head-gray' if line['category_id_code'] == 'NET' else '')}}">
+                                        <td>
+                                            <t t-esc="line['name']"/>
+                                        </td>
+                                        <td class="col-value">
+                                            <t t-esc="'{0:,.2f}'.format(line['total'])"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                    <t t-set="employer_contrib_lines" t-value="[item for item in summary_lines if item['line_group'] == 'employer_contribution']"/>
+                    <t t-set="provision_lines" t-value="[item for item in summary_lines if item['line_group'] == 'provision']"/>
+                    <t t-set="hide_signature_container" t-value="True"/>
+                    <t t-call="isjo_hr_payroll.footer"/>
+                </div>
+            </t>
+        </div>
+        <t t-set="net_wages" t-value="net_wages_total"/>
+        <t t-call="isjo_hr_payroll.footer"/>
+    </template>
+
+    <template id="employee_overview">
+        <div class="employee-overview">
+            <table class="styled-table">
+                <thead>
+                    <tr class="head-gray">
+                        <th class="text-right pr-2">
+                            No.
+                        </th>
+                        <th>
+                            <div>Comp. </div>
+                            <div class="text-nowrap">de Pago</div>
+                        </th>
+                        <th class="text-center" style="width: 62px;">
+                            Código Emp.
+                        </th>
+                        <th>
+                            Nombre del Empleado
+                        </th>
+                        <th>
+                            Puesto de Trabajo
+                        </th>
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="net_wages_total" t-value="0"/>
+                    <t t-foreach="docs" t-as="doc">
+                        <t t-set="lines" t-value="[line for line in doc_lines[doc.id] if line['code'] == 'NET']"/>
+                        <t t-set="line" t-value="lines[0] if len(lines) else None"/>
+                        <t t-if="line">
+                            <t t-set="net_wages_total" t-value="net_wages_total + line['total']"/>
+                            <tr>
+                                <td class="text-right pr-2">
+                                    <t t-esc="doc_index + 1"/>
+                                </td>
+                                <td>
+                                    <t t-esc="doc.number"/>
+                                </td>
+                                <td class="text-center">
+                                    <t t-esc="doc.employee_id.emp_id"/>
+                                </td>
+                                <td class="text-nowrap">
+                                    <t t-esc="doc.employee_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="doc.employee_id.job_id.name"/>
+                                </td>
+                                <td class="col-value">
+                                    <t t-esc="'{0:,.2f}'.format(line['total'])"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                    <tr t-if="show_net_wages_for_validate and net_wages_total" class="head-gray">
+                        <td colspan="4">
+                            Total
+                        </td>
+                        <td colspan="2" class="col-value">
+                            <t t-esc="'{0:,.2f}'.format(net_wages_total)"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <t t-call="isjo_hr_payroll.footer"/>
+    </template>
+
+    <template id="payroll_overview">
+        <div class="payroll-overview">
+            <table class="styled-table">
+                <thead>
+                    <tr class="head-gray">
+                        <th>
+                            <t t-esc="salary_rules_lines_header"/>
+                        </th>
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="salary_rules_sum_lines" t-value="[item for item in total_by_lines if item['line_group'] == 'payroll' and item['appears_on_payslip']]"/>
+                    <t t-foreach="salary_rules_sum_lines" t-as="line">
+                        <tr t-if="show_net_wages_for_validate or line['code'] != 'NET'"
+                            t-attf-class="{{'font-weight-bold' if line['category_id_code'] in ('BASIC','GROSS') else ('head-gray' if line['category_id_code'] == 'NET' else '')}}">
+                            <td>
+                                <t t-esc="line['name']"/>
+                            </td>
+                            <td class="col-value">
+                                <t t-esc="'{0:,.2f}'.format(line['total'])"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+        <t t-set="employer_contrib_lines" t-value="[item for item in total_by_lines if item['line_group'] == 'employer_contribution']"/>
+        <t t-set="provision_lines" t-value="[item for item in total_by_lines if item['line_group'] == 'provision']"/>
+        <t t-call="isjo_hr_payroll.footer"/>
+    </template>
+
+    <template id="report_style">
+        <style type="text/css">
+            .payslip {
+                height: 50%;
+                page-break-inside: avoid;
+                padding-top: 20px;
+            }
+
+            .doc-index {
+                border-bottom: 1px solid #dddddd;
+                border-top: 1px solid #dddddd;
+                color: #875a7b;
+                margin-bottom: 10px;
+            }
+
+            .styled-table tr.head-gray td {
+                padding: 4px 4px;
+            }
+
+            .styled-table td {
+                padding: 0.98px 4px;
+            }
+
+            .slip-info td {
+                white-space: nowrap;
+            }
+
+            .net-wages-total {
+                background-color: #dddddd;
+                color: black;
+                font-weight: bold;
+            }
+
+            .employee-overview,
+            .payroll-overview,
+            .dept-summary {
+                page-break-before: always;
+            }
+
+            .employee-overview,
+            .payroll-overview {
+                padding-top: 12px;
+            }
+
+            .dept-summary-detail {
+                padding-top: 12px;
+                page-break-inside: avoid;
+            }
+
+            .dept-summary-area-title {
+                border-bottom: 1px solid #dddddd;
+                border-top: 1px solid #dddddd;
+                color: #875a7b;
+                font-weight: bold;
+                margin-bottom: 10px
+            }
+
+            .break-inside-avoid {
+                page-break-inside: avoid;
+            }
+
+            .signature-container {
+                margin-bottom: 80px;
+                padding-top: 100px;
+                page-break-inside: avoid;
+            }
+
+            .signature-line {
+                border-bottom: 1px solid black;
+                display: inline-block;
+                text-align: center;
+                margin-top: 0;
+                padding-top: 0;
+                width: 100%;
+            }
+        </style>
+    </template>
+
+    <template id="payslip_run_datailed_report">
+        <t t-name="isjo_hr_payroll.payslip_run_datailed_report">
+            <t t-set="net_wages" t-value="net_wages_total"/>
+            <t t-set="salary_rules_lines_header" t-value="'Desglose - (Salario Bruto Devengado-Deducciones-Retenciones-Descuentos)'"/>
+            <t t-call="utils.basic_layout">
+                <t t-call="isjo_hr_payroll.report_style"/>
+                <div class="page">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="payslip">
+                            <h5 class="doc-index">
+                                <t t-esc="'%s)' % (doc_index + 1)"/>
+                            </h5>
+                            <t t-call="isjo_hr_payroll.payslip_body"/>
+                        </div>
+                    </t>
+                    <t t-call="isjo_hr_payroll.footer"/>
+                </div>
+            </t>
+            <t t-if="show_summary">
+            <t t-if="department_summary" t-call="utils.basic_layout">
+                <t t-call="isjo_hr_payroll.report_style"/>
+                <t t-set="report_title" t-value="'Resumen de Nómina por Área y Departamentos - %s' % payslip_batch_name"/>
+                <div class="page">
+                    <t t-call="isjo_hr_payroll.department_summary"/>
+                </div>
+            </t>
+            <t t-call="utils.basic_layout">
+                <t t-call="isjo_hr_payroll.report_style"/>
+                <t t-set="report_title" t-value="'Resumen General de la Nómina - Empleados - %s' % payslip_batch_name"/>
+                <div class="page">
+                    <t t-call="isjo_hr_payroll.employee_overview"/>
+                </div>
+            </t>
+            <t t-if="total_by_lines" t-call="utils.basic_layout">
+                <t t-call="isjo_hr_payroll.report_style"/>
+                <t t-set="report_title" t-value="'Resumen General de la Nómina - Reglas Salariales - %s' % payslip_batch_name"/>
+                <div class="page">
+                    <t t-call="isjo_hr_payroll.payroll_overview"/>
+                </div>
+            </t>
+        </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    <template id="payslip_body">
+        <t t-set="employee" t-value="doc.employee_id"/>
+        <table class="styled-table mb-1">
+            <tbody>
+                <tr class="head-normal">
+                    <th colspan="2">
+                        <t t-esc="'Comprobante de Pago - %s' % (doc.number)"/>
+                    </th>
+                    <th colspan="2">
+                        <t t-esc="'ID: %s' % (employee.emp_id)"/>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="col-label" style="width: 58px;">
+                        Nombre:
+                    </td>
+                    <td>
+                        <t t-esc="employee.name"/>
+                    </td>
+                    <td class="col-label" style="width: 130px;">
+                        Departamento:
+                    </td>
+                    <td class="text-capitalize">
+                        <t t-esc="employee.department_id.name.lower()"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-label">
+                        Puesto:
+                    </td>
+                    <td>
+                        <t t-esc="employee.job_id.name"/>
+                    </td>
+                    <td class="col-label">
+                        Área Departamental:
+                    </td>
+                    <td class="text-capitalize">
+                        <t t-esc="(employee.department_id.parent_id.name or '').lower()"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="styled-table slip-info">
+            <thead>
+                <tr class="head-gray">
+                    <th>Desglose - (Salario Bruto Devengado-Deducciones-Retenciones-Descuentos)</th>
+                    <th class="text-right">Cantidad</th>
+                    <th class="text-right">Importe</th>
+                    <th class="text-right">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-set="basic_salary" t-value="0"/>
+                <t t-foreach="doc_lines[doc.id]" t-as="line">
+                    <t t-set="column_for_total_on_report" t-value="line['column_display_total_on_report']"/>
+                    <t t-set="quantity" t-value="'{0:,.2f}'.format(line['quantity'])"/>
+                    <t t-set="amount" t-value="'{0:,.2f}'.format(line['amount'])"/>
+                    <t t-set="total" t-value="'{0:,.2f}'.format(line['total'])"/>
+                    <t t-if="line['code'] == 'BASIC'">
+                        <t t-set="basic_salary" t-value="line['total']"/>
+                    </t>
+                    <tr t-if="line['code'] != 'SADE001' or line['total'] != basic_salary"
+                        t-attf-class="{{'font-weight-bold' if line['category_id_code'] in ('BASIC','GROSS') else ('head-gray' if line['category_id_code'] == 'NET' else '')}}">
+                        <td>
+                            <t t-esc="line['name']"/>
+                        </td>
+                        <td class="col-value">
+                            <t t-if="line['category_id_code'] != 'NET'"
+                                t-esc="total if column_for_total_on_report == 'quantity' else quantity"/>
+                        </td>
+                        <td class="col-value">
+                            <t t-if="line['category_id_code'] != 'NET'"
+                                t-esc="total if column_for_total_on_report == 'amount' else (amount if column_for_total_on_report == 'total' else '0.00')"/>
+                        </td>
+                        <td class="col-value">
+                            <t t-esc="total if column_for_total_on_report == 'total' else '0.00'"/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
+
+    <template id="payslip_report">
+        <t t-name="isjo_hr_payroll.payslip_report">
+            <t t-set="print_labels" t-value="['Documento Original']"/>
+            <t t-if="print_duplicate">
+                <t t-set="print_labels" t-value="['Documento Original', 'Documento Copia']"/>
+            </t>
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="report_title" t-value="'Comprobante De Pago Del Empleado'"/>
+                <t t-if="doc.payslip_run_id">
+                    <t t-set="report_title" t-value="'Comprobante De Pago - %s' % doc.payslip_run_id.name"/>
+                </t>
+                <t t-set="date_from" t-value="doc.date_from.strftime('%d-%m-%Y')"/>
+                <t t-set="date_to" t-value="doc.date_to.strftime('%d-%m-%Y')"/>
+                <t t-set="report_subtitle" t-value="'&lt;span class=\'pr-3\'>Período de Pago:&lt;/span>&lt;span>&lt;span class=\'font-weight-bold secondary-color\'>Desde&lt;/span> - %s - &lt;span class=\'font-weight-bold secondary-color\'>Hasta&lt;/span> - %s&lt;span>' % (date_from, date_to)"/>
+                <t t-foreach="print_labels" t-as="print_label">
+                    <t t-call="utils.basic_layout">
+                        <style type="text/css">
+                            .payslip {
+                                page-break-before: always;
+                            }
+
+                            .styled-table thead tr.head-gray {
+                                border-top: unset;
+                            }
+
+                            .styled-table tr.head-gray td,
+                            .styled-table th {
+                                padding: 0px 4px 2px 4px;
+                            }
+
+                            .styled-table td {
+                                padding: 0.98px 4px;
+                            }
+
+                            .slip-info td {
+                                white-space: nowrap;
+                            }
+
+                            .signature-container {
+                                padding-top: 75px;
+                                margin-bottom: 30px;
+                            }
+
+                            .signature-line {
+                                border-top: 1px solid black;
+                                text-align: center;
+                                width: 350px;
+                            }
+
+                            .styled-table tbody tr.head-normal {
+                                border-top: none;
+                            }
+                        </style>
+                        <div class="page">
+                            <div class="payslip">
+                                <t t-call="isjo_hr_payroll.payslip_body"/>
+                                <div class="font-size-report signature-container">
+                                    <div class="signature-line float-left">
+                                        Departamento de Recursos Humanos
+                                    </div>
+                                    <div class="signature-line float-right">
+                                        Recibido Conforme
+                                    </div>
+                                </div>
+                                <div class="footer d-inline-block w-100 text-muted">
+                                    <style type="text/css">
+                                        .footer {
+                                        <t t-esc="'font-size: %s;' % (footer_font_size or font_size)"/>
+                                        }
+
+                                        .primary-color {
+                                            color: #009879;
+                                        }
+
+                                        .secondary-color {
+                                            color: #875a7b;
+                                        }
+                                    </style>
+                                    <div class="float-left">
+                                        <div>
+                                            Original: Empleado
+                                        </div>
+                                        <div>
+                                            Copia: Dpto. RRHH
+                                        </div>
+                                    </div>
+                                    <div t-esc="print_label" t-attf-class="float-right{{' primary-color' if print_label_index == 0 else ' secondary-color'}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

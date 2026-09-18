@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    <record id="view_hr_payslip_run_form_inherit_multicurrency" model="ir.ui.view">
+        <field name="name">hr.payslip.run.form.inherit.multicurrency</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_apply_payroll_currency_rate"
+                    type="object"
+                    string="Aplicar Tasa a los Recibos"
+                    invisible="same_currency"/>
+            </xpath>
+            <field name="company_id" position="after">
+                <field name="same_currency" invisible="1"/>
+                <field name="payment_currency_id" invisible="same_currency"/>
+                <field name="payroll_currency_rate" invisible="same_currency"/>
+            </field>
+        </field>
+    </record>
+</odoo>

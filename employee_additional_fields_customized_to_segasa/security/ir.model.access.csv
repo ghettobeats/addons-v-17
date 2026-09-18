@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_hr_zone","hr.zone","model_hr_zone","hr_payroll.group_hr_payroll_user","1","1","1","1"
+"access_hr_region","hr.region","model_hr_region","hr_payroll.group_hr_payroll_user","1","1","1","1"
+"access_hr_structure_class","hr.structure.class","model_hr_structure_class","hr_payroll.group_hr_payroll_user","1","1","1","1"

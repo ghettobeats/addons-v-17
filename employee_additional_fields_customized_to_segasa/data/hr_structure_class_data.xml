@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Â© 2024 ISJO TECHNOLOGY, SRL (Daniel Diaz <daniel.diaz@isjo-technology.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+        <record id="hr_structure_class_ji01" model="hr.structure.class">
+            <field name="name">JI-01</field>
+            <field name="code">ji01</field>
+        </record>
+
+        <record id="hr_structure_class_ji02" model="hr.structure.class">
+            <field name="name">JI-02</field>
+            <field name="code">ji02</field>
+        </record>
+
+        <record id="hr_structure_class_ji03" model="hr.structure.class">
+            <field name="name">JI-03</field>
+            <field name="code">ji03</field>
+        </record>
+
+        <record id="hr_structure_class_ji04" model="hr.structure.class">
+            <field name="name">JI-04</field>
+            <field name="code">ji04</field>
+        </record>
+
+        <record id="hr_structure_class_ji05" model="hr.structure.class">
+            <field name="name">JI-05</field>
+            <field name="code">ji05</field>
+        </record>
+
+        <record id="hr_structure_class_ji06" model="hr.structure.class">
+            <field name="name">JI-06</field>
+            <field name="code">ji06</field>
+        </record>
+
+        <record id="hr_structure_class_ji07" model="hr.structure.class">
+            <field name="name">JI-07</field>
+            <field name="code">ji07</field>
+        </record>
+
+        <record id="hr_structure_class_ji08" model="hr.structure.class">
+            <field name="name">JI-08</field>
+            <field name="code">ji08</field>
+        </record>
+
+        <record id="hr_structure_class_jf01" model="hr.structure.class">
+            <field name="name">JF-01</field>
+            <field name="code">jf01</field>
+        </record>
+
+        <record id="hr_structure_class_jf02" model="hr.structure.class">
+            <field name="name">JF-02</field>
+            <field name="code">jf02</field>
+        </record>
+
+    </odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    <record id="view_hr_payslip_form_inherit_multicurrency" model="ir.ui.view">
+        <field name="name">hr.payslip.form.inherit.multicurrency</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <field name="contract_id" position="after">
+                <field name="same_currency" invisible="1"/>
+                <field name="payment_currency_id" invisible="same_currency"/>
+                <field name="payroll_currency_rate" invisible="same_currency"
+                    readonly="state in ('done', 'paid', 'cancel')"/>
+                <field name="net_wage_currency" invisible="same_currency"
+                    readonly="state in ('done', 'paid', 'cancel')"/>
+            </field>
+        </field>
+    </record>
+</odoo>

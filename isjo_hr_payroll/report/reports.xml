@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    
+    <!--<report
+        id="action_report_payslip"
+        model="hr.payslip"
+        string="Recibo de Nómina"
+        report_type="qweb-pdf"
+        name="isjo_hr_payroll.payslip_body"
+        file="isjo_hr_payroll.payslip_body"
+        print_report_name="'Recibo de Nómina - %s' % (object.number)"
+    />-->
+    
+    <record id="action_report_payslip" model="ir.actions.report">
+        <field name="name">Payslip</field>
+        <field name="model">hr.payslip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">isjo_hr_payroll.payslip_report</field>
+        <field name="report_file">isjo_hr_payroll.payslip_report</field>
+        <field name="print_report_name">'Payslip - %s' % (object.employee_id.name or 'Employee').replace('/', '')</field>
+        <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
+        <field name="binding_type">report</field>
+        <!--<field name="binding_view_types">form</field>-->
+        <field name="paperformat_id" ref="utils.paperformat_middle_a4_low_margin"/>
+    </record>
+
+    <record id="payslip_run_datailed_action_report" model="ir.actions.report">
+        <field name="name">Payslip Batch Detailed</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">isjo_hr_payroll.payslip_run_datailed_report</field>
+        <field name="report_file">isjo_hr_payroll.payslip_run_datailed_report</field>
+        <field name="print_report_name">(object._get_report_base_filename())</field>
+        <field name="binding_model_id" ref="hr_payroll.model_hr_payslip_run"/>
+        <field name="binding_view_types">form</field>
+        <field name="paperformat_id" ref="utils.paperformat_a4_low_margin_top_and_bottom"/>
+    </record>
+</odoo>

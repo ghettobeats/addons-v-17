@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+    <record id="view_clone_salary_rule_wizard_form" model="ir.ui.view">
+        <field name="name">clone.salary.rule.wizard.form</field>
+        <field name="model">clone.salary.rule.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Clone Salary Rules">
+                <div>
+                    <span colspan="4" nolabel="1">Este asistente creará las reglas salariales seleccionadas a la estructura salarial indicada debajo</span>
+                </div>
+                <group colspan="2">
+                    <field name="struct_id" options="{'no_create':True}"/>
+                </group>
+                <footer>
+                    <button icon="fa-clone" string="Clone" name="clone_salary_rule" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

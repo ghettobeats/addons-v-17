@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- TODO: Tree view -->
+
+    <!-- TODO: Search view -->
+
+    <!-- TODO: Action -->
+
+    <menuitem id="menu_isjo_vacancies_report"
+              name="Vacantes por Cubrir"
+              parent="menu_isjo_hr_reports_root"
+              sequence="40"/>
+
+</odoo>

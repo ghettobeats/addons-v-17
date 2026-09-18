@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+
+    <record id="inherit_view_hr_payslip_form" model="ir.ui.view">
+      <field name="name">inherit_view_hr_payslip_form</field>
+      <field name="model">hr.payslip</field>
+      <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//header/button[@name='compute_sheet']" position="after">
+          <button name="assign_rule_in_lote" string="Refrescar Novedades"
+                  invisible="state in ('paid', 'done', 'cancel')" type="object" icon="fa-refresh"/>
+        </xpath>
+      </field>
+    </record>
+
+  </odoo>

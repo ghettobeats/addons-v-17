@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+        <record id="hr_employee_sequence_visible" model="ir.ui.view">
+            <field name="name">Employee (Visible emp_id)</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='department_id']" position="before">
+                    <field name="emp_id" string="Empleado Id" readonly="0" groups="jt_employee_sequence.group_access_emp_id"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        
+        <record id="hr_payroll_employee_sequence" model="ir.ui.view">
+            <field name="name">Employee code</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_payroll.payroll_hr_employee_view_form"/>
+            <field name="arch" type="xml">
+                <field name="registration_number" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </field>
+            </field>
+        </record>
+        
+    </odoo>

@@ -1,0 +1,29 @@
+.o_datetime_picker .o_date_item_cell.o_public_holiday:not(.o_out_of_range) {
+    background-color: rgba(220, 53, 69, 0.16);
+    box-shadow: inset 0 0 0 1px rgba(220, 53, 69, 0.35);
+    color: #842029;
+}
+
+.o_datetime_picker .o_date_item_cell.o_public_holiday.o_selected,
+.o_datetime_picker .o_date_item_cell.o_public_holiday.o_select_start,
+.o_datetime_picker .o_date_item_cell.o_public_holiday.o_select_end,
+.o_datetime_picker .o_date_item_cell.o_public_holiday:hover {
+    color: var(--o-component-active-color, #fff);
+}
+
+.o_datetime_picker .o_date_item_cell.o_public_holiday.o_today span::after {
+    background: #842029;
+}
+
+.o_calendar_renderer .o_calendar_holiday,
+.o_calendar_year_renderer .o_calendar_holiday {
+    background-color: rgba(220, 53, 69, 0.12) !important;
+}
+
+.o_calendar_renderer .o_calendar_holiday .fc-day-number,
+.o_calendar_year_renderer .o_calendar_holiday .fc-day-number,
+.o_calendar_renderer .o_calendar_holiday .fc-day-top,
+.o_calendar_year_renderer .o_calendar_holiday .fc-day-top {
+    color: #842029;
+    font-weight: 600;
+}

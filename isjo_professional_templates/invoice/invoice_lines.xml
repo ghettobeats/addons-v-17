@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="invoice_lines">
+
+        <!-- Is there a discount on at least one line? -->
+        <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+        <!-- Is there tax in at least one line? -->
+        <t t-set="display_taxes" t-value="any([y.tax_ids for y in o.invoice_line_ids])"/>
+        <!-- to take care of columns when no discount -->
+        <t t-set="col_span" t-value="9 if display_discount else 8"/>
+
+        <!-- Cálculo de monto bruto y descuento -->
+        <t t-set="monto" t-value="sum(l.price_unit * l.quantity for l in o.invoice_line_ids if l.display_type == 'product')"/>
+        <t t-set="descuento" t-value="monto - o.amount_untaxed"/>
+
+        <table class="table table-sm o_main_table mb-0" t-attf-style="color:{{style.text_color}};">
+            <thead>
+                <tr t-attf-style="background-color:{{style.theme_color if not style.transparent else 'transparent'}};font-size:{{int(style.body_font)+2}}px;color:{{style.theme_txt_color if not style.transparent else style.text_color}};">
+                    <th><i class="fa fa-list-ol"/> Item No.</th>
+                    <th t-if="style.show_img"><i class="fa fa-camera"/> Image</th>
+                    <th><i class="fa fa-th-large"/> Codigo</th>
+                    <th><i class="fa fa-th-large"/> Descripción</th>
+                    <th class="text-end"><i class="fa fa-sort-amount-asc"/> Qty</th>
+                    <th class="text-end"><i class="fa fa-tags"/> Precio Unit</th>
+                    <th t-if="display_discount" class="text-end"><i class="fa fa-minus-square"/> Descto(%)</th>
+                    <th t-if="display_taxes" class="text-center"><i class="fa fa-pencil-square"/> Impuesto</th>
+                    <th class="text-end"><i class="fa fa-money"/> Monto</th>
+                </tr>
+            </thead>
+            <tbody class="invoice_tbody">
+                <t t-set="current_subtotal" t-value="0"/>
+                <t t-set="current_total" t-value="0"/>
+                <t t-set="item_count" t-value="0"/>
+                <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+                <t t-foreach="lines" t-as="l">
+                    <t t-set="item_count" t-value="item_count + 1"/>
+                    <t t-set="current_subtotal" t-value="current_subtotal + l.price_subtotal"/>
+                    <t t-set="current_total" t-value="current_total + l.price_total"/>
+                    <tr t-attf-style="background-color:{{style.odd if (l_parity in 'odd' and not style.transparent) else (not style.transparent and style.even) or 'transparent'}};page-break-inside: avoid" t-att-class="'fw-bold o_line_section' if l.display_type == 'line_section' else 'fst-italic o_line_note' if l.display_type == 'line_note' else ''">
+                        <t t-if="l.display_type == 'product'" name="account_invoice_line_accountable">
+                            <td><span t-esc="item_count"/></td>
+                            <td t-if="style.show_img"><span t-if="l.sudo().product_id.image_128" itemprop="image" t-field="l.sudo().product_id.image_128" t-options='{"widget": "image"}'/></td>
+                            <td><span t-field="l.product_id.default_code"/></td>
+                            <td><span t-field="l.name"/></td>
+                            <td class="text-end">
+                                <span t-field="l.quantity"/>
+                                <span t-field="l.product_uom_id" groups="uom.group_uom"/>
+                            </td>
+                            <td t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                <span t-field="l.price_unit" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                            </td>
+                            <td t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                <span class="text-nowrap" t-field="l.discount"/>
+                            </td>
+                            <td t-if="display_taxes" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                <span t-out="', '.join(map(lambda x: (x.invoice_label or x.name), l.tax_ids))" id="line_tax_ids"/>
+                            </td>
+                            <td class="text-end">
+                                <span class="text-nowrap" t-field="l.price_subtotal"/>
+                            </td>
+                        </t>
+                        <t t-if="l.display_type == 'line_section'">
+                            <td t-att-colspan="col_span">
+                                <span t-field="l.name" t-options="{'widget': 'text'}"/>
+                            </td>
+                            <t t-set="current_section" t-value="l"/>
+                            <t t-set="current_subtotal" t-value="0"/>
+                            <t t-set="item_count" t-value="0"/>
+                        </t>
+                        <t t-if="l.display_type == 'line_note'">
+                            <td t-att-colspan="col_span">
+                                <span t-field="l.name" t-options="{'widget': 'text'}"/>
+                            </td>
+                            <t t-set="item_count" t-value="item_count - 1"/>
+                        </t>
+                    </tr>
+                    <t t-if="current_section and (l_last or lines[l_index+1].display_type == 'line_section')">
+                        <tr class="is-subtotal text-end">
+                            <td t-att-colspan="col_span">
+                                <strong class="mr16">Subtotal</strong>
+                                <span t-esc="current_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+            </tbody>
+        </table>
+
+        <!-- Sección: Información de pago + Totales -->
+        <div class="clearfix mb-2" style="page-break-inside: avoid !important;">
+            <div class="row">
+                <!-- Columna izquierda: Información de Pago (solo si tiene pagos) -->
+                <div class="col-6">
+                    <t t-if="o.move_type == 'out_invoice' and o.payment_state not in ('not_paid', 'invoicing_legacy')">
+                        <t t-set="payments_vals" t-value="o.sudo().invoice_payments_widget and o.sudo().invoice_payments_widget.get('content', []) or []"/>
+                        <t t-if="len(payments_vals) > 0">
+                            <div style="margin-top: 8px;">
+                                <div style="border-top: 2px solid black; margin-bottom: 4px;"/>
+                                <p style="margin-bottom: 4px;"><b>Información de Pago :</b></p>
+                                <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+                                    <thead>
+                                        <tr t-attf-style="background-color:{{style.theme_color}};color:{{style.theme_txt_color}};">
+                                            <th style="padding: 3px 6px; border: 1px solid #ccc; text-align: center;">Fecha</th>
+                                            <th style="padding: 3px 6px; border: 1px solid #ccc; text-align: center;">Método</th>
+                                            <th style="padding: 3px 6px; border: 1px solid #ccc; text-align: right;">Monto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="payments_vals" t-as="pay">
+                                            <tr t-if="pay.get('is_exchange', 0) == 0">
+                                                <td style="padding: 3px 6px; border: 1px solid #ccc; text-align: center;">
+                                                    <span t-esc="pay.get('date', '')" t-options='{"widget": "date"}'/>
+                                                </td>
+                                                <td style="padding: 3px 6px; border: 1px solid #ccc; text-align: center;">
+                                                    <span t-esc="pay.get('journal_name', '')"/>
+                                                </td>
+                                                <td style="padding: 3px 6px; border: 1px solid #ccc; text-align: right;">
+                                                    <span t-esc="pay.get('amount', 0)" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+
+                <!-- Columna derecha: Resumen de totales -->
+                <div class="col-6" style="margin-top: 8px;">
+                    <div style="border-top: 2px solid black; margin-bottom: 4px;"/>
+                    <table style="width: 100%; font-size: 9px;border: none; border-collapse: collapse;border-top: 1px solid white;border-bottom: 1px solid white;border-left: 1px solid white;border-right: 1px solid white;">
+                        <tbody style="border: none;">
+                            <!-- MONTO (bruto antes de descuento) -->
+                            <tr style="border: none;">
+                                <td style="text-align: right; padding: 2px 4px;border: none;"><b>MONTO:</b></td>
+                                <td style="text-align: right; padding: 2px 4px;border: none;">
+                                    <span t-esc="monto" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <!-- DESCUENTO -->
+                            <tr t-if="o.move_type not in ('out_refund', 'in_refund')" style="border: none;">
+                                <td style="text-align: right; padding: 2px 4px;border: none;"><b>DESCUENTO:</b></td>
+                                <td style="text-align: right; padding: 2px 4px;border: none;">
+                                    <span t-esc="descuento" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <!-- SUB-TOTAL -->
+                            <tr style="border: none;">
+                                <td style="text-align: right; padding: 2px 4px;border: none;"><b>SUB-TOTAL:</b></td>
+                                <td style="text-align: right; padding: 2px 4px;border: none;">
+                                    <span t-field="o.amount_untaxed" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <!-- Grupos de impuestos (ITBIS, ISR, etc.) -->
+                            <t t-foreach="o.tax_totals.get('groups_by_subtotal', {}).values()" t-as="tax_groups_list">
+                                <t t-foreach="tax_groups_list" t-as="tax_group">
+                                    <tr style="border: none;">
+                                        <td style="text-align: right; padding: 2px 4px;border: none;">
+                                            <b>
+                                                <t t-esc="tax_group['tax_group_name'].upper()"/>
+                                                <t t-if="o.amount_untaxed != tax_group['tax_group_base_amount']">
+                                                    SOBRE <t t-esc="tax_group['formatted_tax_group_base_amount']"/>
+                                                </t>
+                                                :
+                                            </b>
+                                        </td>
+                                        <td style="text-align: right; padding: 2px 4px;border: none;">
+                                            <span t-esc="tax_group['formatted_tax_group_amount']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                            <!-- TOTAL GENERAL -->
+                            <tr style="border: none;">
+                                <th style="text-align: right; padding: 3px 4px;border: none;">TOTAL GENERAL:</th>
+                                <td style="text-align: right; padding: 3px 4px;border: none;">
+                                    <span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <!-- MONTO PAGADO e IMPORTE ADEUDADO (solo si tiene pagos) -->
+                            <t t-if="o.move_type == 'out_invoice' and o.payment_state not in ('not_paid', 'invoicing_legacy')">
+                                <t t-set="payments_vals2" t-value="o.sudo().invoice_payments_widget and o.sudo().invoice_payments_widget.get('content', []) or []"/>
+                                <t t-if="len(payments_vals2) > 0">
+                                    <tr style="border: none;">
+                                        <th style="text-align: right; padding: 2px 4px;border: none;">MONTO PAGADO:</th>
+                                        <td style="text-align: right; padding: 2px 4px;border: none;">
+                                            <span t-esc="o.amount_total - o.amount_residual" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: none;">
+                                        <th style="text-align: right; padding: 2px 4px;border: none;">IMPORTE ADEUDADO:</th>
+                                        <td style="text-align: right; padding: 2px 4px;border: none;">
+                                            <span t-field="o.amount_residual" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cantidad en letras -->
+        <div t-if="style.aiw_report" class="row">
+            <p>
+                <strong>Cantidad en Letra:</strong><span style="text-decoration:underline;" t-field="o.amount_words"/>
+            </p>
+        </div>
+
+        <!-- Comunicación de pago -->
+        <div class="row" t-if="o.move_type in ('out_invoice', 'in_refund') and o.payment_reference">
+            <p name="payment_communication">Utilice la siguiente comunicación para su pago. : <b><span t-field="o.payment_reference"/></b></p>
+        </div>
+        <div t-if="o.invoice_payment_term_id">
+            <p name="payment_term"><span t-field="o.invoice_payment_term_id.note"/></p>
+        </div>
+        <div class="row" t-if="not is_html_empty(o.narration)" name="comment">
+            <span t-field="o.narration"/>
+        </div>
+        <div class="row">
+            <p t-if="not is_html_empty(o.fiscal_position_id.note)" name="note">
+                <span t-field="o.fiscal_position_id.note"/>
+            </p>
+            <p t-if="o.invoice_incoterm_id" name="incoterm">
+                <strong>Incoterm: </strong><span t-field="o.invoice_incoterm_id.code"/> - <span t-field="o.invoice_incoterm_id.name"/>
+            </p>
+            <div id="qrcode" t-if="o.display_qr_code and o.amount_residual > 0">
+                <t t-set="qr_code_url" t-value="o._generate_qr_code(silent_errors=True)"/>
+                <p t-if="qr_code_url">
+                    <strong class="text-center">Scan me with your banking app.</strong><br/><br/>
+                    <img class="border border-dark rounded" t-att-src="qr_code_url"/>
+                </p>
+            </div>
+        </div>
+
+        <!-- Sección de firmas (solo en facturas) -->
+        <t t-if="o.move_type == 'out_invoice'">
+            <div style="margin-top: 50px; page-break-inside: avoid;border: none;">
+                <table style="width: 100%; border: none; border-collapse: collapse;border-top: 1px solid white;border-bottom: 1px solid white;border-left: 1px solid white;border-right: 1px solid white;">
+                    <tr style="border: none;">
+                        <td style="width: 33%; text-align: center; border: none; padding-bottom: 0px;">
+                            <div style="width: 80%; height: 20px; margin: 0 auto; border-bottom: 1px solid black;"/>
+                        </td>
+                        <td style="width: 34%; text-align: center; border: none; padding-bottom: 0px;">
+                            <div style="width: 80%; height: 20px; margin: 0 auto; border-bottom: 1px solid black;"/>
+                        </td>
+                        <td style="width: 33%; text-align: right; border: none; font-size: 9px; font-weight: bold; vertical-align: bottom;">
+                            Original Cliente
+                        </td>
+                    </tr>
+                    <tr style="border: none;">
+                        <td style="width: 33%; text-align: center; border: none; font-size: 9px; padding-top: 6px;">
+                            Preparado Por:
+                        </td>
+                        <td style="width: 34%; text-align: center; border: none; font-size: 9px; padding-top: 6px;">
+                            Recibido Por:
+                        </td>
+                        <td style="width: 33%; text-align: right; border: none; font-size: 9px; font-weight: bold; padding-top: 6px;">
+                            Copia Vendedor
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+
+    </template>
+
+</odoo>

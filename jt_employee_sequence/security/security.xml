@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018,2021 Ivan Yelizariev <https://twitter.com/yelizariev>
+     Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+     License MIT (https://opensource.org/licenses/MIT).
+    -->
+<odoo>
+       <!-- Category main Charge x Mora -->
+        <record model="ir.module.category" id="module_hr_employee">
+            <field name="name">Access view emp_id</field>
+            <field name="sequence">20</field>
+        </record>
+
+       <!-- view user Group -->
+        <record id='group_access_emp_id' model="res.groups">
+            <field name="name">ver campo emp_id</field>
+            <field name="category_id" ref="module_hr_employee" />
+        </record>
+
+    </odoo>

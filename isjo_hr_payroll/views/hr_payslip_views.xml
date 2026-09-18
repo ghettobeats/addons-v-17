@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 Daniel Eduardo Diaz Mateo <https://isjo-technology.com/>
+-->
+<odoo>
+        
+        <!-- AcciÃ³n de servidor para colocar boton para impresion de comprobantes de pago -->
+        <record id="button_print_report_hr_payslip" model="ir.actions.server">
+            <field name="name">Comprobante de pago</field>
+            <field name="model_id" ref="model_hr_payslip"/>
+            <field name="binding_model_id" ref="model_hr_payslip"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_print_report()</field>
+        </record>
+        
+        <!-- AcciÃ³n de servidor para colocar boton para Enviar comprobantes de pago -->
+        <record id="button_send_payslip_by_email" model="ir.actions.server">
+            <field name="name">Enviar Comprobante de pago por Email</field>
+            <field name="model_id" ref="model_hr_payslip"/>
+            <field name="binding_model_id" ref="model_hr_payslip"/>
+            <field name="state">code</field>
+            <field name="code">action = records.send_payslip_by_email()</field>
+        </record>
+        
+        <!-- Payslip -->
+
+        <record id="view_hr_payslip_tree_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.tree.inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree[1]" position="attributes">
+                    <attribute name="default_order">payslip_run_id, employee_id</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_hr_payslip_form_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.form.inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button
+                        name="action_print_report"
+                        type="object"
+                        string="Comprobante de pago"
+                        class="oe_highlight" />
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='wage_type']" position="replace"/>
+                <xpath expr="//field[@name='payslip_run_id']" position="replace"/>
+                <xpath expr="//label[@for='date_from']" position="before">
+                    <field name="payslip_run_id" domain="[('state','in',('draft', 'verify'))]" options="{'no_create': True}"/>
+                    <field name="wage_type" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='struct_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_from']" position="attributes">
+                    <attribute name="force_save">True</attribute>
+                    <attribute name="readonly">'payslip_run_id','!=',False</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_to']" position="attributes">
+                    <attribute name="force_save">True</attribute>
+                    <attribute name="readonly">'payslip_run_id','!=',False</attribute>
+                </xpath>
+                <xpath expr="//field[@name='contract_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='input_line_ids']//field[@name='input_type_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="groups">isjo_hr_payroll.group_hr_payslip_date_editor</attribute>
+                    <attribute name="readonly"></attribute>
+                </xpath>
+                <xpath expr="//field[@name='line_ids']" position="replace">
+                    <field name="salary_computation_line_ids" colspan="4" nolabel="1">
+                        <tree string="Salary Rules" editable="bottom" decoration-info="total == 0" create="0" delete="0" limit="100"
+                            default_order="sequence, name" decoration-bf="category_id_code in ('BASIC','GROSS','NET')">
+                            <field name="code" readonly="1" force_save="1"/>
+                            <field name="name" string="Regla Salarial"/>
+                            <field name="category_id" invisible="1" force_save="1"/>
+                            <field name="category_id_code" invisible="1"/>
+                            <field name="sequence" invisible="1" readonly="1" force_save="1"/>
+                            <field name="quantity" readonly="1" force_save="1"/>
+                            <field name="rate" readonly="1" force_save="1"/>
+                            <field name="salary_rule_id" invisible="1" groups="base.group_no_one" readonly="1" force_save="1"/>
+                            <field name="amount" readonly="1" force_save="1"/>
+                            <field name="total" readonly="1" force_save="1"/>
+                        </tree>
+                        <form string="Payslip Line">
+                            <group col="4">
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="category_id"/>
+                                <field name="sequence"/>
+                                <field name="quantity"/>
+                                <field name="rate"/>
+                                <field name="amount"/>
+                                <field name="total"/>
+                                <field name="salary_rule_id"/>
+                            </group>
+                        </form>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Payslip Run -->
+
+        <record id="view_hr_payslip_by_employees_readonly" model="ir.ui.view">
+            <field name="name">hr.payroll.payslip.employees.readonly</field>
+            <field name="model">hr.payslip.employees</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_by_employees"/>
+            <field name="arch" type="xml">
+                <field name="structure_id" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_hr_payslip_run_form_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.run.form.inherit</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='%(hr_payroll.action_hr_payslip_by_employees)d']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//header/widget[@name='add_payslips']" position="before">
+                    <button name="button_generate_payslips" type="object" invisible="state != 'draft'" string="Generar nóminas" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//group/group[1]" position="inside">
+                    <field name="struct_id"/>
+                </xpath>
+                <xpath expr="//sheet[1]" position="inside">
+                    <separator string="Payslips"/>
+                    <field name="slip_ids" options="{'create': False}">
+                        <tree string="Payslips" limit="100" default_order="employee_id">
+                            <field name="number"/>
+                            <field name="employee_id"/>
+                            <field name="name"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+    </odoo>
