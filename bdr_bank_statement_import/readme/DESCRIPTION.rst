@@ -1,0 +1,1 @@
+This module will add functionalities to manage bank statements for Banco De Reservas.

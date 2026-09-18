@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <record id="l10n_do_banks.bank_popular" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BPD</field>
+    </record>
+    <record id="l10n_do_banks.bank_reservas" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BRD</field>
+    </record>
+    <record id="l10n_do_banks.bank_bhd" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BHD</field>
+    </record>
+    <record id="l10n_do_banks.bank_santa_cruz" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BSC</field>
+    </record>
+    <record id="l10n_do_banks.bank_citibank" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">CIT</field>
+    </record>
+    <record id="l10n_do_banks.bank_scotia" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">SCB</field>
+    </record>
+    <record id="l10n_do_banks.bank_bdi" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BDI</field>
+    </record>
+    <record id="l10n_do_banks.bank_lopez" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BLH</field>
+    </record>
+    <record id="l10n_do_banks.bank_vimeca" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">VIM</field>
+    </record>
+    <record id="l10n_do_banks.bank_promerica" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BPA</field>
+    </record>
+    <record id="l10n_do_banks.bank_asoc_popular" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">APA</field>
+    </record>
+    <record id="l10n_do_banks.bank_caribe" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BCA</field>
+    </record>
+    <record id="l10n_do_banks.bank_ademi" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BAD</field>
+    </record>
+    <record id="l10n_do_banks.bank_acap" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">ACP</field>
+    </record>
+    <record id="l10n_do_banks.bank_anap" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">ALN</field>
+    </record>
+    <record id="l10n_do_banks.bank_banes" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BNC</field>
+    </record>
+    <record id="l10n_do_banks.bank_bell" model="res.bank">
+        <field name="l10n_do_bhd_bank_code">BEL</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Product Categories -->
+    <!-- Apply product category level commission setting -->
+    <record id="product.product_category_5" model="product.category">
+        <field name="commission" eval="True"/>
+        <field name="percentage">10</field>
+    </record>
+    <record id="product.product_category_3" model="product.category">
+        <field name="commission" eval="True"/>
+        <field name="percentage">17</field>
+    </record>
+    <record id="product.product_category_4" model="product.category">
+        <field name="commission" eval="True"/>
+        <field name="percentage">5</field>
+        <field name="fixed_amount">5</field>
+    </record>
+
+    <!-- Products -->
+    <!-- Apply product level commission setting -->
+    <record id="product.product_product_4d_product_template" model="product.template">
+        <field name="commission_ok" eval="True"/>
+        <field name="percentage">3</field>
+    </record>
+    <record id="product.product_product_6_product_template" model="product.template">
+        <field name="commission_ok" eval="True"/>
+        <field name="percentage">3</field>
+    </record>
+    <record id="product.product_product_8_product_template" model="product.template">
+        <field name="commission_ok" eval="True"/>
+        <field name="percentage">3</field>
+    </record>
+    <record id="product.product_product_11b_product_template" model="product.template">
+        <field name="commission_ok" eval="True"/>
+        <field name="percentage">3</field>
+    </record>
+    <record id="product.product_product_7_product_template" model="product.template">
+        <field name="commission_ok" eval="True"/>
+        <field name="percentage">3</field>
+    </record>
+    <record id="product.product_product_9_product_template" model="product.template">
+        <field name="commission_ok" eval="True"/>
+        <field name="percentage">3</field>
+    </record>
+    <record id="product.product_product_10_product_template" model="product.template">
+        <field name="commission_ok" eval="False"/> <!-- This product won't generate commission -->
+    </record>
+
+</odoo>

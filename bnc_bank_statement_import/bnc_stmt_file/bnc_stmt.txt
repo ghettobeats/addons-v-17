@@ -1,0 +1,44 @@
+Estado de Cuentas 
+Cuenta Regional: DO13BANS00000000003200005115  Balance Global USD Balance 53,331.51 
+ CECOMSA, S.R.L  Balance en Transito: 0.00 
+ CARRETERA TURISTICA LUPERON KM 1  Monto Retenido: 0.00 
+ RESIDENCIAL EL EDEN 
+ 1  
+Producto: CA04  Limite de Credito: 0  
+Proposito de la Cuenta:  Balance Disponible: 53,331.51  
+Promedio Global: 0.00  
+Balance a la Fecha: 30/11/21  
+
+Monto  Tasa  
+1 a 500  0.050000%  
+501 a 50,000  0.200000%  
+50,001 a 499,999  0.300000%  
+500,000 en adelante  0.400000%  
+
+Fecha Proceso  Referencia  Descripci  Debito  Credito  Balance  
+06/12/21
+ Contabilizacion pago TRANSIT P
+ 79.06  47,859.75
+08/12/21
+ Contabilizacion pago TRANSIT P
+ 2,796.08  50,655.83
+21/12/21
+ Contabilizacion pago TRANSIT P
+ 344.96  51,000.79
+28/12/21
+ Contabilizacion pago TRANSIT P
+ 87.00  51,087.79
+29/12/21
+ Contabilizacion pago TRANSIT P
+ 2,231.76  53,319.55
+31/12/21
+ INTERESES
+ 12.08  53,331.63
+31/12/21
+ RETENCION DE INTERESES  0.12
+ 53,331.51
+
+Total IMP.LEY 288-04  Total Debitos  Total Creditos  Balance Final
+1 0.01  0.12 (1)  5,550.94( 6)  53,331.51
+
+Numero de Pagina

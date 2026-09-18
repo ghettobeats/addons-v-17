@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="purchase_mode_purchases_below_threshold"
+            model="purchase.gov.purchase.mode">
+            <field name="name">Purchases Below Threshold</field>
+    </record>
+
+    <record id="purchase_mode_international_competitive_bidding"
+            model="purchase.gov.purchase.mode">
+            <field name="name">International Competitive Bidding</field>
+    </record>
+
+    <record id="purchase_mode_reverse_auction"
+            model="purchase.gov.purchase.mode">
+            <field name="name">Reverse Auction</field>
+    </record>
+
+    <record id="purchase_mode_exception_processes"
+            model="purchase.gov.purchase.mode">
+            <field name="name">Exception Processes</field>
+    </record>
+
+    <record id="purchase_mode_national_security_exception_processes"
+            model="purchase.gov.purchase.mode">
+            <field name="name">National Security Exception Processes</field>
+    </record>
+
+    <record id="purchase_mode_public_tender"
+            model="purchase.gov.purchase.mode">
+            <field name="name">Public Tender</field>
+    </record>
+
+    <record id="purchase_mode_restricted_tender"
+            model="purchase.gov.purchase.mode">
+            <field name="name">Restricted Tender</field>
+    </record>
+
+    <record id="purchase_mode_draw_of_works"
+            model="purchase.gov.purchase.mode">
+            <field name="name">Draw of Works</field>
+    </record>
+
+    <record id="purchase_mode_price_comparison"
+            model="purchase.gov.purchase.mode">
+            <field name="name">Price Comparison</field>
+    </record>
+
+    <record id="purchase_mode_minor_purchase"
+            model="purchase.gov.purchase.mode">
+            <field name="name">Minor Purchase</field>
+    </record>
+
+    <record id="purchase_mode_international_public_bidding"
+            model="purchase.gov.purchase.mode">
+            <field name="name">International Public Bidding</field>
+    </record>
+
+</odoo>

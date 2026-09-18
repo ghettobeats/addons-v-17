@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="res_partner_inherited_view" model="ir.ui.view">
+        <field name="name">ResPartnerInheritedView</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="national_provider_registry"
+                       attrs="{'invisible': [('supplier','=', False)], 'required': [('supplier','=', True)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

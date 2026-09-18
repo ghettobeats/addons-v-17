@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="base.main_company" model="res.company">
+        <field name="commission_journal_id" ref="demo_commission_journal"/>
+        <field name="commission_debit_account" ref="demo_expenses"/>
+        <field name="commission_credit_account" ref="demo_non_current_liabilities"/>
+    </record>
+
+</odoo>

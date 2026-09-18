@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_account_form_inherited" model="ir.ui.view">
+        <field name="name">view.account.form.inherited</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='group_id']" position="after">
+                <field name="old_account"/>
+                <field name="account_fiscal_type"/>
+                <field name="user_type_name" invisible="1"/>
+                <field name="account_retribution_type" attrs="{'invisible': [('user_type_name', 'not in', ('Expenses', 'Depreciation', 'Cost of Revenue','Gastos',
+                                                        'Amortización', 'Coste directo de la ventas'))]}"/>
+                <field name="calcular_ingresos_financieros_anexoa" attrs="{'invisible': [('user_type_name', 'not in', ('Income', 'Other Income', 'Otro Ingreso','Ingreso'))]}"/>
+                <field name="es_cuenta_empresarial"
+                       attrs="{'invisible': ['|', ('user_type_name', 'not in', ('Income', 'Other Income', 'Otro Ingreso','Ingreso')),
+                       ('es_cuenta_turistica','=',True)]}"/>
+                <field name="es_cuenta_turistica"
+                       attrs="{'invisible': ['|', ('user_type_name', 'not in', ('Income', 'Other Income', 'Otro Ingreso','Ingreso')),
+                       ('es_cuenta_empresarial','=',True)]}"/>
+                <field name="es_caja_chica"
+                       attrs="{'invisible': [('user_type_name', 'not in', ('Bank and Cash', 'Banco y caja'))]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

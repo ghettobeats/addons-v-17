@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_company_form">
+        <field name="name">res.company.form.inherit</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="model">res.company</field>
+        <field name="arch" type="xml">
+          <xpath expr="//page[@name='general_info']" position="after">
+            <page string="Sello y firma de compañia" name="general_seal_and_sign" >
+            <group>
+                <field name="company_seal" widget="image"/>
+                <field name="company_firm" widget="image"/>
+                <field name="firm_name"/>
+                <field name="firm_position"/>
+            </group>
+            </page>
+           <page string="Valores predeterminados DGII y libros" name="dgii_defaults">
+            <group string="Valores para DGII">
+                <field name="tipo_itbis_venta"/>
+                <field name="clasificacion_itbis_compra"/>
+
+            </group>
+            <group string="Valores para Libro">
+                <field name="property_account_payable_advance_id"/>
+                <field name="property_account_receivable_advance_id"/>
+                <field name="transfer_account_id"/>
+<!--                <field name="email_secundario" widget="email" context="{'gravatar_image': True}"/>-->
+
+            </group>
+            </page>
+        </xpath>
+        </field>
+    </record>
+</odoo>

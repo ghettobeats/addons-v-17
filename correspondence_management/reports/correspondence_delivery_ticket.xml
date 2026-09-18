@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="paperformat_correspondence_custom" model="report.paperformat">
+        <field name="name">Custom 2x4 Inches</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">51</field>
+        <field name="page_width">102</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0.1</field>
+        <field name="margin_bottom">0.1</field>
+        <field name="margin_left">0.1</field>
+        <field name="margin_right">0.1</field>
+        <field name="dpi">203</field>
+    </record>
+
+    <template id="correspondence_delivery_ticket">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="article">
+                    <link href="https://fonts.googleapis.com/css2?family=Quattrocento" rel="stylesheet"/>
+                    <div class="oe_structure"/>
+                    <br/>
+                    <div class="container-fluid ">
+                        <div class="row mt-4" style="align-items: center;">
+                            <div class="col-8">
+                                <img src="/correspondence_management/static/src/img/logo_ticket.png" alt="Not found"
+                                     style="width: 20%;"/>
+                            </div>
+                            <div class="col-4" style="text-align: left;">
+                                <h5>Comprobante de entrega</h5>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row mt-4">
+                            <div class="col-2">
+                                <p class="pl-0">Asunto</p>
+                            </div>
+                            <div class="col-10">
+                                <p style="margin-bottom: 0%;">
+                                    <t t-if="doc.name">
+                                        <t t-esc="doc.name"/>
+                                    </t>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-2">
+                                <p class="pl-0">Destinatario</p>
+                            </div>
+                            <div class="col-10">
+                                <p style="margin-bottom: 0%;">
+                                    <t t-if="doc.department_id">
+                                        <t t-esc="doc.department_id.name"/>
+                                    </t>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-2">
+                                <p class="pl-0">Destino</p>
+                            </div>
+                            <div class="col-10">
+                                <p style="margin-bottom: 0%;">
+                                    <t t-if="doc.employee_id">
+                                        <t t-esc="doc.employee_id.full_name"/>
+                                    </t>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-2">
+                                <p class="pl-0">Recibido por</p>
+                            </div>
+                            <div class="col-10" style="margin-top:15px">
+                                <hr class="border-secondary"/>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:75px">
+                            <div class="col-4">
+                                <p>Impreso en:
+                                      <t t-esc="doc.get_local_time('America/Santo_Domingo')"/>
+                                </p>
+                            </div>
+                            <div class="col-4"/>
+                            <div class="col-4 text-center">
+                                <hr class="border-secondary"/>
+                                <b>Firma</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="correspondence_delivery_ticket_action" model="ir.actions.report">
+        <field name="name">Entrega de correspondencia</field>
+        <field name="model">correspondence</field>
+        <field name="report_file">correspondence_management.correspondence_delivery_ticket</field>
+        <field name="report_name">correspondence_management.correspondence_delivery_ticket</field>
+        <field name="paperformat_id" ref="paperformat_correspondence_custom"/>
+    </record>
+
+
+</odoo>

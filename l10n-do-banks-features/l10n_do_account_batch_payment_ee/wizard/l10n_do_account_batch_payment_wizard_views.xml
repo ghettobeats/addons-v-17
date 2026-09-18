@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--
+    Despite this module inactivate base Payment file menu, extend main module wizard
+    view and set an additional domain triplet so if some mdf re-activate the menu, user
+    won't be able to select payments which have already been added to a Batch Payment
+    -->
+    <record id="l10n_do_account_batch_payment_wizard_form_inherited" model="ir.ui.view">
+        <field name="name">l10n.do.account.batch.payment.wizard.form.inherited</field>
+        <field name="model">l10n_do.account.batch.payment</field>
+        <field name="inherit_id"
+               ref="l10n_do_account_batch_payment_base.l10n_do_account_batch_payment_wizard_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_ids" position="attributes">
+                <attribute name="domain">[
+                    ('payment_type', '=', 'outbound'),
+                    ('journal_id', '=', journal_id),
+                    ('state', '=', 'posted'),
+                    ('batch_payment_id', '=', False),
+                ]</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

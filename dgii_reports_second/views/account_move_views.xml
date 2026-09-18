@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- 607 -->
+    <record id="view_account_journal_form_inherited" model="ir.ui.view">
+        <field name="name">account.journal.form.inherited</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="view_in_kanban"/>
+            </xpath>
+            <xpath expr="//field[@name='loss_account_id']" position="after">
+                <field name="payment_debit_account_id" attrs="{'required':[('type', 'in',('bank','cash'))],
+                'invisible':[('type', 'not in',('bank','cash'))]}"/>
+                <field name="payment_credit_account_id" attrs="{'required':[('type', 'in',('bank','cash'))],
+                'invisible':[('type', 'not in',('bank','cash'))]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_journal_dashboard_kanban_inherited_view" model="ir.ui.view">
+        <field name="name">account.journal.dashboard.kanban.inherited</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='col-12 col-sm-8 o_kanban_primary_right']" position="replace">
+                    <div class="col-12 col-sm-8 o_kanban_primary_right">
+                            <field name="json_activity_data" widget="kanban_vat_activity"/>
+                            <t t-if="dashboard.number_to_check > 0">
+                                <div class="row">
+                                    <div class="col overflow-hidden text-left">
+                                        <span><t t-esc="dashboard.number_to_check"/> lines</span>
+                                    </div>
+                                    <div class="col-auto text-right">
+                                        <span><t t-esc="dashboard.to_check_balance"/></span>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="invoice_form_inherited" model="ir.ui.view">
+        <field name="name">invoice.form.inherited</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='l10n_latam_document_type_id']" position="after">
+                 <field name="tipo_itbis_venta" groups="account.group_account_user"
+                attrs="{'invisible': [['move_type','not in',('out_invoice','out_refund')]], 'required': [['move_type','in',('out_invoice','out_refund')]]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='l10n_latam_document_number']" position="before">
+                <field name="is_encf" invisible="1"/>
+                <field name="ncf_message_done" invisible="1"/>
+                <field name="check_ncf_done" invisible="1"/>
+                <field name="ncf_message_error" invisible="1"/>
+                <field name="ncf_message_incorrect" invisible="1"/>
+                <field name="check_ecf_code" attrs="{'invisible': ['|',('move_type', 'not in', ('in_invoice', 'in_refund')),
+                 ('is_encf', '=', False)]}"/>
+                <button name="check_ncf_in_dgii" class="btn btn-secondary" icon="fa-search" type="object" attrs="{'invisible': ['|','|','|',('move_type', 'not in', ('in_invoice', 'in_refund')),
+                 ('check_ncf_done', '=', True),('is_encf', '=', True),('l10n_latam_document_number', '=', False)]}" string="Confirmar NCF en DGII">
+                            </button>
+                <button name="check_ncf_in_dgii" class="btn btn-secondary" icon="fa-search" type="object" attrs="{'invisible': ['|','|','|',('move_type', 'not in', ('in_invoice', 'in_refund')),
+                 ('check_ncf_done', '=', True),('is_encf', '=', False),('l10n_latam_document_number', '=', False)]}" string="Confirmar e-NCF en DGII">
+                            </button>
+                <div class="alert alert-info info_icon" role="alert" attrs="{'invisible': ['|', ('ncf_message_done', '=', False), ('ncf_message_incorrect', '=', True)]}">
+                                   <span class="fa fa-info fa-lg" title="Info" aria-label="Info"/>
+                                   <field name="check_ncf_message" readonly="1"/>
+
+                </div>
+                <div class="alert alert-warning warning_icon" role="alert" attrs="{'invisible': [('ncf_message_error', '=', False)]}">
+                                   <span class="fa fa-warning fa-lg" title="Warning" aria-label="Warning"/>
+                                   <field name="check_ncf_message" readonly="1"/>
+
+                </div>
+                <div class="alert alert-danger warning_icon" role="alert" attrs="{'invisible': ['|', ('ncf_message_error', '=', True), ('ncf_message_incorrect', '=', False)]}">
+                                   <span class="fa fa-danger fa-lg" title="Danger" aria-label="Danger"/>
+                                   <field name="check_ncf_message" readonly="1"/>
+
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='l10n_latam_document_number']" position="after">
+                 <field name="clasificacion_itbis_compra" groups="account.group_account_user"
+                attrs="{'invisible': [['move_type','not in',('in_invoice','in_refund')]], 'required': [['move_type','in',('in_invoice','in_invoice')]]}"/>
+                <field name="no_product" invisible="1"/>
+                <field name="tipo_compra_cabecera" groups="account.group_account_user"
+                attrs="{'invisible': ['|',('move_type','not in',('in_invoice','in_refund')),('no_product','=',True)], 'required': [('no_product','=',False), ('move_type','in',('in_invoice','in_invoice'))]}"/>
+            </xpath>
+
+            <xpath expr="//page[@name='other_info']" position="after">
+                <page name="dgii_fields" string="DGII" groups="account.group_account_user"
+                attrs="{'invisible': [['move_type','not in',('out_invoice','out_refund')]], 'required': [['move_type','=','out_invoice']], 'readonly': [['state','!=','draft']]}">
+                    <group>
+                        <group col="3" string="Withholding" groups="account.group_account_manager">
+                            <field name="payment_date" string="Withholding date"/>
+                            <field name="sale_itbis_retention_type" string="Tipo de retencion ITBIS en venta"/>
+                            <field name="third_withheld_itbis" string="Withheld ITBIS by a third"/>
+                            <field name="third_income_withholding" string="Income Withholding by a third"/>
+
+                        </group>
+                        <group col="3" string="Taxes" groups="account.group_account_manager">
+                            <field name="invoiced_itbis" string="Invoiced ITBIS"/>
+                            <field name="selective_tax" string="Selective Tax"/>
+                            <field name="other_taxes" string="Other taxes"/>
+                            <field name="legal_tip" string="Legal tip amount"/>
+                        </group>
+                        <group col="3" string="607">
+                            <field name="fiscal_status" widget="state_selection" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+<!--            <xpath expr="//field[@name='amount_by_group']" position="replace">-->
+<!--                <field name="amount_by_group" widget="tax-group-custom-field" nolabel="1" colspan="2"/>-->
+<!--            </xpath>-->
+            <xpath expr="//div[@name='journal_div']" position="after">
+                <field name="es_documento_caja_chica" widget="boolean_toggle"
+                       attrs="{'invisible': [['move_type','not in',('in_invoice','in_refund')]],
+                       'readonly': [['state','!=','draft']]}"/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="invoice_tree_inherited" model="ir.ui.view">-->
+<!--        <field name="name">invoice.tree.inherited</field>-->
+<!--        <field name="model">account.move</field>-->
+<!--        <field name="inherit_id" ref="account.view_invoice_tree"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='state']" position="after">-->
+<!--                <field name="fiscal_status" widget="state_selection" readonly="1"-->
+<!--                       groups="account.group_account_user" invisible="context.get('default_move_type') not in ('in_invoice', 'in_refund','in_receipt')"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- 606 -->
+
+    <record id="invoice_supplier_form_inherited" model="ir.ui.view">
+        <field name="name">invoice.supplier.form.inherited</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="before">
+                <field name="is_exterior" invisible="1"/>
+                <field name="service_type" attrs="{'invisible': [('is_exterior', '=', False)], 'required': [('is_exterior', '=', True)]}"/>
+                <field name="service_type_detail" options="{'no_create': True, 'no_open': True}"
+                       attrs="{'invisible': [('is_exterior', '=', False)], 'readonly': [('service_type', '=', False)], 'required': [('service_type', '!=', False)]}"/>
+            </xpath>
+            <xpath expr="//page[@name='other_info']" position="after">
+                <page name="dgii_fields" string="DGII" groups="account.group_account_user"
+                attrs="{'invisible': [['move_type','not in',('in_invoice','in_refund')]], 'required': [['move_type','=','in_invoice']], 'readonly': [['state','!=','draft']]}">
+                    <group>
+                        <group col="3" string="Taxes" groups="account.group_account_manager">
+                            <field name="invoiced_itbis" string="Invoiced ITBIS"/>
+                            <field name="proportionality_tax" string="Proportionality Tax"/>
+                            <field name="cost_itbis" string="Cost Itbis"/>
+                            <field name="advance_itbis" string="Advanced ITBIS"/>
+                            <field name="selective_tax" string="Selective Tax"/>
+                            <field name="other_taxes" string="Other taxes"/>
+                            <field name="legal_tip" string="Legal tip amount"/>
+                        </group>
+                        <group col="3" string="Invoicing" groups="account.group_account_manager">
+                            <field name="payment_date" string="Payment date"/>
+                            <field name="payment_form" string="Payment form"/>
+                            <field name="service_total_amount" string="Service Total Amount"/>
+                            <field name="good_total_amount" string="Good Total Amount"/>
+                        </group>
+                        <group col="3" string="Withholding" groups="account.group_account_manager">
+                            <field name="withholded_itbis" string="Withheld ITBIS"/>
+                            <field name="isr_withholding_type" string="ISR Withholding Type"/>
+                            <field name="income_withholding" string="Income Withholding"/>
+                        </group>
+                        <group col="3" string="606">
+                            <field name="fiscal_status" widget="state_selection" readonly="1"/>
+                        </group>
+                        <group col="3" string="Importaciones">
+                            <field name="import_itbis_amount" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+<!--            <xpath expr="//field[@name='amount_by_group']" position="replace">-->
+<!--                <field name="amount_by_group" widget="tax-group-custom-field" nolabel="1" colspan="2"/>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+    <record id="invoice_supplier_tree_inherited" model="ir.ui.view">
+        <field name="name">invoice.supplier.tree.inherited</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="fiscal_status" widget="state_selection" readonly="1"
+                       groups="account.group_account_user" invisible="context.get('default_move_type') not in ('out_invoice', 'out_refund','out_receipt','in_invoice', 'in_refund','in_receipt')"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,264 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_sale_commission
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-25 20:57+0000\n"
+"PO-Revision-Date: 2019-01-25 16:59-0400\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 2.2\n"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.product_template_form_view_inherited
+msgid ""
+"<span class=\"fa fa-lightbulb-o fa-lg\"/>\n"
+"                                Setting up this fields will make this particular product ignore category commission\n"
+"                                setup"
+msgstr "La configuración de estos campos hará que este producto en particular ignore la comisión de categoría"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_product_product__commission_ok
+#: model:ir.model.fields,field_description:account_sale_commission.field_product_template__commission_ok
+msgid "Can commission"
+msgstr "Puede comisionar"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_product_category__commission
+msgid "Can generate commission entries"
+msgstr "Puede generar asientos por comisión"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,help:account_sale_commission.field_account_journal__commission
+msgid "Check this field if payments with this journal creates commission entries for invoices Salesperson"
+msgstr "Marca este campo si los pagos con este diario crean asientos por comisión"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,help:account_sale_commission.field_product_category__commission
+msgid "Check this field if products with this category can generate commission entries for invoices Salesperson"
+msgstr "Marca este campo si los pagos con este diario crean asientos por comisión"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.product_template_form_view_inherited
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "Commission"
+msgstr "Comisión"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_config_settings__commission_base
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "Commission Base"
+msgstr "Base de Comisión"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_config_settings__commission_beneficiary
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "Commission Beneficiary"
+msgstr "Beneficiario de Comisión"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_config_settings__commission_currency_rate
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "Commission Currency Rate"
+msgstr "Tasa de Comisión"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_company__commission_journal_id
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_config_settings__commission_journal_id
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "Commission Journal"
+msgstr "Diario de Comisión"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_config_settings__commission_schema
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "Commission Schema"
+msgstr "Esquema de Comisión"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.product_category_form_view_inherited
+msgid "Commission Setup"
+msgstr "Configuración de Comisión"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "Commission entries setup"
+msgstr "Configuración de Asientos por Comisión"
+
+#. module: account_sale_commission
+#: model:ir.model,name:account_sale_commission.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: account_sale_commission
+#: model:ir.model,name:account_sale_commission.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,help:account_sale_commission.field_res_config_settings__move_date
+msgid ""
+"Create date: payment creation date\n"
+"Assignment date: when payment was applied"
+msgstr ""
+"Fecha creación: fecha creación del pago\n"
+"Fecha asignación: fecha asignación del pago"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_company__commission_credit_account
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_config_settings__commission_credit_account
+msgid "Credit Account"
+msgstr "Cuenta de Crédito"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,commission_currency_rate:0
+msgid "Current rate"
+msgstr "Tasa actual"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,commission_beneficiary:0
+msgid "Customer Salesperson"
+msgstr "Vendedor del cliente"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_company__commission_debit_account
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_config_settings__commission_debit_account
+msgid "Debit Account"
+msgstr "Cuenta de Debito"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_product_category__fixed_amount
+#: model:ir.model.fields,field_description:account_sale_commission.field_product_product__fixed_amount
+#: model:ir.model.fields,field_description:account_sale_commission.field_product_template__fixed_amount
+msgid "Fixed Amount"
+msgstr "Monto fijo"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_account_journal__commission
+msgid "Generate commission from payments"
+msgstr "Genera Comisión por pagos"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,commission_base:0
+msgid "Gross Amount"
+msgstr "Monto bruto"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "How commission entries should be registered"
+msgstr "Cómo los asientos por Comisión deben ser registrados"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,commission_beneficiary:0
+msgid "Invoice Salesperson"
+msgstr "Vendedor de factura"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,commission_currency_rate:0
+msgid "Invoice date rate"
+msgstr "Tasa fecha de factura"
+
+#. module: account_sale_commission
+#: model:ir.model,name:account_sale_commission.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "Journal Entry Date"
+msgstr "Fecha entrada de diario"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,commission_schema:0
+msgid "Liquidate"
+msgstr "Liquidación"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_res_config_settings__move_date
+msgid "Move Date"
+msgstr "Fecha asiento"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,commission_base:0
+msgid "Net Amount"
+msgstr "Monto neto"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,move_date:0
+msgid "Payment assignment date"
+msgstr "Fecha asignación del pago"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,commission_beneficiary:0
+msgid "Payment collector"
+msgstr "Cobrador"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,move_date:0
+msgid "Payment create date"
+msgstr "Fecha creación del pago"
+
+#. module: account_sale_commission
+#: model:ir.model,name:account_sale_commission.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: account_sale_commission
+#: selection:res.config.settings,commission_schema:0
+msgid "Pays"
+msgstr "Pagos"
+
+#. module: account_sale_commission
+#: model:ir.model.fields,field_description:account_sale_commission.field_product_category__percentage
+#: model:ir.model.fields,field_description:account_sale_commission.field_product_product__percentage
+#: model:ir.model.fields,field_description:account_sale_commission.field_product_template__percentage
+msgid "Percentage"
+msgstr "Porcentaje"
+
+#. module: account_sale_commission
+#: model:ir.actions.act_window,name:account_sale_commission.product_category_action_form
+msgid "Product Categories"
+msgstr "Categorías de productos"
+
+#. module: account_sale_commission
+#: model:ir.model,name:account_sale_commission.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: account_sale_commission
+#: model:ir.model,name:account_sale_commission.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: account_sale_commission
+#: model:ir.ui.menu,name:account_sale_commission.product_product_menu_sellable
+msgid "Products Categories"
+msgstr "Categorías de productos"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "What amount base should be taken for commission calculation"
+msgstr "Cuál monto base debe tomarse para el cómputo de la Comisión"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "What currency rate should use"
+msgstr "Qué tasa debe usarse"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "What date should the Commission journal entry take"
+msgstr "Qué fecha debe tomar el asiento por comisión"
+
+#. module: account_sale_commission
+#: model_terms:ir.ui.view,arch_db:account_sale_commission.res_config_settings_view_form_inherited
+msgid "Who would receive the commission"
+msgstr "Quién debe recibir la Comisión"

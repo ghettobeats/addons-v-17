@@ -1,0 +1,108 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_do_account_batch_payment_bpd
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-12 15:20+0000\n"
+"PO-Revision-Date: 2021-11-12 11:21-0400\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+"Language: es_DO\n"
+"X-Generator: Poedit 3.0\n"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: code:addons/l10n_do_account_batch_payment_bpd/models/account_payment.py:59
+#, python-format
+msgid "%s account type is required for generate batch file"
+msgstr "La cuenta %s requiere un Tipo de Cuenta para generar el archivo de pago por lotes"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_bpd.field_res_company__l10n_do_bpd_bank_number
+msgid "BPD Bank Number"
+msgstr "Número BPD"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: code:addons/l10n_do_account_batch_payment_bpd/models/res_company.py:0
+#, python-format
+msgid "BPD Bank number must be a 5 digits value"
+msgstr "El Número del BPD debe ser un valor de 5 dígitos"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_bpd.field_res_currency__l10n_do_bpd_currency_code
+msgid "BPD Currency Code"
+msgstr "Código BPD"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: code:addons/l10n_do_account_batch_payment_bpd/models/account_payment.py:0
+#: code:addons/l10n_do_account_batch_payment_bpd/models/account_payment.py:0
+#, python-format
+msgid "Banco Popular batch payment file needs company VAT"
+msgstr "El archivo de Pago por Lotes del BPD requiere el RNC de la compañía"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model,name:l10n_do_account_batch_payment_bpd.model_res_bank
+msgid "Bank"
+msgstr "Banco"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_bpd.field_res_bank__l10n_do_bpd_bank_code
+msgid "Bank Code"
+msgstr "Código Banco"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model,name:l10n_do_account_batch_payment_bpd.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: code:addons/l10n_do_account_batch_payment_bpd/models/account_payment.py:0
+#, python-format
+msgid "Company BPD Bank number is required for this operation."
+msgstr "El Número BPD de la compañía es requerido para esta operación."
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model,name:l10n_do_account_batch_payment_bpd.model_res_currency
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_bpd.field_res_bank__l10n_do_bpd_digiver_code
+msgid "Digit Destiny Bank"
+msgstr "Dígito Banco Destino"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model,name:l10n_do_account_batch_payment_bpd.model_l10n_do_account_batch_payment
+msgid "Dominican Batch Payment"
+msgstr "Lotes de Pagos Dominicanos"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_bpd.field_l10n_do_account_batch_payment__effective_date
+msgid "Effective Date"
+msgstr "Fecha efectiva"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_bpd.field_l10n_do_account_batch_payment__is_bpd_bank
+msgid "Is Bpd Bank"
+msgstr "Es BPD"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model,name:l10n_do_account_batch_payment_bpd.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model,name:l10n_do_account_batch_payment_bpd.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: l10n_do_account_batch_payment_bpd
+#: model:ir.model.fields,help:l10n_do_account_batch_payment_bpd.field_l10n_do_account_batch_payment__effective_date
+msgid "Select the effectiveness date of all transactions"
+msgstr "Selecciona la fecha de efectividad de todas las transacciones"

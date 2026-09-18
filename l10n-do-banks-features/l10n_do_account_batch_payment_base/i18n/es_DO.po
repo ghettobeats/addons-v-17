@@ -1,0 +1,141 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_do_account_batch_payment_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-10 15:55+0000\n"
+"PO-Revision-Date: 2021-04-10 11:56-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_DO\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_account_payment__partner_bank_id
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_account_payment_register__partner_bank_id
+msgid "Bank Account"
+msgstr "Cuenta bancaria"
+
+#. module: l10n_do_account_batch_payment_base
+#: model_terms:ir.ui.view,arch_db:l10n_do_account_batch_payment_base.l10n_do_account_batch_payment_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: l10n_do_account_batch_payment_base
+#: code:addons/l10n_do_account_batch_payment_base/wizard/l10n_do_account_batch_payment_wizard.py:0
+#, python-format
+msgid ""
+"Could not generate any bank file.\n"
+"Did you install the module to support %s bank?"
+msgstr ""
+"“No se pudo generar el archivo.\\n”\n"
+"¿Ha instalado el módulo que soporta el banco %s?"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: l10n_do_account_batch_payment_base
+#: code:addons/l10n_do_account_batch_payment_base/models/account_payment.py:0
+#, python-format
+msgid "Destination account is required to generate batch payment file"
+msgstr "La cuenta destino es requerida para generar un archivo de pago por lote"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model,name:l10n_do_account_batch_payment_base.model_l10n_do_account_batch_payment
+msgid "Dominican Batch Payment"
+msgstr "Lotes de Pagos Dominicanos"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__file
+msgid "Download File"
+msgstr "Descargar archivo"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__filename
+msgid "File Name"
+msgstr "Nombre del archivo"
+
+#. module: l10n_do_account_batch_payment_base
+#: model_terms:ir.ui.view,arch_db:l10n_do_account_batch_payment_base.l10n_do_account_batch_payment_wizard_form
+msgid "Generate"
+msgstr "Generar"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.actions.act_window,name:l10n_do_account_batch_payment_base.l10n_do_account_batch_payment_wizard_action
+msgid "Generate Payment File"
+msgstr "Generar Archivo de Pagos"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__journal_id
+msgid "Journal"
+msgstr "Diario"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.ui.menu,name:l10n_do_account_batch_payment_base.l10n_do_account_batch_payment_base_menu
+msgid "Payment files"
+msgstr "Archivos de pago"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model,name:l10n_do_account_batch_payment_base.model_account_payment
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__payment_ids
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model,name:l10n_do_account_batch_payment_base.model_account_payment_register
+msgid "Register Payment"
+msgstr "Registrar pago"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_account_payment_register__l10n_do_show_bank_acc
+msgid "Show Bank Account"
+msgstr "Mostrar Cuenta Bancaria"
+
+#. module: l10n_do_account_batch_payment_base
+#: model:ir.model.fields,field_description:l10n_do_account_batch_payment_base.field_l10n_do_account_batch_payment__total_to_pay
+msgid "Total Amount"
+msgstr "Monto total"

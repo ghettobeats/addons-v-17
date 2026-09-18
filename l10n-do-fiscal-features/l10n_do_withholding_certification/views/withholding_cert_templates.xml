@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="l10n_do_withholding_cert_layout">
+
+        <div t-if="o.company_id.l10n_do_show_header" class="header">
+            <div class="row">
+                <div class="col-2 mb4 ml-4">
+                    <img src="/l10n_do_withholding_certification/static/src/img/coat_of_arms.png"
+                         style="max-height: 100px;" alt="Coat of Arms"/>
+                </div>
+                <div class="col-1 ml-4">
+                    <!-- Empty space -->
+                </div>
+                <div class="col-4 mb4 ml-4">
+                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
+                         style="max-height: 100px;"/>
+                </div>
+                <div class="col-1">
+                    <!-- Empty space -->
+                </div>
+                <div class="col-4 ml-2" name="company_address" style="max-height: 100px;">
+                    <div t-field="o.company_id.partner_id"
+                         t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'
+                    />
+                    <span t-if="o.company_id.phone"><span t-field="o.company_id.phone"/></span><br/>
+                </div>
+            </div>
+            <div class="row zero_min_height">
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <span style="font-size: 12px;">PRESIDENCIA DE LA REPÚBLICA</span>
+                </div>
+                <div class="col-4" style="text-align:center; font-size: 12px;">
+                    RNC: <span t-field="o.company_id.vat"/>
+                </div>
+                <div class="col-4" style="text-align:right; font-size: 12px;">
+                    <span t-field="o.company_id.website"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+
+        <div t-if="o.company_id.l10n_do_show_footer" class="footer o_standard_footer">
+            <!-- PENDING -->
+        </div>
+    </template>
+
+</odoo>

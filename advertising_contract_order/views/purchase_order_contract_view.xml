@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field name="is_contract"/>
+            </xpath>
+            <notebook position="inside">
+                <page name="Contract" string="Contract" attrs="{'invisible': [('is_contract','=',False)]}">
+                    <group>
+                        <field name="certification_number" width="auto"/>
+                        <field name="contract_number" width="auto"/>
+                        <field name="contract_date_from" width="auto"/>
+                        <field name="contract_date_end" width="auto"/>
+                    </group> 
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

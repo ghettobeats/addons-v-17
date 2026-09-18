@@ -1,0 +1,1 @@
+This module allows automating the creation of journal items corresponding to the Cost of Good Sold lines (COGS) in the invoice when this is validated, where the sale order related to the invoice has additional picking moves of storable products with perpetual valuation that have not any sale line linked.

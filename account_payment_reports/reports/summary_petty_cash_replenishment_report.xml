@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="summary_petty_cash_replenishment_report">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                        <div class="oe_structure"/>
+                        <div class="page">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <p>
+                                            Dirección Financiera
+                                            <br/>
+                                            División de Tesorería
+                                        </p>
+                                        <strong>
+                                            <h5>
+                                                Resumen Reposición Caja Chica
+                                            </h5>
+                                        </strong>
+
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>
+                                            <strong>Fecha:
+                                            </strong>
+                                            <br/>
+                                            <span t-field="doc.date"/>
+                                            <br/>
+                                        </p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>
+                                            <strong>Monto Fondo:
+                                            </strong>
+                                            <br/>
+                                            <span t-field="doc.balance_start"/>
+                                            <br/>
+                                        </p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>
+                                            <strong>Efectivo Disponible:
+                                            </strong>
+                                            <br/>
+                                            <span t-field="doc.balance_end_real"/>
+                                            <br/>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:25px">
+                                    <div class="col-4">
+                                        <p>
+                                            <strong>Pendiente Reposición:
+                                            </strong>
+                                            <br/>
+                                            <span t-field="doc.x_studio_pendiente_reposicin"/>
+                                        </p>
+                                    </div>
+                                    <br/>
+                                    <div class="col-4">
+                                        <p>
+                                            <strong>Monto a Reponer:
+                                            </strong>
+                                            <br/>
+                                            <span t-field="doc.x_studio_monto_a_reponer"/>
+                                            <br/>
+                                        </p>
+                                    </div>
+                                </div>
+                                <br/>
+                                <table class="table"
+                                       style="width: 100%; page-break-inside: auto; border-collapse: collapse; font-size: 13px;">
+                                    <thead>
+                                        <tr class="text-center" style="page-break-before: always;">
+                                            <th>FECHA</th>
+                                            <th>DESCRIPCIÓN</th>
+                                            <th>BENEFICIARIO</th>
+                                            <th>MONTO RD$</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center" style="page-break-inside: avoid;">
+                                        <tr t-foreach="doc.line_ids" t-as="table_line">
+                                            <td>
+                                                <t t-if="table_line.date">
+                                                    <span t-field="table_line.date"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span/>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="table_line.payment_ref">
+                                                    <span t-field="table_line.payment_ref"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span/>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="table_line.partner_id">
+                                                    <span t-field="table_line.partner_id"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span/>
+                                                </t>
+                                            </td>
+                                            <td class="active" style="background-color:	#e6e6e6">
+                                                <t t-if="table_line.amount">
+                                                    <strong>
+                                                        <span t-esc="'{:,.2f}'.format(table_line.amount_total_signed)"/>
+                                                    </strong>
+                                                </t>
+                                                <t t-else="">
+                                                    <span/>
+                                                </t>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-12 text-right ">
+                                        <p>
+                                            <strong>Total: RD$</strong>
+                                            <span t-esc="'{:,.2f}'.format(doc.total_entry_encoding * -1)"/>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div style="margin-top:40px" class="row">
+                                    <div class="col-4">
+                                        <p>Revisado por:</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Aprobado por:</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Entregado por:
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_summary_petty_cash_replenishment_report" model="ir.actions.report">
+            <field name="name">Resumen Reposición Caja Chica</field>
+            <field name="model">account.bank.statement</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_file">account_payment_reports.summary_petty_cash_replenishment_report</field>
+            <field name="report_name">account_payment_reports.summary_petty_cash_replenishment_report</field>
+            <!--            <field name="binding_model_id" ref="account.model_account_payment"/> -->
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

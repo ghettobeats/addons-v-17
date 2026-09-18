@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tax_cert_report_payment_receipt_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <div class="page" style="font-size: 12px !important;">
+                <h2 align="center"><strong>Certificado de retenciones</strong></h2>
+                <br/>
+
+                <div class="row mt64">
+                    <div class="col-6" t-if="o.date">
+                        <strong>Fecha: </strong> <span t-field="o.date"/>
+                    </div>
+                </div>
+                <div class="row mt64">
+                    <div class="col-6" t-if="o.date">
+                        <strong>De: </strong> <span t-field="o.company_id.name"/>
+                    </div>
+                </div>
+                <div class="row mt64">
+                    <div class="col-6" t-if="o.date">
+                        <strong>A: </strong> <span>Dirección General de Impuestos Internos (DGII)</span>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <span>En cumplimiento con las disposiciones del Artículo 77 del Reglamento 139-98, modificado por el Decreto 195-01 de fecha 8 de
+febrero del 2001 que, establece la obligatoriedad de los Agentes de Retención de proporcionar información de las rentas
+pagadas y el impuesto retenido a requerimiento de los contribuyentes, y de la Norma General 02-05 sobre la retención de ITBIS
+a Sociedades; informamos que nuestra empresa, actuando en calidad de Agente de Retención, retuvo dicho impuesto a la
+entidad indicada más abajo e ingresó su pago a esa Dirección General en los plazos y formas previstos en el Código Tributario
+(Ley 11-92 y sus modificaciones). Citamos a continuación los datos mencionados:</span>
+                <br/>
+                <br/>
+
+
+                <div class="row">
+                    <div class="col-6" t-if="o.partner_type">
+                        <t t-if="o.partner_type == 'customer'">
+                            <strong>Razon Social: </strong>
+                        </t>
+                        <t t-if="o.partner_type == 'supplier'">
+                            <strong>Razon Social: </strong>
+                        </t><span t-field="o.partner_id"/>
+                    </div>
+                    <div class="col-6" t-if="o.partner_id.vat">
+                        <strong>RNC: </strong><span t-field="o.partner_id.vat"/>
+                    </div>
+                </div>
+                <div class="row mb64">
+                    <div class="col-6">
+                        <strong>Direccion: </strong><span t-field="o.partner_id.street"/>
+                        <span>,</span><span t-field="o.partner_id.street2"/>
+                        <span>,</span><span t-field="o.partner_id.city"/>
+                        <span>,</span><span t-field="o.partner_id.state_id.name"/>
+                </div>
+                </div>
+                <div class="row mb64">
+                    <div class="col-4" t-if="o.amount">
+                        <strong>Monto pagado: </strong><span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                     </div>
+                     <div class="col-4" t-if="o.amount">
+                        <strong>Total ITBIS retenido: </strong><span t-field="o.withold_itbis_amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                     </div>
+                     <div class="col-4" t-if="o.amount">
+                        <strong>Total ISR retenido: </strong><span t-field="o.withold_isr_amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                     </div>
+                </div>
+
+                <br/>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th><span>Fecha de factura</span></th>
+                            <th><span>Numero de factura</span></th>
+                            <th><span>NCF</span></th>
+                            <th class="text-right"><span>Subtotal</span></th>
+                            <th class="text-right"><span>ITBIS</span></th>
+                            <th class="text-right"><span>Retencion ITBIS</span></th>
+                            <th class="text-right"><span>Retencion ISR</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="o.payment_invoice_ids" t-as="rec">
+
+                            <t t-set="inv" t-value="rec"/>
+                                <t t-if="inv.itbis_withold > 0 or inv.isr_withold > 0 ">
+                                    <td><span t-field="inv.date_invoice"/></td>
+                                    <td><span t-field="inv.invoice_id.name"/></td>
+                                    <td><span t-field="inv.invoice_id.l10n_latam_document_number"/></td>
+                                    <td class="text-right"><span t-field="inv.subtotal" t-options="{'widget': 'monetary', 'display_currency': inv.currency_id}"/></td>
+                                    <td class="text-right"><span t-esc="inv.itbis" t-options="{'widget': 'monetary', 'display_currency': inv.currency_id}"/></td>
+                                    <td class="text-right"><span t-field="inv.itbis_withold"/></td>
+                                    <td class="text-right"><span t-field="inv.isr_withold"/></td>
+                                </t>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <br/>
+                <div style="text-align: right;">
+                    <div>
+                        <img t-if="o.company_id.company_seal" t-att-src="image_data_uri(o.company_id.company_seal)" class="right" alt="Seal"
+                        style="width:200px;height:200px;"/>
+                        <img t-if="o.company_id.company_firm" t-att-src="image_data_uri(o.company_id.company_firm)" class="right" alt="Firm"
+                        style="width:150px;height:150px;"/>
+                    </div>
+                    <span>_________________________________</span>
+                    <div style="text-align: right;">
+                        <strong><span style="text-align: right;" t-field="o.company_id.firm_name"/></strong>
+                        <br/>
+                        <strong><span style="text-align: right;" t-field="o.company_id.firm_position"/></strong>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="tax_cert_report_payment_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>
+                <t t-call="dgii_reports_second.tax_cert_report_payment_receipt_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

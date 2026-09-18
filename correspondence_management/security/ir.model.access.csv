@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_correspondence,correspondenceUsers,model_correspondence,base.group_user,1,1,1,1
+access_correspondence_type,correspondenceTypeUsers,model_correspondence_types,base.group_user,1,1,1,1
+access_internal_messenger,internal_messengerUsers,model_correspondence_internal_messenger,base.group_user,1,1,1,1
+access_wizard,WizardUsers,model_correspondence_wizard,base.group_user,1,1,1,1

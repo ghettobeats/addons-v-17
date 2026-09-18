@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="base.main_company" model="res.company">
+        <field name="l10n_do_year_tag_line" type="html">
+            <div class="l10n_do_year_tag_line" style="text-align:center;">
+                <br/>
+                <br/>
+                <span><strong>AÑO DE LA CONSOLIDACIÓN DE LA SEGURIDAD ALIMENTARIA</strong></span>
+                <br/>
+                <span><strong>“AVANZANDO PARA TI”</strong></span>
+            </div>
+        </field>
+        <field name="l10n_do_sign_table" type="html">
+            <div class="l10n_do_sign_table">
+                <br/>
+                <br/>
+                <div class="col-4 float-left" style="position:absolute;">
+                    <strong><span>NAME 1</span></strong><br/>
+                    <span>Position 1</span></div>
+                <div class="col-4"></div>
+                <div class="col-4 float-right" style="text-align:center;">
+                    <strong><span>NAME 2</span></strong><br/>
+                    <span>Position 2</span></div>
+            </div>
+        </field>
+    </record>
+
+</odoo>

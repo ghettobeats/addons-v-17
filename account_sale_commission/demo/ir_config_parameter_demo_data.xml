@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="commission_schema_param" model="ir.config_parameter">
+        <field name="key">account_sale_commission.commission_schema</field>
+        <field name="value">liquidate</field>
+    </record>
+    <record id="commission_base_param" model="ir.config_parameter">
+        <field name="key">account_sale_commission.commission_base</field>
+        <field name="value">gross</field>
+    </record>
+    <record id="commission_beneficiary_param" model="ir.config_parameter">
+        <field name="key">account_sale_commission.commission_beneficiary</field>
+        <field name="value">invoice</field>
+    </record>
+    <record id="commission_currency_rate_param" model="ir.config_parameter">
+        <field name="key">account_sale_commission.commission_currency_rate</field>
+        <field name="value">invoice</field>
+    </record>
+    <record id="move_date_param" model="ir.config_parameter">
+        <field name="key">account_sale_commission.move_date</field>
+        <field name="value">create_date</field>
+    </record>
+
+</odoo>

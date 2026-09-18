@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hr_expense_sheet_form_inherit" model="ir.ui.view">
+            <field name="name">view_hr_expense_sheet_form_inherit</field>
+            <field name="model">hr.expense.sheet</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="ticket_id" widget="many2one_tags" force_save="1" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="before">
+                    <field name="beneficiary_type"/>
+                    <field name="guest_id" attrs="{'invisible':[('beneficiary_type','!=','guess')],
+                    'required':[('beneficiary_type','=','guess')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="replace">
+                    <label for="employee_id" string="Empleado"
+                           attrs="{'invisible': [('beneficiary_type', '!=', 'employee')]}"/>
+                    <div attrs="{'invisible': [('beneficiary_type', '!=', 'employee')]}" class="o_row">
+                        <field name="employee_id"
+                               widget="many2one_avatar_employee"
+                               context="{'default_company_id': company_id}"
+                               attrs="{'required': [('beneficiary_type', '=', 'employee')],'readonly': [('state', '!=', 'draft')]}"
+                               force_save="1"
+                               nolabel="1"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <!--        HELPDESK TICKETS VIEWS      -->
+
+        <record id="helpdesk_ticket_view_form_inherit" model="ir.ui.view">
+            <field name="name">view_hr_expense_sheet_form_inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="expense_id" force_save="1" options="{'no_create': True, 'no_open': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

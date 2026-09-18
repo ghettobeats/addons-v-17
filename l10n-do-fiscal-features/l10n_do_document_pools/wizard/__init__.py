@@ -1,0 +1,1 @@
+from . import l10n_do_journal_document_type_validate_wizard

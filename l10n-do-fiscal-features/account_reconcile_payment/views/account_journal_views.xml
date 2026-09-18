@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_account_journal_form_inherited" model="ir.ui.view">
+        <field name="name">view.account.journal.form.inherited</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <group name="group_alias_ro" position="after">
+                <group string="Reconciled payments" attrs="{'invisible': [('type', '!=', 'general')]}">
+                    <field name="l10n_do_reconciled_payments_journal"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>

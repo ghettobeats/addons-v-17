@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="bank_cheque_history_print_pdf_report_inherit"
+              inherit_id="odoo_cheque_management.bank_cheque_history_print_pdf_report">
+        <xpath expr="//t/t/div/div/t/div/t[@t-esc='account_number']" position="after">
+            <span t-if="bank_cheque_line_obj.name.attribute == 'free_text'"
+                  t-field="bank_cheque_line_obj.name.free_text"/>
+        </xpath>
+    </template>
+</odoo>

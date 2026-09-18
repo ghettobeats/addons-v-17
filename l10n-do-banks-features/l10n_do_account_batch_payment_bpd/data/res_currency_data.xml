@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="base.DOP" model="res.currency">
+        <field name="l10n_do_bpd_currency_code">214</field>
+    </record>
+    <record id="base.USD" model="res.currency">
+        <field name="l10n_do_bpd_currency_code">840</field>
+    </record>
+    <record id="base.EUR" model="res.currency">
+        <field name="l10n_do_bpd_currency_code">978</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_journal_document_type_queued_pool,access_account_journal_document_type_queued_pool,l10n_do_document_pools.model_account_journal_document_type_queued_pool,base.group_user,1,1,1,1
+access_ir_sequence_validate_wizard,access_ir_sequence_validate_wizard,l10n_do_document_pools.model_ir_sequence_validate_wizard,base.group_user,1,1,1,0

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Journals used as payment methods -->
+    <record id="demo_bank_journal" model="account.journal">
+        <field name="name">Demo Bank Journal</field>
+        <field name="type">bank</field>
+        <field name="code">DBNKJ</field>
+        <field name="commission" eval="True"/>
+    </record>
+
+    <record id="demo_cash_journal" model="account.journal">
+        <field name="name">Demo Cash Journal</field>
+        <field name="type">cash</field>
+        <field name="code">DCSHJ</field>
+        <field name="commission" eval="True"/>
+    </record>
+
+    <record id="demo_check_journal" model="account.journal">
+        <field name="name">Demo Check Journal</field>
+        <field name="type">cash</field>
+        <field name="code">DCCKJ</field>
+        <field name="commission" eval="True"/>
+    </record>
+
+    <!-- Commission journal entries Journal -->
+    <record id="demo_commission_journal" model="account.journal">
+        <field name="name">Demo Commission Journal</field>
+        <field name="type">general</field>
+        <field name="code">DCMMJ</field>
+    </record>
+
+    <!-- Commission journal entries accounts -->
+    <record id="demo_non_current_liabilities" model="account.account">
+        <field name="code">1101021000</field>
+        <field name="name">Commission to pay</field>
+        <field name="user_type_id" ref="account.data_account_type_non_current_liabilities"/>
+    </record>
+
+    <record id="demo_expenses" model="account.account">
+        <field name="code">1101021001</field>
+        <field name="name">Commission expenses</field>
+        <field name="user_type_id" ref="account.data_account_type_expenses"/>
+    </record>
+
+</odoo>

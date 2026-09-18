@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="batch_payment_report">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.html_container">
+                    <t t-call="web.external_layout">
+                        <div class="oe_structure"/>
+                        <div class="page">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span>
+                                            <p style="margin-bottom: 0px;">
+                                                <strong>No. de Transacción:</strong>
+                                                <span t-field="doc.name"/>
+                                            </p>
+                                            <p>
+                                                <strong>Fecha:</strong>
+                                                <span t-field="doc.date"/>
+                                            </p>
+                                            <p style="margin-bottom: 0px;">
+                                                <span style="font-size: medium;">Dr.Leonardo Aguilera Batista</span>
+                                            </p>
+                                             <p style="margin-bottom: 0px;">
+                                                <span style="font-size: medium;">Presidente Ejecutivo</span>
+                                            </p>
+
+                                            <p style="margin-bottom: 0px;">
+                                                <span style="font-size: medium;">Banco de Reservas la Rep. Dominicana, Banco Múltiple <br/>
+                                                Su Despacho
+                                                </span>
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <br/>
+
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span>
+                                            <p style="margin-bottom: 0px; font-size: medium;">Atención a la señora  Doris Laura
+                                                Uribe
+                                                Velázquez
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="padding-left: 87px;">
+                                        <p style="margin-bottom: 0px; font-size: medium;">Vicepresidenta Ejecutiva de
+                                            Negocios Gubernamentales
+                                        </p>
+                                    </div>
+                                </div>
+                                <br/>
+
+                                <p>
+                                    Sirva la presente para solicitar el débito de nuestra cuenta corriente en pesos
+                                    dominicanos
+                                    <strong>No. 100010302061495</strong>, por el monto de  <span t-field="doc.currency_id.symbol"/><span t-esc="'{:,.2f}'.format(doc.amount * -1)"/>, para ser transferidos a la cuenta
+                                    del personal de este Ministerio por concepto de <span t-field="doc.x_studio_concept"/>, conforme al detalle a continuación:
+                                </p>
+                                <br/>
+                                <table class="table" style="page-break-inside: auto; font-size: 12px;">
+                                    <thead>
+                                        <tr style="page-break-before: always;">
+                                            <th>NO. DE OFICIO</th>
+                                            <th>CÉDULA</th>
+                                            <th>NOMBRE</th>
+                                            <th>CUENTA BENEFICIARIA</th>
+                                            <th>MONTO RD$</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="page-break-inside: avoid;">
+                                        <tr t-foreach="doc.payment_ids" t-as="table_line">
+                                            <td>
+                                                <t t-if="table_line.x_expense_id">
+                                                    <span t-field="table_line.x_expense_id.name"/>
+                                                </t>
+                                                <t t-elif="table_line.ref.find('.') &gt; 0">
+                                                    <span t-esc="table_line.ref[0:table_line.ref.find('.')]"/>
+                                                </t>
+                                                <t t-elif="table_line.ref.find(',') &gt; 0">
+                                                    <span t-esc="table_line.ref[0:table_line.ref.find(',')]"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-esc="table_line.ref"/>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="table_line.partner_id">
+                                                    <span t-field="table_line.partner_id.vat"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span/>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="table_line.x_entregar_a">
+                                                    <span t-field="table_line.x_entregar_a"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-field="table_line.partner_id"/>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="table_line.partner_bank_id">
+                                                    <span t-field="table_line.partner_bank_id.acc_number"/>
+                                                </t>
+                                            </td>
+                                            <td class="active" style="background-color: #e6e6e6">
+                                                <strong>
+                                                    <span t-esc="'{:,.2f}'.format(table_line.amount_total_signed)"/>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-12 text-right ">
+                                        <p>
+                                            Total:  <span t-field="doc.currency_id.symbol"/>
+                                            <span t-esc="'{:,.2f}'.format(doc.amount * -1)"/>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>Agradeciendo su gestión.
+                                    </p>
+                                    <P>Atentamente</P>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 45px;">
+                                <div class="col-4 text-center">
+                                    <div class="firma-label">Firma Autorizada</div>
+                                </div>
+                                <div class="col-4"/>
+                                <div class="col-4 text-center">
+                                    <div class="firma-label">Firma Autorizada</div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+        <record id="action_batch_payment_report" model="ir.actions.report">
+            <field name="name">Pago por Lote Informe</field>
+            <field name="model">account.batch.payment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_file">account_payment_reports.batch_payment_report</field>
+            <field name="report_name">account_payment_reports.batch_payment_report</field>
+            <!--            <field name="binding_model_id" ref="account.model_account_payment"/> -->
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

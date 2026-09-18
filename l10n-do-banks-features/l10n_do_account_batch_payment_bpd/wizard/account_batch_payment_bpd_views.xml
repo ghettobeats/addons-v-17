@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="l10n_do_account_batch_bpd" model="ir.ui.view">
+        <field name="model">l10n_do.account.batch.payment</field>
+        <field name="inherit_id"
+               ref="l10n_do_account_batch_payment_base.l10n_do_account_batch_payment_wizard_form"/>
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="is_bpd_bank" invisible="1"/>
+                <field name="effective_date"
+                       attrs="{'invisible': [('is_bpd_bank', '!=', True)]}"
+                       required="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>

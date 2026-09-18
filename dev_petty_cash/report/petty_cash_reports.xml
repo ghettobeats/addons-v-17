@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <record id="petty_cash_detalle_report" model="ir.actions.report">
+            <field name="name">Reporte de Caja</field>
+            <field name="model">petty.cash.expense</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">dev_petty_cash.petty_cash_template_detalle</field>
+            <field name="report_file">dev_petty_cash.petty_cash_template_detalle</field>
+            <field name="print_report_name">((object.name or '').replace('/','_')+'-'+(object.employee_id.name or '').replace('/','_')+'-'+(object.tipo_caja_id.name or '').replace('/','_')+'-'+((str(object.date) or 'final').replace('/','_')))</field>
+            <field name="binding_model_id" ref="dev_petty_cash.model_petty_cash_expense"/>
+            <field name="binding_type">report</field
+            >
+        </record>
+
+
+    </data>
+</odoo>

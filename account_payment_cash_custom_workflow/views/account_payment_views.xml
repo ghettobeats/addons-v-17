@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_form" model="ir.ui.view">
+        <field name="name">account.payment.form.cash.control.custom</field>
+        <field name="model">account.payment</field>
+	<field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+	    <field name="payment_type" position="after">
+		<field
+		    name="cash_replenishment"
+		    attrs="{'invisible': [('is_internal_transfer', '=', False)]}" />
+		<field name="journal_cash_control" invisible="1" />
+		<field name="user_can_edit_amount" invisible="1" />
+		<field name="refunded" readonly="1" attrs="{'invisible': [('journal_cash_control', '=', False)]}" />
+	    </field>
+	    <xpath expr="//sheet/group[1]">
+		<field
+		    name="cash_replenishment_payment_ids"
+		    nolabel="1"
+		    attrs="{'invisible': [('cash_replenishment', '=', False)]}" />
+		<field
+		    name="cash_replenishment_payment_invoice_ids"
+		    nolabel="1"
+		    attrs="{'invisible': [('cash_replenishment', '=', False)]}" />
+	    </xpath>
+	    <xpath expr="//group[@name='group1']/div/field[@name='amount']" position="attributes">
+		<attribute name="attrs">{'readonly': ['&amp;', '|', ('state', '!=', 'draft'), ('cash_replenishment_payment_ids', '!=', []), ('user_can_edit_amount', '=', False)]}</attribute>
+		<attribute name="force_save">1</attribute>
+	    </xpath>
+	</field>
+    </record>
+</odoo>

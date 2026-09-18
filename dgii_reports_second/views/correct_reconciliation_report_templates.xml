@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="correct_reconciliation_report_receipt">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+
+            <t t-set="company_id" t-value="request.env['res.company'].search([('id','=',companyid)])"/>
+<!--            <t t-foreach="docs" t-as="o">-->
+            <div class="page" style="font-size: 14px !important;">
+                <h2 align="center"><strong>Reporte de Conciliacion Bancaria</strong></h2>
+
+                <hr style="border-top:1px dashed rgba(0,0,0,0.5);"/>
+                <div class="row mt64">
+                    <div class="col-6">
+                        <strong>Cuenta de mayor: </strong> <span t-esc="cuenta_mayor"/>
+                    </div>
+                </div>
+                <div class="row mt64">
+                    <div class="col-6">
+                        <strong>Banco: </strong> <span t-esc="banco"/>
+                    </div>
+                </div>
+                <div class="row mt64">
+                    <div class="col-6">
+                        <strong>Numero de cuenta: </strong> <span t-esc="numero_cuenta"/>
+                        </div>
+                </div>
+                <div class="row mt64">
+                    <div class="col-6">
+                        <strong>Moneda: </strong> <span t-esc="moneda_simbolo"/>
+                        </div>
+                </div>
+                <div class="row mt64">
+                    <div class="col-6">
+                        <strong>A la fecha: </strong> <span t-esc="fecha"/>
+                        </div>
+                </div>
+                <hr style="border-top:1px dashed rgba(0,0,0,0.5);"/>
+
+                <h4 align="center"><strong>Resumen</strong></h4>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th><span>Conceptos</span></th>
+                            <th class="text-right"><span>Valores</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: transparent;">
+                            <td><span><strong style="color:black;">Balance según extracto del banco a la fecha</strong></span></td>
+                            <td class="text-right"><span t-esc="balance_banco"
+                                      t-options="{'widget': 'monetary',
+                                      'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                        </tr>
+
+                        <tr style="background-color: transparent;">
+                            <td><span/></td>
+                            <td class="text-right"><span/></td>
+                        </tr>
+
+                        <tr style="background-color: transparent;">
+                            <td><span><strong style="color:black;">Transacciones en tránsito a la fecha</strong></span></td>
+                            <td class="text-right"><span/></td>
+                        </tr>
+
+                        <tr style="background-color: transparent;">
+                            <td><span style="margin-left: 10px"><strong style="color:grey;">+ Pagos entrantes en tránsito</strong></span></td>
+                            <td class="text-right"><span/></td>
+                        </tr>
+                        <tr style="background-color: transparent;">
+                            <td><span style="margin-left: 20px">Depositos (Cheques) en tránsito</span></td>
+                            <td class="text-right"><span t-esc="sum([l['monto'] if l['metodo_pago']  == 'cheque' and l['tipo_pago']  == 'inbound' else 0 for l in trans_transito])"
+
+                                      t-options="{'widget': 'monetary',
+                                      'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                        </tr>
+                        <tr style="background-color: transparent;">
+                            <td><span style="margin-left: 20px">Transferencias y otros depositos en transito</span></td>
+                            <td class="text-right"><span t-esc="sum([l['monto'] if l['metodo_pago']  == 'otro' and l['tipo_pago']  == 'inbound' else 0 for l in trans_transito])"
+
+                                      t-options="{'widget': 'monetary',
+                                      'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                        </tr>
+
+                        <tr style="background-color: transparent;">
+                            <td><span style="margin-left: 10px"><strong style="color:grey;">- Pagos salientes en tránsito</strong></span></td>
+                            <td class="text-right"><span/></td>
+                        </tr>
+                        <tr style="background-color: transparent;">
+                            <td><span style="margin-left: 20px">Cheques (pagos) en transito</span></td>
+                            <td class="text-right"><span t-esc="sum([l['monto'] if l['metodo_pago']  == 'cheque' and l['tipo_pago']  == 'outbound' else 0 for l in trans_transito])"
+
+                                      t-options="{'widget': 'monetary',
+                                      'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                        </tr>
+                        <tr style="background-color: transparent;">
+                            <td><span style="margin-left: 20px">Transferencias y otros pagos en transito</span></td>
+                            <td class="text-right"><span t-esc="sum([l['monto'] if l['metodo_pago']  == 'otro' and l['tipo_pago']  == 'outbound' else 0 for l in trans_transito])"
+
+                                      t-options="{'widget': 'monetary',
+                                      'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                        </tr>
+
+                        <tr style="background-color: transparent;">
+                            <td><span/></td>
+                            <td class="text-right"><span/></td>
+                        </tr>
+
+                        <tr style="background-color: transparent;">
+                            <td><span><strong style="color:black;">Balance de banco actualizado</strong></span></td>
+                            <td class="text-right"><span t-esc="(balance_banco + sum([l['monto'] if l['metodo_pago']  == 'cheque' and l['tipo_pago']  == 'inbound' else 0 for l in trans_transito]) +
+                                                                 sum([l['monto'] if l['metodo_pago']  == 'otro' and l['tipo_pago']  == 'inbound' else 0 for l in trans_transito]) +
+                                                                 - sum([l['monto'] if l['metodo_pago']  == 'cheque' and l['tipo_pago']  == 'outbound' else 0 for l in trans_transito]) -
+                                                                    sum([l['monto'] if l['metodo_pago']  == 'otro' and l['tipo_pago']  == 'outbound' else 0 for l in trans_transito]))"
+                                      t-options="{'widget': 'monetary',
+                                      'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                        </tr>
+
+                        <tr style="background-color: transparent;">
+                            <td><span><strong style="color:black;">Balance en libro a la fecha</strong></span></td>
+                            <td class="text-right"><span t-esc="balance_libro"
+                                      t-options="{'widget': 'monetary',
+                                      'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                        </tr>
+
+                        <tr style="background-color: transparent;">
+                            <td><span><strong style="color:black;">Diferencias banco vs libro a la fecha</strong></span></td>
+                            <td class="text-right"><span t-esc="((balance_banco + sum([l['monto'] if l['metodo_pago']  == 'cheque' and l['tipo_pago']  == 'inbound' else 0 for l in trans_transito]) +
+                                                                 sum([l['monto'] if l['metodo_pago']  == 'otro' and l['tipo_pago']  == 'inbound' else 0 for l in trans_transito]) +
+                                                                 - sum([l['monto'] if l['metodo_pago']  == 'cheque' and l['tipo_pago']  == 'outbound' else 0 for l in trans_transito]) -
+                                                                    sum([l['monto'] if l['metodo_pago']  == 'otro' and l['tipo_pago']  == 'outbound' else 0 for l in trans_transito])) - balance_libro)"
+                                      t-options="{'widget': 'monetary',
+                                      'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                        </tr>
+
+<!--                        (balance_banco + sum([l['monto'] if l['tipo_pago']  == 'inbound' else 0 for l in trans_transito])-->
+<!--                                                                - sum([l['monto'] if l['tipo_pago']  == 'outbound' else 0 for l in trans_transito])) - -->
+
+                        <t t-if="sum([l['monto'] if l['tipo_trans_banco']  == 'entrante' else 0 for l in bank_trans_transito]) != 0
+            or sum([l['monto'] if l['tipo_trans_banco']  == 'saliente' else 0 for l in bank_trans_transito]) != 0">
+
+
+                            <tr style="background-color: transparent;">
+                                <td><span/></td>
+                                <td class="text-right"><span/></td>
+                            </tr>
+
+                            <tr style="background-color: transparent;">
+                                <td><span><strong style="color:black;">Transacciones de banco no conciliadas a la fecha</strong></span></td>
+                                <td class="text-right"><span/></td>
+                            </tr>
+                            <tr style="background-color: transparent;">
+                                <td><span style="margin-left: 10px"><strong style="color:grey;">+ Pagos entrantes de banco no conciliados</strong></span></td>
+                                <td class="text-right"><span t-esc="sum([l['monto'] if l['tipo_trans_banco']  == 'entrante' else 0 for l in bank_trans_transito])"
+                                          t-options="{'widget': 'monetary',
+                                          'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                            </tr>
+                            <tr style="background-color: transparent;">
+                                <td><span style="margin-left: 10px"><strong style="color:grey;">- Pagos salientes de banco no conciliados</strong></span></td>
+                                <td class="text-right"><span t-esc="sum([l['monto'] if l['tipo_trans_banco']  == 'saliente' else 0 for l in bank_trans_transito])"
+                                          t-options="{'widget': 'monetary',
+                                          'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                            </tr>
+
+                            <tr style="background-color: transparent;">
+                                <td><span/></td>
+                                <td class="text-right"><span/></td>
+                            </tr>
+
+                            <tr style="background-color: transparent;">
+                                <td><span><strong style="color:black;">Total de transacciones de banco no conciliadas</strong></span></td>
+                                <td class="text-right"><span t-esc="(sum([l['monto'] if l['tipo_trans_banco']  == 'entrante' else 0 for l in bank_trans_transito])
+                                                                    - sum([l['monto'] if l['tipo_trans_banco']  == 'saliente' else 0 for l in bank_trans_transito]))"
+                                          t-options="{'widget': 'monetary',
+                                          'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                            </tr>
+
+
+                        </t>
+
+
+                        <t t-if="sum([l['monto'] if l['tipo_pago']  == 'inbound' else 0 for l in trans_transito_nodiario]) != 0
+            or sum([l['monto'] if l['tipo_pago']  == 'outbound' else 0 for l in trans_transito_nodiario]) != 0">
+
+
+                            <tr style="background-color: transparent;">
+                                <td><span/></td>
+                                <td class="text-right"><span/></td>
+                            </tr>
+
+                            <tr style="background-color: transparent;">
+                                <td><span><strong style="color:black;">Transacciones por asiento sin conciliar</strong></span></td>
+                                <td class="text-right"><span/></td>
+                            </tr>
+                            <tr style="background-color: transparent;">
+                                <td><span style="margin-left: 10px"><strong style="color:grey;">+ Pagos entrantes de asientos no conciliados</strong></span></td>
+                                <td class="text-right"><span t-esc="sum([l['monto'] if l['tipo_pago']  == 'inbound' else 0 for l in trans_transito_nodiario])"
+                                          t-options="{'widget': 'monetary',
+                                          'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                            </tr>
+                            <tr style="background-color: transparent;">
+                                <td><span style="margin-left: 10px"><strong style="color:grey;">- Pagos salientes de asientos no conciliados</strong></span></td>
+                                <td class="text-right"><span t-esc="sum([l['monto'] if l['tipo_pago']  == 'outbound' else 0 for l in trans_transito_nodiario])"
+                                          t-options="{'widget': 'monetary',
+                                          'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                            </tr>
+
+                            <tr style="background-color: transparent;">
+                                <td><span/></td>
+                                <td class="text-right"><span/></td>
+                            </tr>
+
+                            <tr style="background-color: transparent;">
+                                <td><span><strong style="color:black;">Total de transacciones de asientos no conciliadas</strong></span></td>
+                                <td class="text-right"><span t-esc="(sum([l['monto'] if l['tipo_pago']  == 'inbound' else 0 for l in trans_transito_nodiario])
+                                                                    - sum([l['monto'] if l['tipo_pago']  == 'outbound' else 0 for l in trans_transito_nodiario]))"
+                                          t-options="{'widget': 'monetary',
+                                          'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                            </tr>
+
+
+                        </t>
+
+
+
+
+
+                    </tbody>
+                </table>
+                <br/>
+                <br/>
+                <div class="text-center" style="padding-bottom:60px">
+                      <table border="0" width="100%" style="border: none; border-collapse: collapse;">
+                        <tr style="border: none;">
+                          <th style="border: none;">___________________________________________________</th>
+                          <th style="border: none;">  </th>
+                          <th style="border: none;">___________________________________________________</th>
+                        </tr>
+                        <tr style="border: none;">
+                          <td style="border: none;">Realizado Por</td>
+                          <td style="border: none;">  </td>
+                          <td style="border: none;">Revisado por</td>
+                        </tr>
+                      </table>
+                </div>
+
+
+            </div>
+            <t t-if="sum([l['monto'] if l['tipo_pago']  == 'outbound' else 0 for l in trans_transito]) > 0 or sum([l['monto'] if l['tipo_pago']  == 'inbound' else 0 for l in trans_transito]) > 0">
+                <div class="page" style="page-break-before: always;font-size: 12px !important;">
+
+                    <h4 align="center"><strong>Detalles de transacciones en transito</strong></h4>
+                    <br/>
+                    <br/>
+
+                    <t t-if="sum([l['monto'] if l['tipo_pago'] == 'inbound' and l['metodo_pago']  == 'cheque' else 0 for l in trans_transito]) > 0">
+                    <div id="transito_cheque_in">
+                    <h4 align="left"><strong>Depositos (Cheques) en tránsito</strong></h4>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th><span>Fecha</span></th>
+                                <th><span>Numero interno</span></th>
+                                <th><span>Numero de cheque</span></th>
+                                <th><span>Socio de negocio</span></th>
+                                <th><span>Detalle</span></th>
+                                <th class="text-right"><span>Monto</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="0"/>
+                            <tr t-foreach="trans_transito" t-as="line">
+                                <t t-if="trans_transito[i]['metodo_pago']  == 'cheque' and trans_transito[i]['tipo_pago']  == 'inbound' ">
+                                        <td><span t-esc="trans_transito[i]['fecha']"/></td>
+                                        <td><span t-esc="trans_transito[i]['numero']"/></td>
+                                        <td><span t-esc="trans_transito[i]['cheque_numero']"/></td>
+                                        <td><span t-esc="trans_transito[i]['sn']"/></td>
+                                        <td><span t-esc="trans_transito[i]['detalle']"/></td>
+                                        <td class="text-right"><span t-esc="trans_transito[i]['monto']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                </t>
+                                <t t-set="i" t-value="i+1"/>
+                            </tr>
+                        </tbody>
+                    </table>
+                        <div class="clearfix">
+                            <div id="total" class="row">
+                                <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                    <table class="table table-sm" style="page-break-inside: avoid;">
+                                        <tr class="border-black o_total">
+                                            <td><strong>Total de depositos (cheques) en tránsito</strong></td>
+                                            <td class="text-right">
+                                                <span class="text-nowrap" t-esc="sum([l['monto'] if l['tipo_pago'] == 'inbound' and l['metodo_pago']  == 'cheque' else 0 for l in trans_transito])"
+                                                 t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                        <br/>
+                        <br/>
+                    </t>
+
+                    <t t-if="sum([l['monto'] if l['tipo_pago'] == 'inbound' and l['metodo_pago']  == 'otro' else 0 for l in trans_transito]) > 0">
+                     <div id="transito_otro_in">
+                    <h4 align="left"><strong>Transferencias y otros depositos en tránsito</strong></h4>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th><span>Fecha</span></th>
+                                <th><span>Numero interno</span></th>
+                                <th><span>Socio de negocio</span></th>
+                                <th><span>Detalle</span></th>
+                                <th class="text-right"><span>Monto</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="0"/>
+                            <tr t-foreach="trans_transito" t-as="line">
+                                <t t-if="trans_transito[i]['metodo_pago']  == 'otro' and trans_transito[i]['tipo_pago']  == 'inbound' ">
+                                        <td><span t-esc="trans_transito[i]['fecha']"/></td>
+                                        <td><span t-esc="trans_transito[i]['numero']"/></td>
+                                        <td><span t-esc="trans_transito[i]['sn']"/></td>
+                                        <td><span t-esc="trans_transito[i]['detalle']"/></td>
+                                        <td class="text-right"><span t-esc="trans_transito[i]['monto']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                </t>
+                                <t t-set="i" t-value="i+1"/>
+                            </tr>
+                        </tbody>
+                    </table>
+                         <div class="clearfix">
+                            <div id="total" class="row">
+                                <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                    <table class="table table-sm" style="page-break-inside: avoid;">
+                                        <tr class="border-black o_total">
+                                            <td><strong>Total en transferencias y otros depositos en tránsito</strong></td>
+                                            <td class="text-right">
+                                                <span class="text-nowrap" t-esc="sum([l['monto'] if l['tipo_pago'] == 'inbound' and l['metodo_pago']  == 'otro' else 0 for l in trans_transito])"
+                                                 t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                        <br/>
+                        <br/>
+                    </t>
+                    <t t-if="sum([l['monto'] if l['tipo_pago'] == 'outbound' and l['metodo_pago']  == 'cheque' else 0 for l in trans_transito]) > 0">
+
+                    <div id="transito_cheque_out">
+                    <h4 align="left"><strong>Cheques (pagos) en tránsito</strong></h4>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th><span>Fecha</span></th>
+                                <th><span>Numero interno</span></th>
+                                <th><span>Numero de cheque</span></th>
+                                <th><span>Socio de negocio</span></th>
+                                <th><span>Detalle</span></th>
+                                <th class="text-right"><span>Monto</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="0"/>
+                            <tr t-foreach="trans_transito" t-as="line">
+                                <t t-if="trans_transito[i]['metodo_pago']  == 'cheque' and trans_transito[i]['tipo_pago']  == 'outbound' ">
+                                        <td><span t-esc="trans_transito[i]['fecha']"/></td>
+                                        <td><span t-esc="trans_transito[i]['numero']"/></td>
+                                        <td><span t-esc="trans_transito[i]['cheque_numero']"/></td>
+                                        <td><span t-esc="trans_transito[i]['sn']"/></td>
+                                        <td><span t-esc="trans_transito[i]['detalle']"/></td>
+                                        <td class="text-right"><span t-esc="trans_transito[i]['monto']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                </t>
+                                <t t-set="i" t-value="i+1"/>
+                            </tr>
+                        </tbody>
+                    </table>
+                        <div class="clearfix">
+                            <div id="total" class="row">
+                                <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                    <table class="table table-sm" style="page-break-inside: avoid;">
+                                        <tr class="border-black o_total">
+                                            <td><strong>Total de cheques (pagos) en transito</strong></td>
+                                            <td class="text-right">
+                                                <span class="text-nowrap" t-esc="sum([l['monto'] if l['tipo_pago'] == 'outbound' and l['metodo_pago']  == 'cheque' else 0 for l in trans_transito])"
+                                                 t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                        <br/>
+                        <br/>
+                     </t>
+
+                    <t t-if="sum([l['monto'] if l['tipo_pago'] == 'outbound' and l['metodo_pago']  == 'otro' else 0 for l in trans_transito]) > 0">
+                    <div id="transito_otro_out">
+                    <h4 align="left"><strong>Transferencias y otros pagos en tránsito</strong></h4>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th><span>Fecha</span></th>
+                                <th><span>Numero interno</span></th>
+                                <th><span>Socio de negocio</span></th>
+                                <th><span>Detalle</span></th>
+                                <th class="text-right"><span>Monto</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="0"/>
+                            <tr t-foreach="trans_transito" t-as="line">
+                                <t t-if="trans_transito[i]['metodo_pago']  == 'otro' and trans_transito[i]['tipo_pago']  == 'outbound' ">
+                                        <td><span t-esc="trans_transito[i]['fecha']"/></td>
+                                        <td><span t-esc="trans_transito[i]['numero']"/></td>
+                                        <td><span t-esc="trans_transito[i]['sn']"/></td>
+                                        <td><span t-esc="trans_transito[i]['detalle']"/></td>
+                                        <td class="text-right"><span t-esc="trans_transito[i]['monto']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                </t>
+                                <t t-set="i" t-value="i+1"/>
+                            </tr>
+                        </tbody>
+                    </table>
+                        <div class="clearfix">
+                            <div id="total" class="row">
+                                <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                    <table class="table table-sm" style="page-break-inside: avoid;">
+                                        <tr class="border-black o_total">
+                                            <td><strong>Total de transferencias y otros pagos en tránsito</strong></td>
+                                            <td class="text-right">
+                                                <span class="text-nowrap" t-esc="sum([l['monto'] if l['tipo_pago'] == 'outbound' and l['metodo_pago']  == 'otro' else 0 for l in trans_transito])"
+                                                 t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                        <br/>
+                        <br/>
+                    </t>
+
+
+
+                </div>
+
+            </t>
+
+            <t t-if="sum([l['monto'] if l['tipo_trans_banco']  == 'entrante' else 0 for l in bank_trans_transito]) != 0
+            or sum([l['monto'] if l['tipo_trans_banco']  == 'saliente' else 0 for l in bank_trans_transito]) != 0">
+                <div class="page" style="page-break-before: always;font-size: 12px !important;">
+                    <h4 align="center"><strong>Transacciones de banco no conciliadas</strong></h4>
+                    <br/>
+                    <br/>
+
+                    <t t-if="sum([l['monto'] if l['tipo_trans_banco']  == 'entrante' else 0 for l in bank_trans_transito]) != 0">
+                     <div id="transito_otro_in">
+                    <h4 align="left"><strong>Pagos entrantes de banco no conciliados</strong></h4>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th><span>Fecha</span></th>
+                                <th><span>Numero interno</span></th>
+                                <th><span>Socio de negocio</span></th>
+                                <th><span>Detalle</span></th>
+                                <th class="text-right"><span>Monto</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="i" t-value="0"/>
+                            <tr t-foreach="bank_trans_transito" t-as="line">
+                                <t t-if="bank_trans_transito[i]['tipo_trans_banco']  == 'entrante'">
+                                        <td><span t-esc="bank_trans_transito[i]['fecha']"/></td>
+                                        <td><span t-esc="bank_trans_transito[i]['numero']"/></td>
+                                        <td><span t-esc="bank_trans_transito[i]['sn']"/></td>
+                                        <td><span t-esc="bank_trans_transito[i]['detalle']"/></td>
+                                        <td class="text-right"><span t-esc="bank_trans_transito[i]['monto']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                </t>
+                                <t t-set="i" t-value="i+1"/>
+                            </tr>
+                        </tbody>
+                    </table>
+                         <div class="clearfix">
+                            <div id="total" class="row">
+                                <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                    <table class="table table-sm" style="page-break-inside: avoid;">
+                                        <tr class="border-black o_total">
+                                            <td><strong>Total de pagos entrantes de banco no conciliados</strong></td>
+                                            <td class="text-right">
+                                                <span class="text-nowrap" t-esc="sum([l['monto'] if l['tipo_trans_banco']  == 'entrante' else 0 for l in bank_trans_transito])"
+                                                 t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                        <br/>
+                        <br/>
+                    </t>
+
+                    <t t-if="sum([l['monto'] if l['tipo_trans_banco']  == 'saliente' else 0 for l in bank_trans_transito]) != 0">
+                             <div id="transito_otro_in">
+                            <h4 align="left"><strong>Pagos salientes de banco no conciliados</strong></h4>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th><span>Fecha</span></th>
+                                        <th><span>Numero interno</span></th>
+                                        <th><span>Socio de negocio</span></th>
+                                        <th><span>Detalle</span></th>
+                                        <th class="text-right"><span>Monto</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="i" t-value="0"/>
+                                    <tr t-foreach="bank_trans_transito" t-as="line">
+                                        <t t-if="bank_trans_transito[i]['tipo_trans_banco']  == 'saliente'">
+                                                <td><span t-esc="bank_trans_transito[i]['fecha']"/></td>
+                                                <td><span t-esc="bank_trans_transito[i]['numero']"/></td>
+                                                <td><span t-esc="bank_trans_transito[i]['sn']"/></td>
+                                                <td><span t-esc="bank_trans_transito[i]['detalle']"/></td>
+                                                <td class="text-right"><span t-esc="bank_trans_transito[i]['monto']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                        </t>
+                                        <t t-set="i" t-value="i+1"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                                 <div class="clearfix">
+                                    <div id="total" class="row">
+                                        <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                            <table class="table table-sm" style="page-break-inside: avoid;">
+                                                <tr class="border-black o_total">
+                                                    <td><strong>Total de pagos salientes de banco no conciliados</strong></td>
+                                                    <td class="text-right">
+                                                        <span class="text-nowrap" t-esc="sum([l['monto'] if l['tipo_trans_banco']  == 'saliente' else 0 for l in bank_trans_transito])"
+                                                         t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                                <br/>
+                                <br/>
+                    </t>
+
+                </div>
+            </t>
+
+            <t t-if="sum([l['monto'] if l['tipo_pago']  == 'outbound' else 0 for l in trans_transito_nodiario]) != 0
+            or sum([l['monto'] if l['tipo_pago']  == 'inbound' else 0 for l in trans_transito_nodiario]) != 0">
+                <div class="page" style="page-break-before: always;font-size: 12px !important;">
+                    <h4 align="center"><strong>Transacciones de asientos no conciliadas</strong></h4>
+                    <br/>
+                    <br/>
+
+                    <t t-if="sum([l['monto'] if l['tipo_pago']  == 'outbound' else 0 for l in trans_transito_nodiario]) != 0">
+                         <div id="transito_otro_out_journal">
+                        <h4 align="left"><strong>Pagos salientes de asientos no conciliados</strong></h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th><span>Fecha</span></th>
+                                    <th><span>Numero interno</span></th>
+                                    <th><span>Socio de negocio</span></th>
+                                    <th><span>Detalle</span></th>
+                                    <th class="text-right"><span>Monto</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="0"/>
+                                <tr t-foreach="trans_transito_nodiario" t-as="line">
+                                    <t t-if="trans_transito_nodiario[i]['tipo_pago']  == 'outbound'">
+                                            <td><span t-esc="trans_transito_nodiario[i]['fecha']"/></td>
+                                            <td><span t-esc="trans_transito_nodiario[i]['numero']"/></td>
+                                            <td><span t-esc="trans_transito_nodiario[i]['sn']"/></td>
+                                            <td><span t-esc="trans_transito_nodiario[i]['detalle']"/></td>
+                                            <td class="text-right"><span t-esc="trans_transito_nodiario[i]['monto']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                    </t>
+                                    <t t-set="i" t-value="i+1"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                             <div class="clearfix">
+                                <div id="total" class="row">
+                                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                        <table class="table table-sm" style="page-break-inside: avoid;">
+                                            <tr class="border-black o_total">
+                                                <td><strong>Total de pagos salientes de asientos no conciliados</strong></td>
+                                                <td class="text-right">
+                                                    <span class="text-nowrap" t-esc="sum([l['monto'] if l['tipo_pago']  == 'outbound' else 0 for l in trans_transito_nodiario])"
+                                                     t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                            <br/>
+                            <br/>
+                </t>
+
+                    <t t-if="sum([l['monto'] if l['tipo_pago']  == 'inbound' else 0 for l in trans_transito_nodiario]) != 0">
+                         <div id="transito_otro_in_journal">
+                        <h4 align="left"><strong>Pagos entrantes de asientos no conciliados</strong></h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th><span>Fecha</span></th>
+                                    <th><span>Numero interno</span></th>
+                                    <th><span>Socio de negocio</span></th>
+                                    <th><span>Detalle</span></th>
+                                    <th class="text-right"><span>Monto</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="0"/>
+                                <tr t-foreach="trans_transito_nodiario" t-as="line">
+                                    <t t-if="trans_transito_nodiario[i]['tipo_pago']  == 'inbound'">
+                                            <td><span t-esc="trans_transito_nodiario[i]['fecha']"/></td>
+                                            <td><span t-esc="trans_transito_nodiario[i]['numero']"/></td>
+                                            <td><span t-esc="trans_transito_nodiario[i]['sn']"/></td>
+                                            <td><span t-esc="trans_transito_nodiario[i]['detalle']"/></td>
+                                            <td class="text-right"><span t-esc="trans_transito_nodiario[i]['monto']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                    </t>
+                                    <t t-set="i" t-value="i+1"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                             <div class="clearfix">
+                                <div id="total" class="row">
+                                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                        <table class="table table-sm" style="page-break-inside: avoid;">
+                                            <tr class="border-black o_total">
+                                                <td><strong>Total de pagos entrantes de asientos no conciliados</strong></td>
+                                                <td class="text-right">
+                                                    <span class="text-nowrap" t-esc="sum([l['monto'] if l['tipo_pago']  == 'inbound' else 0 for l in trans_transito_nodiario])"
+                                                     t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                            <br/>
+                            <br/>
+                </t>
+
+                </div>
+            </t>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </t>
+        </t>
+<!--        </t>-->
+    </template>
+
+<!--    <template id="tax_cert_daterange_report_payment_receipt">-->
+<!--        <t t-call="web.html_container">-->
+<!--        <t t-foreach="docs" t-as="o">-->
+<!--                <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>-->
+<!--                <t t-call="dgii_reports.tax_cert_daterange_report_payment_receipt_document" t-lang="lang"/>-->
+<!--            </t>-->
+
+<!--        </t>-->
+<!--    </template>-->
+
+    <report id="action_correct_reconciliation_report_receipte"
+        model="correct.reconciliation.report"
+        report_type="qweb-pdf"
+        menu="False"
+        string="Reporte de conciliacion bancaria"
+        name="dgii_reports.correct_reconciliation_report_receipt"
+        file="dgii_reports.correct_reconciliation_report_receipt"
+
+    />
+
+
+</odoo>

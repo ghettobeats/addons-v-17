@@ -1,0 +1,103 @@
+name: Unit Tests
+
+on:
+  push:
+    branches:
+      - '[0-9]+.0'
+    paths:
+      - '**/workflows/**'
+      - '**/src/**'
+      - '**/i18n/**'
+      - '**.py'
+      - '**.xml'
+  pull_request:
+    branches:
+      - '[0-9]+.0'
+    types: [ labeled ]
+
+env:
+  REQUIRED_MODULES: # list of addional addons to install separated by comma
+  TEST_TAGS: '0'
+
+jobs:
+  test:
+    name: Test Modules
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      get_modules: ${{ steps.get_modules.outputs.modules }}
+    services:
+      db:
+        image: postgres:13-alpine
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+        # needed because the postgres container does not provide a healthcheck
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4.x
+
+      - name: INDEXA ${{ env.GITHUB_REPOSITORY_NAME_PART_SLUG_URL }}
+        uses: actions/checkout@v4
+        with:
+          path: ${{ env.GITHUB_REPOSITORY_SLUG_URL }}
+
+      - name: Download python addons script
+        run: curl https://raw.githubusercontent.com/iterativo-git/dockerdoo/${{ env.GITHUB_BASE_REF_SLUG || env.GITHUB_REF_SLUG }}/resources/getaddons.py -o getaddons.py
+
+      - name: Select Odoo modules to install
+        id: get_modules
+        run: |
+          output=$(python -c "from getaddons import get_modules; print(','.join(get_modules('$GITHUB_WORKSPACE/${{ env.GITHUB_REPOSITORY_SLUG_URL }}', depth=3)))")
+          echo $output
+          echo "::set-output name=modules::$output"
+      - name: Set test all tag
+        if: ${{ github.event.label.name == 'test all' }}
+        run: |
+          echo "WITHOUT_TEST_TAGS=1" >> $GITHUB_ENV
+
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2.1.3
+        with:
+          project_id: '${{ vars.ITERATIVO_GCP_PROJECT }}'
+          workload_identity_provider: '${{ vars.ITERATIVO_GCP_WORKLOAD_IDENTITY }}'
+          service_account: '${{ vars.ITERATIVO_GCP_ARTIFACTS_SA }}'
+          token_format: access_token
+
+
+      - name: Login to Google Artifact Registry
+        uses: docker/login-action@v3.3.0
+        with:
+          registry: gcr.io
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+
+      - name: Run Odoo tests
+        run: |
+          docker pull gcr.io/${{ vars.ITERATIVO_GCP_PROJECT }}/iterativo/dockerdoo:${{ env.GITHUB_BASE_REF_SLUG || env.GITHUB_REF_SLUG }}
+          docker run -e RUN_TESTS -e WITHOUT_TEST_TAGS -e PIP_AUTO_INSTALL -e LOG_LEVEL -e WITHOUT_DEMO -e EXTRA_MODULES -e ODOO_EXTRA_ADDONS -e PGHOST \
+          -v $GITHUB_WORKSPACE:/github/workspace \
+          --network="host" --name odoo -t gcr.io/${{ vars.ITERATIVO_GCP_PROJECT }}/iterativo/dockerdoo:${{ env.GITHUB_BASE_REF_SLUG || env.GITHUB_REF_SLUG }}
+        env:
+          RUN_TESTS: '1'
+          WITHOUT_TEST_TAGS: ${{ env.WITHOUT_TEST_TAGS }}
+          PIP_AUTO_INSTALL: '1'
+          LOG_LEVEL: test
+          WITHOUT_DEMO: 'False'
+          EXTRA_MODULES: ${{ steps.get_modules.outputs.modules }},${{ env.REQUIRED_MODULES }}
+          ODOO_EXTRA_ADDONS: /github/workspace
+          PGHOST: localhost
+      

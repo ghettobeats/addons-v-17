@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+<!--        <record id="l10n_do.1_ret_100_tax_security" model="account.tax">-->
+<!--                <field name="purchase_itbis_retention_type">03</field>-->
+<!--        </record>-->
+
+<!--        <record id="l10n_do.1_ret_100_tax_nonprofit" model="account.tax">-->
+<!--                <field name="purchase_itbis_retention_type">02</field>-->
+<!--        </record>-->
+
+<!--        <record id="l10n_do.1_ret_100_tax_person" model="account.tax">-->
+<!--                <field name="purchase_itbis_retention_type">01</field>-->
+<!--        </record>-->
+
+<!--        <record id="l10n_do.1_ret_75_tax_nonformal" model="account.tax">-->
+<!--                <field name="active">False</field>-->
+<!--        </record>-->
+
+<!--        <record id="l10n_do.1_ret_30_tax_moral" model="account.tax">-->
+<!--                <field name="purchase_itbis_retention_type">04</field>-->
+<!--        </record>-->
+<!--        &lt;!&ndash; Fiscal position for consumer invoices in sales, controlling ausence of vat number &ndash;&gt;-->
+<!--        <record id="consumer_vat_in_process" model="account.fiscal.position">-->
+<!--            <field name="sequence">0</field>-->
+<!--            <field name="name">In process</field>-->
+<!--            <field name="note">In proccess to adquire vat  number for customer.</field>-->
+<!--        </record>-->
+
+<!--&lt;!&ndash;         Retenciones ITBIS Retención 30% ITBIS en ventas Servicios a Jurídicas (N02-05)&ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_30_tax_moral" model="account.tax">-->
+<!--            <field name="sequence">70</field>-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_54"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones 606 grupo de retenciones a personas informales &ndash;&gt;-->
+<!--        <record id="tax_ret_75_tax_person_nonformal_goods" model="account.tax.group">-->
+<!--            <field name="name">ITBIS -75%</field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones 606 Retención 75% ITBIS Bienes a Informales (N08-10) &ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_75_tax_nonformal" model="account.tax">-->
+<!--            <field name="tax_group_id" ref="tax_ret_75_tax_person_nonformal_goods"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones 606 Retención 100% ITBIS Servicios de Seguridad (N07-09) &ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_100_tax_security" model="account.tax">-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_18"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones 606 Retención 100% ITBIS Servicios No Lucrativas (N01-11) &ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_100_tax_nonprofit" model="account.tax">-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_18"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones 606 Retención 100% ITBIS Servicios a Físicas (R293-11) &ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_100_tax_person" model="account.tax">-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_18"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones 606 Retención 30% ITBIS Servicios a Jurídicas (N02-05) &ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_30_tax_moral" model="account.tax">-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_54"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones ITBIS 606 a alquiler personas fisicas &ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_100_tax_security" model="account.tax">-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_18"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones ISR 606 a alquiler personas fisicas &ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_10_income_rent" model="account.tax">-->
+<!--            <field name="isr_retention_type">01</field>-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_10"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones ISR 606 a Honorarios profesionales &ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_10_income_person" model="account.tax">-->
+<!--            <field name="isr_retention_type">02</field>-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_10"/>-->
+<!--        </record>-->
+<!--        &lt;!&ndash; Retenciones ISR 606 a otras rentas &ndash;&gt;-->
+<!--        <record id="ret_2_other_income_transfer" model="account.tax">-->
+<!--            <field name="sequence">66</field>-->
+<!--            <field name="name">Retención 2% ISR por otras rentas</field>-->
+<!--            <field name="description">-2% ISR</field>-->
+<!--            <field name="amount">-2</field>-->
+<!--            <field name="amount_type">percent</field>-->
+<!--            <field name="type_tax_use">purchase</field>-->
+<!--            <field name="isr_retention_type">03</field>-->
+<!--            <field eval="0" name="price_include"/>-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_2"/>-->
+<!--            <field name="invoice_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_21030309'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--            <field name="refund_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_21030309'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--        </record>-->
+
+<!--        <record id="sale_ret_30_tax_moral" model="account.tax">-->
+<!--            <field name="sequence">102</field>-->
+<!--            <field name="name">30% ITBIS Retenido Servicios (N02-05)</field>-->
+<!--            <field name="description">-30% ITBIS (N02-05)</field>-->
+<!--            <field name="amount">-5.4</field>-->
+<!--            <field name="amount_type">percent</field>-->
+<!--            <field name="type_tax_use">sale</field>-->
+<!--            <field name="sale_itbis_retention_type">03</field>-->
+<!--            <field eval="0" name="price_include"/>-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_54"/>-->
+<!--            <field name="invoice_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_11080301'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--            <field name="refund_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_11080301'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--        </record>-->
+
+<!--        <record id="sale_ret_100_tax_moral" model="account.tax">-->
+<!--            <field name="sequence">101</field>-->
+<!--            <field name="name">100% ITBIS Retenido Servicios (N02-05)</field>-->
+<!--            <field name="description">-100% ITBIS (N02-05)</field>-->
+<!--            <field name="amount">-18</field>-->
+<!--            <field name="amount_type">percent</field>-->
+<!--            <field name="type_tax_use">sale</field>-->
+<!--            <field name="sale_itbis_retention_type">03</field>-->
+<!--            <field eval="0" name="price_include"/>-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_18"/>-->
+<!--            <field name="invoice_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_11080301'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--            <field name="refund_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_11080301'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--        </record>-->
+
+
+
+
+<!--        &lt;!&ndash; Retenciones ISR 606 a Rentas Presuntas &ndash;&gt;-->
+<!--        <record id="ret_2_other_estimated_income_transfer" model="account.tax">-->
+<!--            <field name="sequence">67</field>-->
+<!--            <field name="name">Retención 2% ISR por rentas presuntas</field>-->
+<!--            <field name="description">-2% ISR</field>-->
+<!--            <field name="amount">-2</field>-->
+<!--            <field name="amount_type">percent</field>-->
+<!--            <field name="type_tax_use">purchase</field>-->
+<!--            <field name="isr_retention_type">04</field>-->
+<!--            <field eval="0" name="price_include"/>-->
+<!--            <field name="tax_group_id" ref="l10n_do.tax_group_retencion_2"/>-->
+<!--            <field name="invoice_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_21030309'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--            <field name="refund_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_21030309'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--        </record>-->
+
+<!--        <record id="tax_group_imp_itbis_new" model="account.tax.group">-->
+<!--            <field name="name">ITBIS Importacion</field>-->
+<!--        </record>-->
+
+<!--        <record id="tax_group_retencion_5" model="account.tax.group">-->
+<!--            <field name="name">ISR -5%</field>-->
+<!--        </record>-->
+
+<!--        <record id="tax_group_retencion_2_itbis" model="account.tax.group">-->
+<!--            <field name="name">ITBIS -2%</field>-->
+<!--        </record>-->
+
+<!--        <record id="sale_ret_2_tax_tc" model="account.tax">-->
+<!--            <field name="sequence">102</field>-->
+<!--            <field name="name">2% ITBIS Retenido TC (N08-04)</field>-->
+<!--            <field name="description">-30% ITBIS (N02-05)</field>-->
+<!--            <field name="amount">-2.0</field>-->
+<!--            <field name="amount_type">percent</field>-->
+<!--            <field name="type_tax_use">sale</field>-->
+<!--            <field name="sale_itbis_retention_type">01</field>-->
+<!--            <field eval="0" name="price_include"/>-->
+<!--            <field name="tax_group_id" ref="tax_group_retencion_2_itbis"/>-->
+<!--            <field name="invoice_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_11080301'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--            <field name="refund_repartition_line_ids" eval="[(5,0,0),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'base',-->
+<!--                }),-->
+<!--                (0,0, {-->
+<!--                    'factor_percent': 100,-->
+<!--                    'repartition_type': 'tax',-->
+<!--                    'account_id': ref('l10n_do.1_do_niif_11080301'),-->
+<!--                }),-->
+<!--            ]"/>-->
+<!--        </record>-->
+
+<!--                 <record id="l10n_do.tax_18_importation" model="account.tax">-->
+<!--            <field name="sequence">20</field>-->
+<!--            <field name="name">ITBIS - Importaciones</field>-->
+<!--            <field name="description">ITBIS (IMP)</field>-->
+<!--            <field name="amount">-0.01</field>-->
+<!--            <field name="amount_type">fixed</field>-->
+<!--            <field name="is_import">True</field>-->
+<!--             <field name="tax_group_id" ref="tax_group_imp_itbis_new"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Retenciones 607 Retenciones proveedores del estado &ndash;&gt;-->
+<!--        <record id="l10n_do.1_ret_5_income_gov" model="account.tax">-->
+<!--            <field name="tax_group_id" ref="tax_group_retencion_5"/>-->
+<!--        </record>-->
+
+
+    </data>
+</odoo>

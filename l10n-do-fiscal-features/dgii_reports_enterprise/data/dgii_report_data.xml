@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Switch root menu "Invoicing" to "Accounting" -->
+    <record id="dgii_reports.marcos_account_dgii_menu" model="ir.ui.menu">
+        <field name="parent_id" ref="account_accountant.menu_accounting"/>
+    </record>
+
+</odoo>

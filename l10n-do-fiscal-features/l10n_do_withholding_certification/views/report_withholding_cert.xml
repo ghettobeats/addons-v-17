@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="l10n_do_report_withholding_document">
+        <t t-call="l10n_do_withholding_certification.l10n_do_withholding_cert_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <div class="page">
+                <t t-set="data" t-value="o.get_certification_data()"/>
+                <t t-set="withholding_values" t-value="data['withholding_values'].items()"/>
+                <t t-set="l10n_do_legal_base_string" t-value="o.get_l10n_do_legal_base_string(withholding_values)"/>
+
+                <!-- Document Year tag line -->
+                <span t-raw="o.company_id.l10n_do_year_tag_line"/>
+                <div class="addressee">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <span>Señores:</span>
+                    <br/>
+                    <span><strong>DIRECCIÓN GENERAL DE IMPUESTOS INTERNOS</strong></span>
+                    <br/>
+                    <span>Ciudad.</span>
+                </div>
+                <div class="first_paragraph">
+                    <br/>
+                    <p align="justify">
+                        El 
+                        <span t-esc="o.company_id.name"/>, <strong>CERTIFICA</strong> que <span t-if="o.partner_id.company_type == 'person' and o.partner_id.title">el/la <span t-esc="o.partner_id.title.name"/></span> <strong><span t-esc="o.partner_id.name"/></strong> con RNC/Céd <strong><span t-esc="o.partner_id.vat"/></strong>, recibió ingresos por un monto de 
+                        <strong>
+                          <span t-esc="centered_amount_words"/>
+                        </strong> 
+                        <strong><span t-esc="o.company_id.currency_id.symbol"/></strong><strong><span t-esc="'{0:,.2f}'.format(data['paid_amount'])"/></strong>, de los cuales se le realizó la retención de 
+                        <t t-foreach="withholding_values" t-as="wh">
+                          <span t-esc="wh[0].l10n_do_tax_name"/> por un monto de
+                          <span t-esc="o.company_id.currency_id.symbol"/>
+                          <span t-esc="'{0:,.2f}'.format(wh[1])"/>, 
+                        </t> según está estipulado en <span t-esc="l10n_do_legal_base_string"/>.
+                    </p>
+                </div>
+                <div style="text-align:center;">
+                    <br/>
+                    <span name="title"><strong>Reporte Retenciones:</strong></span>
+                </div>
+                <div class="details_table">
+                    <br/>
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th name="h_date" style="width: 20%;">
+                                    <span>Fecha</span>
+                                </th>
+                                <th name="h_amount" style="width: 20%;">
+                                    <span>Total bruto</span>
+                                </th>
+                                <th name="h_reference" style="width: 10%;">
+                                    <span>NCF</span>
+                                </th>
+                                <t t-foreach="withholding_values" t-as="wh">
+                                    <th name="h_l10n_do_tax_name" class="text-left" style="width: 15%;">
+                                        <span t-esc="wh[0].l10n_do_tax_name"/>
+                                    </th>
+                                </t>
+                                <th name="h_total" class="text-right" style="width: 20%;">
+                                    <span>Total Pagado</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="data['invoices_data']" t-as="invoice">
+                                <tr t-att-class="'o_line_note'">
+                                    <t>
+                                        <td name="b_date" class="text-left">
+                                            <span t-esc="datetime.datetime.strftime(invoice['date'], '%d-%m-%Y')"/>
+                                        </td>
+                                        <td name="b_amount" class="text-left">
+                                            <span t-esc="'{0:,.2f}'.format(invoice['payment_amount'])"/>
+                                        </td>
+                                        <td name="b_reference" class="text-left">
+                                            <span t-esc="invoice['reference']"/>
+                                        </td>
+                                        <t t-foreach="invoice['withholding']" t-as="wh">
+                                            <td name="b_tax_amount" class="text-right">
+                                                <span t-esc="'{0:,.2f}'.format(wh['amount'])"/>
+                                            </td>
+                                        </t>
+                                        <td name="b_total" class="text-right">
+                                            <span t-esc="'{0:,.2f}'.format(invoice['paid_amount'])"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th name="f_totals">
+                                    <span>Totales</span>
+                                </th>
+                                <th name="f_amount">
+                                    <span t-esc="o.company_id.currency_id.symbol"/><span t-esc="'{0:,.2f}'.format(data['paid_amount'])"/>
+                                </th>
+                                <th name="f_empty"></th>
+                                <t t-foreach="withholding_values" t-as="wh">
+                                    <th name="f_tax_amount" class="text-right">
+                                        <span t-esc="o.company_id.currency_id.symbol"/><span t-esc="'{0:,.2f}'.format(wh[1])"/>
+                                    </th>
+                                </t>
+                                <th name="f_total_amount" class="text-right">
+                                    <span t-esc="o.company_id.currency_id.symbol"/><span t-esc="'{0:,.2f}'.format(data['payments_amount'])"/>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="second_paragraph">
+                    <br/>
+                    <p align="justify">
+                        La presente certificación se expide a solicitud de la parte interesada, <span t-if="o.company_id.city">en la ciudad de</span> <span t-if="o.company_id.city" t-esc="o.company_id.city"/>, <span t-if="o.company_id.state_id" t-esc="o.company_id.state_id.name"/><span t-if="o.company_id.state_id">,</span> a los <span t-esc="o.get_date_string(datetime.datetime.now())"/>.
+                    </p>
+                </div>
+
+                <!-- Document Signs -->
+                <span t-raw="o.company_id.l10n_do_sign_table"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="l10n_do_report_withholding_document_private">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <div class="page">
+                <t t-set="data" t-value="o.get_certification_data()"/>
+                <t t-set="withholding_values" t-value="data['withholding_values'].items()"/>
+                <t t-set="l10n_do_legal_base_string" t-value="o.get_l10n_do_legal_base_string(withholding_values)"/>
+                <div class="date_div" style="text-align:left;">
+                    <br/>
+                    <br/>
+                    <span><span t-if="o.company_id.city" t-esc="o.company_id.city"/>, <span t-if="o.company_id.state_id" t-esc="o.company_id.state_id.name"/></span>
+                    <br/>
+                    <span><span t-esc="o.get_date_string(datetime.datetime.now(), short_date=True)"/></span>
+                </div>
+                <div class="addressee">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <span>Señores:</span>
+                    <br/>
+                    <span><strong>DIRECCIÓN GENERAL DE IMPUESTOS INTERNOS</strong></span>
+                    <br/>
+                    <span>Ciudad.</span>
+                </div>
+                <div class="first_paragraph">
+                    <br/>
+                    <p align="justify">
+                        Por medio de la presente <strong>CERTIFICAMOS</strong> que <span t-if="o.partner_id.company_type == 'person' and o.partner_id.title">el/la <span t-esc="o.partner_id.title.name"/></span> <strong><span t-esc="o.partner_id.name"/></strong> con RNC/Céd <strong><span t-esc="o.partner_id.vat"/></strong>, recibió ingresos por un monto de <strong><span t-esc="data['amount_in_words']"/></strong> <strong><span t-esc="o.company_id.currency_id.symbol"/></strong><strong><span t-esc="'{0:,.2f}'.format(data['paid_amount'])"/></strong>, de los cuales se le realizó la retención de <t t-foreach="withholding_values" t-as="wh"><span t-esc="wh[0].l10n_do_tax_name"/> por un monto de <span t-esc="o.company_id.currency_id.symbol"/><span t-esc="'{0:,.2f}'.format(wh[1])"/>, </t> según está estipulado en <span t-esc="l10n_do_legal_base_string"/>.
+                    </p>
+                </div>
+                <div style="text-align:center;">
+                    <br/>
+                    <span name="title"><strong>Reporte Retenciones:</strong></span>
+                </div>
+                <div class="details_table">
+                    <br/>
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th name="h_date" style="width: 20%;">
+                                    <span>Fecha</span>
+                                </th>
+                                <th name="h_amount" style="width: 20%;">
+                                    <span>Total bruto</span>
+                                </th>
+                                <th name="h_reference" style="width: 10%;">
+                                    <span>NCF</span>
+                                </th>
+                                <t t-foreach="withholding_values" t-as="wh">
+                                    <th name="h_l10n_do_tax_name" class="text-right">
+                                        <span t-esc="wh[0].l10n_do_tax_name"/>
+                                    </th>
+                                </t>
+                                <th name="h_total" style="width: 20%;" class="text-right">
+                                    <span>Total Pagado</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="data['invoices_data']" t-as="invoice">
+                                <tr t-att-class="'o_line_note'">
+                                    <t>
+                                        <td name="b_date" class="text-left">
+                                            <span t-esc="datetime.datetime.strftime(invoice['date'], '%d-%m-%Y')"/>
+                                        </td>
+                                        <td name="b_amount" class="text-left">
+                                            <span t-esc="'{0:,.2f}'.format(invoice['payment_amount'])"/>
+                                        </td>
+                                        <td name="b_reference" class="text-left">
+                                            <span t-esc="invoice['reference']"/>
+                                        </td>
+                                        <t t-foreach="invoice['withholding']" t-as="wh">
+                                            <td name="b_tax_amount" class="text-right">
+                                                <span t-esc="'{0:,.2f}'.format(wh['amount'])"/>
+                                            </td>
+                                        </t>
+                                        <td name="b_total" class="text-right">
+                                            <span t-esc="'{0:,.2f}'.format(invoice['paid_amount'])"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th name="f_totals">
+                                    <span>Totales</span>
+                                </th>
+                                <th name="f_amount">
+                                    <span t-esc="o.company_id.currency_id.symbol"/><span t-esc="'{0:,.2f}'.format(data['paid_amount'])"/>
+                                </th>
+                                <th name="f_empty"></th>
+                                <t t-foreach="withholding_values" t-as="wh">
+                                    <th name="f_tax_amount" class="text-right">
+                                        <span t-esc="o.company_id.currency_id.symbol"/><span t-esc="'{0:,.2f}'.format(wh[1])"/>
+                                    </th>
+                                </t>
+                                <th name="f_total_amount" class="text-right">
+                                    <span t-esc="o.company_id.currency_id.symbol"/><span t-esc="'{0:,.2f}'.format(data['payments_amount'])"/>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Document Signs -->
+                <span t-raw="o.company_id.l10n_do_sign_table"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="l10n_do_report_withholding_cert">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-if="o.has_l10n_do_withholding">
+                    <t t-if="o.company_id.l10n_do_withholding_cert_type == 'gov'">
+                        <t t-call="l10n_do_withholding_certification.l10n_do_report_withholding_document"/>
+                    </t>
+                    <t t-else="">
+                        <t t-call="l10n_do_withholding_certification.l10n_do_report_withholding_document_private"/>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

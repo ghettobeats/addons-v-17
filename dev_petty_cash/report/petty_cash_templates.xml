@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="petty_cash_template_detalle_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <div class="page">
+                <h3><strong>Reposicion Caja Chica: <span t-field="o.name"/></strong></h3>
+                <div class="mb-4 mt-4">
+                    <div class="row">
+                        <div class="col-4" t-if="o.date">
+                            <strong>Fecha de Reposicion:</strong> <span t-field="o.date"/>
+                        </div>
+                        <div class="col-4" t-if="o.employee_id">
+                            <strong>Responsable:</strong> <span t-field="o.employee_id"/>
+                        </div>
+                        <div class="col-4" t-if="o.petty_journal_id">
+                            <strong>Diario de Caja:</strong> <span t-field="o.petty_journal_id"/>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div>
+
+                        <div class="col-9" t-if="o.note">
+                                <strong>Detalle: </strong><span t-field="o.note"/>
+                             </div>
+                </div>
+
+
+<!--                <table class="table table-sm table-bordered">-->
+<!--                        <tr>-->
+<!--                            <td class="text-center"><strong>Concepto</strong></td>-->
+<!--                            <td class="text-center"><strong>Valor</strong></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td><strong>Monto de Fondo</strong></td>-->
+<!--                            <td class="text-right"><span t-field="o.x_monto_fondo" -->
+<!--                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td><strong>Efectivo Disponible</strong></td>-->
+<!--                            <td class="text-right"><span t-field="o.x_efectivo_disponible" -->
+<!--                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td><strong>Monto Pendiente de Reponer</strong></td>-->
+<!--                            <td class="text-right"><span t-field="o.x_monto_pendiente_reponer" -->
+<!--                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td><strong>Reposiciones Pendientes De Recibir</strong></td>-->
+<!--                            <td class="text-right"><span t-field="o.x_monto_provisional" -->
+<!--                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+
+<!--                <t t-set="partials" t-value="o.move_id._get_reconciled_invoices_partials()"/>-->
+<!--                <t t-set="invoices" t-value="{partial[2].move_id for partial in partials}"/>-->
+<!--                &lt;!&ndash; Check if invoices include different currencies &ndash;&gt;-->
+<!--                <t t-foreach="invoices" t-as="inv">-->
+<!--                    <t t-if="any(inv.currency_id != par[2].currency_id for par in inv._get_reconciled_invoices_partials())" t-set="otherCurrency" t-value="True"/>-->
+<!--                </t>-->
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th><span>Fecha</span></th>
+                            <th><span>Proveedor</span></th>
+                            <th><span>Detalle</span></th>
+                            <th><span>Empleado</span></th>
+                            <th><span>Objetal</span></th>
+                            <!-- Add a column if there are different currencies -->
+                            <th class="text-right"><span>Monto</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="o.expense_lines" t-as="inv">
+                            <tr>
+                                <td><span t-field="inv.date"/></td>
+                                <td><span t-field="inv.partner_id.name"/></td>
+                                <td><span t-field="inv.payment_reference"/></td>
+                                <td><span t-field="inv.employee_id.name"/></td>
+                                <td><span t-field="inv.analytic_account_id.name"/></td>
+                                <td class="text-right"><span t-esc="inv.total_amount"
+                                t-options="{'widget': 'monetary', 'display_currency': inv.currency_id}"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+                <table class="table table-sm table-bordered">
+                        <tr>
+                            <td><strong>Balance</strong></td>
+                            <td class="text-right"><span t-field="o.balance"
+                            t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                        </tr>
+                        <tr>
+                                <td><strong>Monto de Gastos</strong></td>
+                                <td class="text-right"><span t-field="o.expense_amount"
+                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                            </tr>
+                        <tr>
+                                <td><strong>Monto Restante</strong></td>
+                                <td class="text-right"><span t-field="o.remaining_balace"
+                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></td>
+                            </tr>
+                    </table>
+
+
+
+
+            </div>
+
+        </t>
+    </template>
+
+    <template id="petty_cash_template_detalle">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.company_id.partner_id.lang or o.company_id.partner_id.lang"/>
+                <t t-call="dev_petty_cash.petty_cash_template_detalle_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

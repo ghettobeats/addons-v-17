@@ -1,0 +1,203 @@
+# This file contains the translation of the following modules:
+# 	* mitur_check_printing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e-20220731\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-31 20:00+0000\n"
+"PO-Revision-Date: 2022-07-31 20:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__account_check_printing_layout
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__account_check_printing_layout
+msgid "Check Layout"
+msgstr "Disposición del cheque"
+
+#. module: mitur_check_printing
+#: model:ir.actions.report,name:mitur_check_printing.action_print_custom_report
+msgid "Cheques"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model,name:mitur_check_printing.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: mitur_check_printing
+#: model:ir.model,name:mitur_check_printing.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: mitur_check_printing
+#: model_terms:ir.ui.view,arch_db:mitur_check_printing.mitur_check_printing_check_report_config_form
+msgid "Cuerpo"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model_terms:ir.ui.view,arch_db:mitur_check_printing.mitur_check_printing_check_report_config_form
+msgid "Detalle"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__commu_letter_left
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__commu_letter_left
+msgid "Margen izquierdo concepto"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__check_footer_date_left
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__check_footer_date_left
+msgid "Margen izquierdo de fecha en pie"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__date_left
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__date_left
+msgid "Margen izquierdo de la fecha"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__check_footer_amount_left
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__check_footer_amount_left
+msgid "Margen izquierdo de monto en pie"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__amount_left
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__amount_left
+msgid "Margen izquierdo del monto"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__name_left
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__name_left
+msgid "Margen izquierdo del nombre"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__amount_letter_left
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__amount_letter_left
+msgid "Margen izquierdo monto en letras"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__commu_letter_top
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__commu_letter_top
+msgid "Margen superior concepto"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__check_footer_date_top
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__check_footer_date_top
+msgid "Margen superior de fecha en pie"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__date_top
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__date_top
+msgid "Margen superior de la fecha"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__check_footer_amount_top
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__check_footer_amount_top
+msgid "Margen superior de monto en pie"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__body_top
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__body_top
+msgid "Margen superior del cuerpo del cheque"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__amount_top
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__amount_top
+msgid "Margen superior del monto"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__name_top
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__name_top
+msgid "Margen superior del nombre"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__amount_letter_top
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__amount_letter_top
+msgid "Margen superior monto en letras"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_account_payment__check_name
+msgid "Name on Check"
+msgstr "Beneficiario"
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,help:mitur_check_printing.field_account_payment__check_name
+msgid "Name on printed check"
+msgstr "Nombre en cheque impreso"
+
+#. module: mitur_check_printing
+#: model:ir.model.fields.selection,name:mitur_check_printing.selection__res_company__account_check_printing_layout__disabled
+msgid "None"
+msgstr "Ninguno"
+
+#. module: mitur_check_printing
+#: model:ir.model,name:mitur_check_printing.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,help:mitur_check_printing.field_res_config_settings__account_check_printing_layout
+msgid ""
+"Select the format corresponding to the check paper you will be printing your"
+" checks on.\n"
+msgstr "Seleccionar el formato correspondiente al papel que desea imprimir"
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,help:mitur_check_printing.field_res_company__account_check_printing_layout
+msgid ""
+"Select the format corresponding to the check paper you will be printing your checks on.\n"
+"In order to disable the printing feature, select 'None'."
+msgstr ""
+"Seleccione el tamaño correspondiente al tamaño de cheque que va a imprimir.\n"
+"Para desactivar la función de impresión, seleccione 'Ninguno'."
+
+#. module: mitur_check_printing
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_company__font_zise
+#: model:ir.model.fields,field_description:mitur_check_printing.field_res_config_settings__font_zise
+msgid "Tamaño de letra"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model_terms:ir.ui.view,arch_db:mitur_check_printing.custom_report
+msgid "VOID"
+msgstr ""
+
+#. module: mitur_check_printing
+#: model:ir.model.fields.selection,name:mitur_check_printing.selection__res_company__account_check_printing_layout__action_print_check_middle
+msgid "check in middle"
+msgstr "verificar en el medio"
+
+#. module: mitur_check_printing
+#: model:ir.model.fields.selection,name:mitur_check_printing.selection__res_company__account_check_printing_layout__action_print_check_bottom
+msgid "check on bottom"
+msgstr "verificar en la parte inferior"
+
+#. module: mitur_check_printing
+#: model:ir.model.fields.selection,name:mitur_check_printing.selection__res_company__account_check_printing_layout__action_print_check_top
+msgid "check on top"
+msgstr "verificar en la parte superior"
+
+#. module: mitur_check_printing
+#: model:ir.model.fields.selection,name:mitur_check_printing.selection__res_company__account_check_printing_layout__action_print_custom_report
+msgid "custom report"
+msgstr "Reporte personalizado"

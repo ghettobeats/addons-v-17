@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tax_cert_daterange_report_payment_receipt">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+        <t t-set="company_id" t-value="request.env['res.company'].search([('id','=',companyid)])"/>
+<!--            <t t-foreach="docs" t-as="o">-->
+            <div class="page" style="font-size: 12px !important;">
+                <h2 align="center"><strong>Certificado de retenciones</strong></h2>
+                <br/>
+
+                <div class="row mt64">
+                    <div class="col-6">
+                        <strong>Fecha: </strong> <span t-esc="certificate_date"/>
+                    </div>
+                </div>
+                <div class="row mt64">
+                    <div class="col-6">
+                        <strong>De: </strong> <span t-esc="company_id.name"/>
+                    </div>
+                </div>
+                <div class="row mt64">
+                    <div class="col-6">
+                        <strong>A: </strong> <span>Dirección General de Impuestos Internos (DGII)</span>
+                        </div>
+                </div>
+                <br/>
+                <br/>
+                <span>En cumplimiento con las disposiciones del Artículo 77 del Reglamento 139-98, modificado por el Decreto 195-01 de fecha 8 de
+febrero del 2001 que, establece la obligatoriedad de los Agentes de Retención de proporcionar información de las rentas
+pagadas y el impuesto retenido a requerimiento de los contribuyentes, y de la Norma General 02-05 sobre la retención de ITBIS
+a Sociedades; informamos que nuestra empresa, actuando en calidad de Agente de Retención, retuvo dicho impuesto a la
+entidad indicada más abajo e ingresó su pago a esa Dirección General en los plazos y formas previstos en el Código Tributario
+(Ley 11-92 y sus modificaciones). Citamos a continuación los datos mencionados:</span>
+                <br/>
+                <br/>
+
+
+                <div class="row mb64">
+                        <t>
+                            <div class="col-6">
+                            <strong>Razon Social: </strong><span t-esc="partner_id"/>
+                            </div>
+                        </t>
+                    <div class="col-6">
+                        <strong>RNC/CED: </strong><span t-esc="partner_id_vat"/>
+                    </div>
+                </div>
+                <div class="row mb64">
+                    <div class="col-6">
+                        <strong>Direccion: </strong><span t-esc="partner_id_street"/>
+                        <span>,</span><span t-esc="partner_id_street2"/>
+                        <span>,</span><span t-esc="partner_id_city"/>
+                        <span>,</span><span t-esc="partner_id_state_name"/>
+                </div>
+                </div>
+                <div class="row mb64">
+                    <div class="col-4" t-if="amount">
+                        <strong>Monto pagado: </strong><span t-esc="amount" t-options="{'widget': 'monetary', 'display_currency': request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                    </div>
+                     <div class="col-4" t-if="withold_itbis_amount">
+                        <strong>Total ITBIS retenido: </strong><span t-esc="withold_itbis_amount" t-options="{'widget': 'monetary', 'display_currency': request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                     </div>
+                     <div class="col-4" t-if="withold_isr_amount">
+                        <strong>Total ISR retenido: </strong><span t-esc="withold_isr_amount"  t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/>
+                     </div>
+                </div>
+
+                <br/>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th><span>Fecha de factura</span></th>
+                            <th><span>Numero de factura</span></th>
+                            <th><span>Numero de pago</span></th>
+                            <th><span>Fecha de pago</span></th>
+                            <th><span>NCF</span></th>
+                            <th class="text-right"><span>Subtotal</span></th>
+                            <th class="text-right"><span>ITBIS</span></th>
+                            <th class="text-right"><span>Retencion ITBIS</span></th>
+                            <th class="text-right"><span>Retencion ISR</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="i" t-value="0"/>
+                        <tr t-foreach="ret_invoices" t-as="line">
+                            <t t-if="ret_invoices[i]['itbis_withold'] > 0 or ret_invoices[i]['isr_withold'] > 0 ">
+                                    <td><span t-esc="ret_invoices[i]['date_invoice']"/></td>
+                                    <td><span t-esc="ret_invoices[i]['invoice_name']"/></td>
+                                    <td><span t-esc="ret_invoices[i]['name']"/></td>
+                                    <td><span t-esc="ret_invoices[i]['payment_date']"/></td>
+                                    <td><span t-esc="ret_invoices[i]['l10n_latam_document_number']"/></td>
+                                    <td class="text-right"><span t-esc="ret_invoices[i]['subtotal']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                    <td class="text-right"><span t-esc="ret_invoices[i]['itbis']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                    <td class="text-right"><span t-esc="ret_invoices[i]['itbis_withold']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                                    <td class="text-right"><span t-esc="ret_invoices[i]['isr_withold']" t-options="{'widget': 'monetary', 'display_currency':  request.env['res.currency'].search([('id', '=', currency_id)])}"/></td>
+                            </t>
+                            <t t-set="i" t-value="i+1"/>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <br/>
+                <div style="text-align: right;">
+                    <div>
+                        <img t-if="res_company.company_seal" t-att-src="image_data_uri(res_company.company_seal)" class="right" alt="Seal"
+                        style="width:200px;height:200px;"/>
+                        <img t-if="res_company.company_firm" t-att-src="image_data_uri(res_company.company_firm)" class="right" alt="Firm"
+                        style="width:150px;height:150px;"/>
+                    </div>
+                    <span>_________________________________</span>
+                    <div style="text-align: right;">
+                        <strong><span style="text-align: right;" t-esc="res_company.firm_name"/></strong>
+                        <br/>
+                        <strong><span style="text-align: right;" t-esc="res_company.firm_position"/></strong>
+                    </div>
+                </div>
+            </div>
+        </t>
+        </t>
+<!--        </t>-->
+    </template>
+
+<!--    <template id="tax_cert_daterange_report_payment_receipt">-->
+<!--        <t t-call="web.html_container">-->
+<!--        <t t-foreach="docs" t-as="o">-->
+<!--                <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>-->
+<!--                <t t-call="dgii_reports.tax_cert_daterange_report_payment_receipt_document" t-lang="lang"/>-->
+<!--            </t>-->
+
+<!--        </t>-->
+<!--    </template>-->
+
+    <report id="action_print_tax_cert_daterange"
+        model="create.withholding.tax.cert"
+        report_type="qweb-pdf"
+        menu="False"
+        string="Certificado de retencion-Rango de fecha"
+        name="dgii_reports.tax_cert_daterange_report_payment_receipt"
+        file="dgii_reports.tax_cert_daterange_report_payment_receipt"
+
+    />
+
+
+</odoo>

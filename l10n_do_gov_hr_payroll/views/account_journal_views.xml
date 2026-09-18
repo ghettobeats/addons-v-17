@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_view_account_journal_form" model="ir.ui.view">
+            <field name="name">inherit.view.account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="is_for_payroll" attrs="{'invisible': [('type', '!=', 'general')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

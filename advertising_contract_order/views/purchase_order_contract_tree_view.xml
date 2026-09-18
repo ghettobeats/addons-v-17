@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_view_tree_inherit" model="ir.ui.view">
+        <field name="name">	purchase.order.view.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_status']" position="after">
+                <field name="certification_number" optional="hide"/>
+                <field name="contract_number" optional="hide"/>
+                <field name="contract_date_from" optional="hide"/>
+                <field name="contract_date_end" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

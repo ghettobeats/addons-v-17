@@ -1,0 +1,71 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* advertising_contract_order
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-09-29 16:32+0000\n"
+"PO-Revision-Date: 2022-09-29 16:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: advertising_contract_order
+#: model_terms:ir.ui.view,arch_db:advertising_contract_order.contract_purchase_order
+msgid "<strong>Certification Number:</strong>"
+msgstr "Número de Certificación"
+
+#. module: advertising_contract_order
+#: model_terms:ir.ui.view,arch_db:advertising_contract_order.contract_purchase_order
+msgid "<strong>Contract Number:</strong>"
+msgstr "Número de Contrato"
+
+#. module: advertising_contract_order
+#: model_terms:ir.ui.view,arch_db:advertising_contract_order.contract_purchase_order
+msgid "<strong>Date End:</strong>"
+msgstr "Fecha Final de Vigencia"
+
+#. module: advertising_contract_order
+#: model_terms:ir.ui.view,arch_db:advertising_contract_order.contract_purchase_order
+msgid "<strong>Date From:</strong>"
+msgstr "Fecha de Inicio de Vigencia"
+
+#. module: advertising_contract_order
+#: model:ir.model.fields,field_description:advertising_contract_order.field_purchase_order__certification_number
+msgid "Certification Number"
+msgstr "Número de Certificación"
+
+#. module: advertising_contract_order
+#: model_terms:ir.ui.view,arch_db:advertising_contract_order.purchase_order_form_inherit
+msgid "Contract"
+msgstr "Contrato"
+
+#. module: advertising_contract_order
+#: model:ir.model.fields,field_description:advertising_contract_order.field_purchase_order__contract_number
+msgid "Contract Number"
+msgstr "Número de Contrato"
+
+#. module: advertising_contract_order
+#: model:ir.model.fields,field_description:advertising_contract_order.field_purchase_order__contract_date_from
+msgid "Effective Date"
+msgstr "Fecha de Inicio de Vigencia"
+
+#. module: advertising_contract_order
+#: model:ir.model.fields,field_description:advertising_contract_order.field_purchase_order__contract_date_end
+msgid "Expiration Date"
+msgstr "Fecha Final de Vigencia"
+
+#. module: advertising_contract_order
+#: model:ir.model,name:advertising_contract_order.model_purchase_order
+msgid "Purchase Order"
+msgstr "Orden de compra"
+
+#. module: advertising_contract_order
+#: model:ir.model.fields,field_description:advertising_contract_order.field_purchase_order__is_contract
+msgid "is contract?"
+msgstr "¿es contrato?"

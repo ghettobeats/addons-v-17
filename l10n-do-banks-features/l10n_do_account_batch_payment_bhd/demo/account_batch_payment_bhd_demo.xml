@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+
+    <record model="res.partner.bank" id="bhd_dop_bank_partner">
+        <field name="acc_number">402123456</field>
+        <field name="acc_type">bank</field>
+        <field name="partner_id" ref="base.main_partner"/>
+        <field name="bank_id" ref="l10n_do_banks.bank_bhd"/>
+        <field name="currency_id" ref="base.DOP"/>
+    </record>
+    <record model="res.partner.bank" id="bhd_usd_bank_partner">
+        <field name="acc_number">402654321</field>
+        <field name="acc_type">bank</field>
+        <field name="partner_id" ref="base.main_partner"/>
+        <field name="bank_id" ref="l10n_do_banks.bank_bhd"/>
+        <field name="currency_id" ref="base.USD"/>
+    </record>
+    <record id="batch_bhd_bank_journal_dop" model="account.journal">
+        <field name="name">BHD 1234</field>
+        <field name="code">BBJDD</field>
+        <field name="type">bank</field>
+        <field name="bank_account_id" ref="bhd_dop_bank_partner"/>
+    </record>
+    <record id="batch_bhd_bank_journal_usd" model="account.journal">
+        <field name="name">BHD 5678</field>
+        <field name="code">BBJDU</field>
+        <field name="type">bank</field>
+        <field name="bank_account_id" ref="bhd_usd_bank_partner"/>
+    </record>
+
+</odoo>

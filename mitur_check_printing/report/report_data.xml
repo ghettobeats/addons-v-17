@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="action_print_custom_report"
+            model="account.payment"
+            string="Cheques"
+            report_type="qweb-pdf"
+            name="mitur_check_printing.custom_report"
+            file="mitur_check_printing.custom_report"
+            attachment_use="True"
+            attachment="(object.state in ('open','paid')) and
+                ('CHK'+(object.number or '').replace('/','')+'.pdf')"
+            paperformat="mitur_check_printing.paper_format_check"/>
+
+    </data>
+</odoo>

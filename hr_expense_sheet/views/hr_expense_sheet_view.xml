@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="hr_expense_sheet_form_view_inherit" model="ir.ui.view">
+        <field name="name">hr_expense_sheet_form_view_inherit</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref=""/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='employee_id']" position="before">
+                <field name="beneficiary_type"/>
+                <field name="guess_id" attrs="{'invisible':[('beneficiary_type','!=','guess')],
+                    'required':[('beneficiary_type','=','guess')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+                <field name="attrs">{'invisible': [('beneficiary_type', '!=', 'employee')],
+                    'required':[('beneficiary_type','=','employee')]}
+                </field>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

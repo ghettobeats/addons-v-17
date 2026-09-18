@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	<record id="account_payment_form_inherited_multiinvoicepayment2" model="ir.ui.view">
+                <field name="name">account.payment.form.inherited.multiinvoicepayment2</field>
+                <field name="model">account.payment</field>
+                <field name="inherit_id" ref="account.view_account_payment_form"/>
+                <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="attrs">{
+				'readonly':['|',('state','!=','draft'),'&amp;',('internal_transfer_type','!=','j_to_a'),('is_internal_transfer','=',True)],
+				'invisible':['|', ('partner_type','!=','customer'),
+                                ('is_internal_transfer', '=', True)]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='destination_journal_id']" position="replace"/>
+
+                <xpath expr="//field[@name='is_internal_transfer']" position="replace"/>
+                 <xpath expr="//field[@name='payment_type']" position="after">
+                    <field name="is_internal_transfer" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                </xpath>
+
+
+                <xpath expr="//field[@name='journal_id']" position="after">
+                    <field name="is_investor_related"/>
+                    <field name="investor_id" attrs="{'invisible':[('is_investor_related','=',False)],
+				    'required':[('is_investor_related','=',True)],
+				    'readonly':[('state', '!=', 'draft')]}"/>
+                </xpath>
+
+                    <xpath expr="//field[@name='payment_type']" position="after">
+			<field name="internal_transfer_type" attrs="{'invisible':[('is_internal_transfer','=',False)],
+				'required':[('is_internal_transfer','=',True)],
+				    'readonly':[('state', '!=', 'draft')]}"/>
+
+
+			<field name="to_account_id" attrs="{
+				'invisible':
+				['|',('is_internal_transfer','=',False),('internal_transfer_type','not in',['a_to_a','j_to_a'])],
+				'required' : [('is_internal_transfer','=',True),('internal_transfer_type','in',['a_to_a','j_to_a'])],
+				    'readonly':[('state', '!=', 'draft')]
+				}"/>
+
+		</xpath>
+
+                <xpath expr="//group[@name='group1']" position="before">
+                    <field name="different_currencies" invisible="1"/>
+                    <group name="group3_1" attrs="{'invisible': [('different_currencies', '=', False)]}">
+                        <field name="tasa_manual"  attrs="{'readonly': [('state', '!=', 'draft')]}" widget="boolean_toggle"/>
+                        <field name="payment_rate" force_save="1" attrs="{'readonly': ['|', ('state', '!=', 'draft'), ('tasa_manual', '=', False)]}"/>
+                        <label for="amount_in_journal_currency" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <div name="amount_in_journal_currency_amount_div" class="o_row">
+                            <field name="amount_in_journal_currency" readonly="1" force_save="1"/>
+                            <field name="journal_currency_id" options="{'no_create': True, 'no_open': True}" required="1" attrs="{'invisible': [('state', '!=', 'draft')]}" groups="base.group_multi_currency"/>
+                        </div>
+                    </group>
+                </xpath>
+            <xpath expr="//label[@for='amount']" position="before">
+                <field name="different_currencies_2" invisible="1"/>
+                <field name="tasa_manual"  attrs="{'readonly': [('state', '!=', 'draft')],
+                'invisible': [('different_currencies_2', '=', False)]}" widget="boolean_toggle"/>
+                <field name="payment_rate" force_save="1" attrs="{'readonly': ['|', ('state', '!=', 'draft'), ('tasa_manual', '=', False)], 'invisible': [('different_currencies_2', '=', False)]}"/>
+            </xpath>
+
+
+                <xpath expr="//div[@name='amount_div']" position="after">
+                    <field name="to_journal_id" attrs="{'invisible':
+				['|',('is_internal_transfer','=',False),('internal_transfer_type','!=','j_to_j')],
+				'required' :[('is_internal_transfer','=',True),('internal_transfer_type','=','j_to_j')]
+				}"/>
+                    <field name="currency_to_journal" invisible="1"/>
+                    <field name="parent_internal_transfer" invisible="1"/>
+                    <field name="child_internal_transfer" invisible="1"/>
+                    <field name="amount_to_journal" attrs="{'invisible':
+				['|',('is_internal_transfer','=',False),('internal_transfer_type','!=','j_to_j')],
+				'required' :[('is_internal_transfer','=',True),('internal_transfer_type','=','j_to_j')]
+				}"/>
+                    <field name="related_payment_transfer" attrs="{'invisible':
+				['|',('is_internal_transfer','=',False),('internal_transfer_type','!=','j_to_j')],
+				'readonly' :[('is_internal_transfer','=',True),('internal_transfer_type','=','j_to_j')]
+				}" force_save="1"/>
+                <div class="alert alert-success info_icon" role="alert" attrs="{'invisible': [('parent_internal_transfer', '=', False)]}">
+                                   <i class="fa fa-info fa-lg" title="Info" aria-label="Info"/> Transferencia padre
+
+                </div>
+                <div class="alert alert-info info_icon" role="alert" attrs="{'invisible': [('child_internal_transfer', '=', False)]}">
+                                   <i class="fa fa-info fa-lg" title="Info" aria-label="Info"/> Transferencia hija
+
+                </div>
+
+                </xpath>
+                    <xpath expr="//sheet" position="inside">
+                        <separator string="Detalle de facturas" attrs="{'invisible': ['|', ('payment_type', 'not in', ['inbound', 'outbound']), ('partner_type', 'not in', ['customer', 'supplier'])],'readonly': [('state', '!=', 'draft')]}"/>
+
+                        <label for="option_select_invoices" string="Seleccionar todo" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('option_select_invoices','!=', False)]}"/>
+                        <label for="option_select_invoices" string="Deseleccionar todo" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('option_select_invoices','=', False)]}"/>
+                        <div name="select_all_div" class="o_row">
+                               <field name="option_select_invoices" widget="boolean_toggle" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        </div>
+                        <field name="payment_invoice_ids" attrs="{'invisible': ['|', ('payment_type', 'not in', ['inbound', 'outbound']), ('partner_type', 'not in', ['customer', 'supplier'])]}">
+                            <tree editable="bottom" create="false">
+                                <field name="add_invoice" widget="boolean_toggle" string="Seleccionar" attrs="{'column_invisible': [('parent.state', '!=', 'draft')]}"/>
+                        		<field name="invoice_id" readonly="1" force_save="1" string="Factura"/>
+                                <field name="date_invoice" string="Fecha"/>
+                                <field name="date_due" string="Vencimiento"/>
+                                <field name="subtotal" sum="Total"/>
+                                <field name="itbis" sum="Total"/>
+                                <field name="amount_total" sum="Total"/>
+                                <field name="residual" sum="Total" string="Pendiente"/>
+                                <field name="compute_manual_retention_field" invisible="1"/>
+                                <field name="itbis_withold" string="ITBIS / Extra TC" force_save="1" sum="Total" attrs="{'column_invisible': ['|',('parent.withold_method', 'not in', ['itbis', 'itbis_isr','itbis_tccomision']),
+                        		                                                                                    ('parent.manual_retentions', '=', True)]}"/>
+                                <field name="isr_withold" force_save="1" sum="Total" attrs="{'column_invisible': ['|',('parent.withold_method', 'not in', ['isr', 'itbis_isr']),
+                        		                                                                                    ('parent.manual_retentions', '=', True)]}"/>
+                        		<field name="tc_withold" force_save="1" sum="Total" attrs="{'column_invisible': ['|', ('parent.withold_method', '!=', 'itbis_tccomision'),
+                        		                                                                                    ('parent.manual_retentions', '=', True)]}"/>
+                                <field name="itbis_withold_manual" string="ITBIS / Extra TC manual" force_save="1" sum="Total" attrs="{'column_invisible': ['|',('parent.withold_method', 'not in', ['itbis', 'itbis_isr','itbis_tccomision']),
+                        		                                                                                    ('parent.manual_retentions', '=', False)]}"/>
+                                <field name="isr_withold_manual" force_save="1" sum="Total" attrs="{'column_invisible': ['|',('parent.withold_method', 'not in', ['isr', 'itbis_isr']),
+                        		                                                                                    ('parent.manual_retentions', '=', False)]}"/>
+                        		<field name="tc_withold_manual" force_save="1" sum="Total" attrs="{'column_invisible': ['|', ('parent.withold_method', '!=', 'itbis_tccomision'),
+                        		                                                                                    ('parent.manual_retentions', '=', False)]}"/>
+                                <field name="reconcile_amount" sum="Total" attrs="{'readonly': [('payment_state', '!=', 'draft')]}" force_save="1" string="A pagar"/>
+                        		<field name="currency_id" invisible="1"/>
+                        		<field name="payment_state" invisible="1"/>
+                                <field name="withold_method_line" invisible="1"/>
+                        	</tree>
+                        </field>
+                    </xpath>
+                    <xpath expr="//div[@name='amount_div']" position="after">
+                      <field name="withold_method" attrs="{'readonly': [('state', '!=', 'draft')],'invisible': [('is_internal_transfer', '=', True)]}"/>
+                        <label for="withold_itbis_select" string="Retencion de ITBIS / Comision TC extra" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('withold_method', 'not in', ['itbis', 'itbis_isr','itbis_tccomision'])]}"/>
+                        <div name="itbis_div" class="o_row">
+                        <field name="withold_itbis_select" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('withold_method', 'not in', ['itbis', 'itbis_isr','itbis_tccomision'])], 'required': [('withold_method', 'in', ['itbis', 'itbis_isr','itbis_tccomision'])]}" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="withold_itbis_amount"  readonly="1" force_save="1" attrs="{'invisible': [('withold_method', 'not in', ['itbis', 'itbis_isr','itbis_tccomision'])]}"/>
+                        </div>
+                        <label for="withold_isr_select" attrs="{'readonly': [('state', '!=', 'draft')],'invisible': [('withold_method', 'not in', ['isr', 'itbis_isr'])]}"/>
+                        <div name="isr_div" class="o_row">
+                        <field name="withold_isr_select" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('withold_method', 'not in', ['isr', 'itbis_isr'])], 'required': [('withold_method', 'in', ['isr', 'itbis_isr'])]}" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="withold_isr_amount"  readonly="1" force_save="1" attrs="{'invisible': [('withold_method', 'not in', ['isr', 'itbis_isr'])]}"/>
+                        </div>
+                        <label for="withold_tc_select" attrs="{'readonly': [('state', '!=', 'draft')],'invisible': [('withold_method', '!=', 'itbis_tccomision')]}"/>
+                        <div name="tc_div" class="o_row">
+                        <field name="withold_tc_select" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('withold_method', '!=','itbis_tccomision')], 'required': [('withold_method', 'in', ['itbis_tccomision'])]}" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="withold_tc_amount"  readonly="1" force_save="1" attrs="{'invisible': [('withold_method', '!=', 'itbis_tccomision')]}"/>
+                        </div>
+                        <field name="manual_retentions" attrs="{'invisible': [('withold_method', 'in', ['default', False])]}"/>
+
+                    </xpath>
+
+                </field>
+        </record>
+
+        <record id="account.action_account_payments" model="ir.actions.act_window">
+            <field name="name">Pagos entrantes</field>
+            <field name="domain">[('payment_type',"=", 'inbound')]</field>
+            <field name="context">{
+                'default_payment_type': 'inbound',
+                'default_partner_type': 'customer',
+                'default_move_journal_types': ('bank', 'cash'),
+                'group_by':['journal_id']
+            }</field>
+        </record>
+
+        <record id="account.action_account_payments_payable" model="ir.actions.act_window">
+                <field name="name">Pagos salientes</field>
+                <field name="domain">[('payment_type',"=", 'outbound')]</field>
+                <field name="context">{
+                    'default_payment_type': 'outbound',
+                    'default_partner_type': 'supplier',
+                    'default_move_journal_types': ('bank', 'cash'),
+                    'group_by':['journal_id']
+                }</field>
+        </record>
+
+        <menuitem id="account_bank_menu" name="Bancos y cajas"
+              parent="account_accountant.menu_accounting"
+              sequence="3"
+              groups="account.group_account_user"/>
+
+        <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu" >
+            <field name="parent_id" ref="account_bank_menu"/>
+            <field name="name">Pagos Entrantes</field>
+        </record>
+        <record id="account.menu_action_account_payments_payable" model="ir.ui.menu" >
+            <field name="parent_id" ref="account_bank_menu"/>
+            <field name="name">Pagos Salientes</field>
+        </record>
+
+        <record id="account.menu_action_account_payments_payable" model="ir.ui.menu" >
+            <field name="parent_id" ref="account_bank_menu"/>
+            <field name="name">Pagos Salientes</field>
+        </record>
+
+        <record id="action_bank_statement_tree2" model="ir.actions.act_window">
+            <field name="name">Extractos bancarios y efectivo</field>
+            <field name="res_model">account.bank.statement</field>
+            <field name="view_mode">tree,form,pivot,graph</field>
+            <field name="domain">[('journal_id.type', 'in', ('bank','cash'))]</field>
+            <field name="context">{'group_by': ['journal_id']}</field>
+            <field name="search_view_id" ref="account.view_bank_statement_search"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Registro de extractos bancarios.
+              </p><p>
+                Un extracto bancario es un resumen de todas las transacciones
+                ocurridas en un determinado periodo de tiempo en una cuenta de banco
+                 o de efectivo. Usted tiene que recibir esto periódicamente de su banco o
+                realizar arqueos de efectivos.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="account_bank_menu_extracts" name="Extractos bancarios y efectivo"
+              parent="account_bank_menu"
+              sequence="100"
+              groups="account.group_account_user"
+              action="action_bank_statement_tree2"/>
+
+
+        <function model="account.payment" name="change_menu_names"/>
+
+        <record id="dgii_account_bank_statement_form" model="ir.ui.view">
+        <field name="name">dgii.account.bank.statement.form</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="replace">
+                <field name="journal_id"
+                       domain="[('type', 'in', ('cash','bank'))]"
+                       attrs="{'readonly': [('move_line_count','!=', 0)]}"
+                       options='{"no_open": True, "no_create": True}'/>
+
+            </xpath>
+        </field>
+        </record>
+
+                <record id="account_payment_method_tree" model="ir.ui.view">
+        <field name="name">account.payment.method.tree</field>
+        <field name="model">account.payment.method</field>
+        <field name="arch" type="xml">
+            <tree string="Payment Terms" multi_edit="1" editable="bottom">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="payment_type"/>
+                    <field name="l10n_do_payment_form"/>
+<!--                    <field name="sequence"/>-->
+                </tree>
+        </field>
+        </record>
+
+
+
+
+
+
+
+    </data>
+</odoo>

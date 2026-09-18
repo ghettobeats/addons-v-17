@@ -1,0 +1,56 @@
+<odoo>
+    <menuitem id="menu_correspondence" name="Correspondencia"
+              web_icon="correspondence_management,static/description/icon.png"
+              groups="correspondence_management.correspondence_officer_group,correspondence_management.correspondence_manager_group"/>
+
+
+    <record id="action_correspondence" model="ir.actions.act_window">
+        <field name="name">Correspondencia</field>
+        <field name="res_model">correspondence</field>
+        <field name="context">{'search_default_correspondence_received': 1}</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Recibir nueva correspondencia!
+            </p>
+        </field>
+    </record>
+
+    <record id="action_correspondence_types" model="ir.actions.act_window">
+        <field name="name">Tipos de correspondencia</field>
+        <field name="res_model">correspondence.types</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <record id="action_internal_messengers" model="ir.actions.act_window">
+        <field name="name">Mensajeros</field>
+        <field name="res_model">correspondence.internal.messenger</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No hay ningún mensajero predeterminado para mostrar!
+            </p>
+            <p>
+                En esta sección, debes configurar el mensajero por defecto que se utilizará para la
+                correspondencia interna. Solo puede existir un mensajero por defecto, quien será el encargado
+                principal de gestionar y entregar los mensajes dentro de la organización.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_action_correspondence" name="Correspondencia" parent="menu_correspondence" sequence="1">
+        <menuitem id="correspondence_subitem" action="action_correspondence"/>
+
+    </menuitem>
+
+    <!--Configuracion -->
+    <menuitem id="menu_action_configurations" name="Configuración" parent="menu_correspondence" sequence="13" groups="correspondence_management.correspondence_manager_group">
+        <menuitem id="menu_second_action_stage" name="Tipos">
+            <menuitem id="menu_staff_stage" action="action_correspondence_types"/>
+        </menuitem>
+        <menuitem id="menu_messengers" name="Mensajeros">
+            <menuitem id="menu_internal_messengers" action="action_internal_messengers"/>
+        </menuitem>
+    </menuitem>
+</odoo>

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="0">
+
+    <!-- HR SALARY RULES-->
+    <record id="hr_rule_gov_basic" model="hr.salary.rule">
+        <field name="name">Basic Salary</field>
+        <field name="sequence" eval="1"/>
+        <field name="code">BASIC</field>
+        <field name="category_id" ref="hr_payroll.BASIC"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.IBASIC and inputs.IBASIC.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.IBASIC and inputs.IBASIC.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_incentives" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.BASIC"/>
+        <field name="name">Incentivos</field>
+        <field name="code">INC</field>
+        <field name="sequence" eval="12" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.IINC and inputs.IINC.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.IINC and inputs.IINC.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_taxable_amounts" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.BASIC"/>
+        <field name="name">Otras Remuneraciones</field>
+        <field name="code">OREM</field>
+        <field name="appears_on_payslip" eval="False" />
+        <field name="sequence" eval="15" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.IOREM and inputs.IOREM.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.IOREM and inputs.IOREM.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_taxable" model="hr.salary.rule">
+        <field name="name">Gross</field>
+        <field name="sequence" eval="50"/>
+        <field name="code">GROSS</field>
+        <field name="category_id" ref="hr_payroll.GROSS"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.IBASICINPUT and inputs.IBASICINPUT.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.IBASICINPUT and inputs.IBASICINPUT.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_insurance_live" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Seguro de Vida</field>
+        <field name="code">03004000</field>
+        <field name="sequence" eval="100" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I03004000 and inputs.I03004000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I03004000 and inputs.I03004000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_funeral_services" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Servicios Funerarios (INAVI)</field>
+        <field name="code">03005000</field>
+        <field name="sequence" eval="101" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I03005000 and inputs.I03005000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I03005000 and inputs.I03005000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_sfs_parents_health" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">SFS - Salud Padres</field>
+        <field name="code">03002000</field>
+        <field name="sequence" eval="102" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I03002000 and inputs.I03002000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I03002000 and inputs.I03002000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_association_of_public_servants" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Asociación de Servidores Públicos</field>
+        <field name="code">01001000</field>
+        <field name="sequence" eval="103" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I01001000 and inputs.I01001000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I01001000 and inputs.I01001000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_cooperative_appliances" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Electrodomésticos Cooperativa</field>
+        <field name="code">04005000</field>
+        <field name="sequence" eval="104" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I04005000 and inputs.I04005000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I04005000 and inputs.I04005000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_ars_universal_complementary_insurance" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">ARS Universal Seguro Complementario</field>
+        <field name="code">03001000</field>
+        <field name="sequence" eval="105" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I03001000 and inputs.I03001000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I03001000 and inputs.I03001000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_afp_extraordinary_contributions" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">AFP Aportes Extraordinario</field>
+        <field name="code">03008000</field>
+        <field name="sequence" eval="106" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I03008000 and inputs.I03008000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I03008000 and inputs.I03008000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_senasa_complementary" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">SENASA Complementario</field>
+        <field name="code">03010000</field>
+        <field name="sequence" eval="107" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I03010000 and inputs.I03010000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I03010000 and inputs.I03010000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_food_litigation" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Litis Alimenticia</field>
+        <field name="code">06001000</field>
+        <field name="sequence" eval="108" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I06001000 and inputs.I06001000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I06001000 and inputs.I06001000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_coop_loan" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Cooperativa MAP - Préstamo</field>
+        <field name="code">04011000</field>
+        <field name="sequence" eval="110" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I04011000 and inputs.I04011000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I04011000 and inputs.I04011000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_coop_savings" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Cooperativa MAP - Ahorro</field>
+        <field name="code">01003000</field>
+        <field name="sequence" eval="120" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I01003000 and inputs.I01003000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I01003000 and inputs.I01003000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_sfs_employee" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Retención - Seguro Familiar de Salud (ARS/SFS)</field>
+        <field name="code">03007000</field>
+        <field name="sequence" eval="200" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I03007000 and inputs.I03007000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I03007000 and inputs.I03007000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_afp_employee" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Retención - Fondo de Pensiones (AFP/SVDS)</field>
+        <field name="code">02003000</field>
+        <field name="sequence" eval="210" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I02003000 and inputs.I02003000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I02003000 and inputs.I02003000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_isr_employee" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="name">Retención - Impuesto sobre la Renta (ISR)</field>
+        <field name="code">02001000</field>
+        <field name="sequence" eval="220" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.I02001000 and inputs.I02001000.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.I02001000 and inputs.I02001000.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_sfs_contribution" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="name">Contribución - Seguro Familiar de Salud (SFS)</field>
+        <field name="code">SFSC</field>
+        <field name="appears_on_payslip" eval="False" />
+        <field name="sequence" eval="300" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.ISFSC and inputs.ISFSC.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.ISFSC and inputs.ISFSC.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_afp_contribution" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="name">Contribución - Fondo de Pensiones (AFP/SVDS)</field>
+        <field name="code">SVDSC</field>
+        <field name="appears_on_payslip" eval="False" />
+        <field name="sequence" eval="310" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.ISVDSC and inputs.ISVDSC.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.ISVDSC and inputs.ISVDSC.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_pension_contribution" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="name">Contribución - Fondo de Pensiones Adicional</field>
+        <field name="code">SVDSCA</field>
+        <field name="appears_on_payslip" eval="False" />
+        <field name="sequence" eval="315" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.ISVDSCA and inputs.ISVDSCA.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.ISVDSCA and inputs.ISVDSCA.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_srl_contribution" model="hr.salary.rule">
+        <field name="category_id" ref="hr_payroll.COMP"/>
+        <field name="name">Contribución - Seguro de Riesgos Laborales (SRL)</field>
+        <field name="code">SRLC</field>
+        <field name="appears_on_payslip" eval="False"/>
+        <field name="sequence" eval="320" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.ISRLC and inputs.ISRLC.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.ISRLC and inputs.ISRLC.amount)</field>
+    </record>
+
+    <record id="hr_rule_gov_net" model="hr.salary.rule">
+        <field name="name">Net Salary</field>
+        <field name="sequence" eval="500"/>
+        <field name="code">NET</field>
+        <field name="category_id" ref="hr_payroll.NET"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = bool(inputs.INET and inputs.INET.amount)</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = (inputs.INET and inputs.INET.amount)</field>
+    </record>
+
+    <!-- HR RULE INPUTS-->
+
+    <record id="hr_rule_input_gov_basic" model="hr.rule.input">
+        <field name="name">Basic Salary</field>
+        <field name="code">IBASIC</field>
+        <field name="input_id" ref="hr_rule_gov_basic" />
+    </record>
+
+    <record id="hr_rule_input_gov_incentives" model="hr.rule.input">
+        <field name="name">Incentivos</field>
+        <field name="code">IINC</field>
+        <field name="input_id" ref="hr_rule_gov_incentives" />
+    </record>
+
+    <record id="hr_rule_input_gov_taxable_amounts" model="hr.rule.input">
+        <field name="name">Otras Remuneraciones</field>
+        <field name="code">IOREM</field>
+        <field name="input_id" ref="hr_rule_gov_taxable_amounts" />
+    </record>
+
+    <record id="hr_rule_input_gov_taxable" model="hr.rule.input">
+        <field name="name">Gross</field>
+        <field name="code">IGROSS</field>
+        <field name="input_id" ref="hr_rule_gov_taxable" />
+    </record>
+
+    <record id="hr_rule_input_gov_insurance_live" model="hr.rule.input">
+        <field name="name">Seguro de Vida</field>
+        <field name="code">I03004000</field>
+        <field name="input_id" ref="hr_rule_gov_insurance_live"/>
+    </record>
+
+    <record id="hr_input_gov_funeral_services" model="hr.rule.input">
+        <field name="name">Servicios Funerarios (INAVI)</field>
+        <field name="code">I03005000</field>
+        <field name="input_id" ref="hr_rule_gov_funeral_services"/>
+    </record>
+
+    <record id="hr_input_gov_sfs_parents_health" model="hr.rule.input">
+        <field name="name">SFS - Salud Padres</field>
+        <field name="code">I03002000</field>
+        <field name="input_id" ref="hr_rule_gov_sfs_parents_health"/>
+    </record>
+
+    <record id="hr_input_gov_association_of_public_servants" model="hr.rule.input">
+        <field name="name">Asociación de Servidores Públicos</field>
+        <field name="code">I01001000</field>
+        <field name="input_id" ref="hr_rule_gov_association_of_public_servants"/>
+    </record>
+
+    <record id="hr_input_gov_cooperative_appliances" model="hr.rule.input">
+        <field name="name">Electrodomésticos Cooperativa</field>
+        <field name="code">I04005000</field>
+        <field name="input_id" ref="hr_rule_gov_cooperative_appliances"/>
+    </record>
+
+    <record id="hr_input_gov_ars_universal_complementary_insurance" model="hr.rule.input">
+        <field name="name">ARS Universal Seguro Complementario</field>
+        <field name="code">I03001000</field>
+        <field name="input_id" ref="hr_rule_gov_ars_universal_complementary_insurance"/>
+    </record>
+
+    <record id="hr_input_gov_afp_extraordinary_contributions" model="hr.rule.input">
+        <field name="name">AFP Aportes Extraordinario</field>
+        <field name="code">I03008000</field>
+        <field name="input_id" ref="hr_rule_gov_afp_extraordinary_contributions"/>
+    </record>
+
+    <record id="hr_input_gov_senasa_complementary" model="hr.rule.input">
+        <field name="name">SENASA Complementario</field>
+        <field name="code">I03010000</field>
+        <field name="input_id" ref="hr_rule_gov_senasa_complementary"/>
+    </record>
+
+    <record id="hr_input_gov_food_litigation" model="hr.rule.input">
+        <field name="name">Litis Alimenticia</field>
+        <field name="code">I06001000</field>
+        <field name="input_id" ref="hr_rule_gov_food_litigation"/>
+    </record>
+
+    <record id="hr_rule_input_gov_coop_loan" model="hr.rule.input">
+        <field name="name">Cooperativa MAP - Préstamo</field>
+        <field name="code">I04011000</field>
+        <field name="input_id" ref="hr_rule_gov_coop_loan"/>
+    </record>
+
+    <record id="hr_rule_input_gov_coop_savings" model="hr.rule.input">
+        <field name="name">Cooperativa MAP - Ahorro</field>
+        <field name="code">I01003000</field>
+        <field name="input_id" ref="hr_rule_gov_coop_savings"/>
+    </record>
+
+    <record id="hr_rule_input_gov_sfs_employee" model="hr.rule.input">
+        <field name="name">Retención - Seguro Familiar de Salud (ARS/SFS)</field>
+        <field name="code">I03007000</field>
+        <field name="input_id" ref="hr_rule_gov_sfs_employee" />
+    </record>
+
+    <record id="hr_rule_input_gov_afp_employee" model="hr.rule.input">
+        <field name="name">Retención - Fondo de Pensiones (AFP/SVDS)</field>
+        <field name="code">I02003000</field>
+        <field name="input_id" ref="hr_rule_gov_afp_employee" />
+    </record>
+
+    <record id="hr_rule_input_gov_isr_employee" model="hr.rule.input">
+        <field name="name">Retención - Impuesto sobre la Renta (ISR)</field>
+        <field name="code">I02001000</field>
+        <field name="input_id" ref="hr_rule_gov_isr_employee" />
+    </record>
+
+    <record id="hr_rule_input_gov_sfs_contribution" model="hr.rule.input">
+        <field name="name">Contribución - Seguro Familiar de Salud (SFS)</field>
+        <field name="code">ISFSC</field>
+        <field name="input_id" ref="hr_rule_gov_sfs_contribution" />
+    </record>
+
+    <record id="hr_rule_input_gov_afp_contribution" model="hr.rule.input">
+        <field name="name">Contribución - Fondo de Pensiones (AFP/SVDS)</field>
+        <field name="code">ISVDSC</field>
+        <field name="input_id" ref="hr_rule_gov_afp_contribution" />
+    </record>
+
+    <record id="hr_rule_input_gov_pension_contribution" model="hr.rule.input">
+        <field name="name">Contribución - Fondo de Pensiones Adicional</field>
+        <field name="code">ISVDSCA</field>
+        <field name="input_id" ref="hr_rule_gov_pension_contribution" />
+    </record>
+
+    <record id="hr_rule_input_gov_srl_contribution" model="hr.rule.input">
+        <field name="name">Contribución - Seguro de Riesgos Laborales (SRL)</field>
+        <field name="code">ISRLC</field>
+        <field name="input_id" ref="hr_rule_gov_srl_contribution" />
+    </record>
+
+    <record id="hr_rule_input_gov_net" model="hr.rule.input">
+        <field name="name">Net Salary</field>
+        <field name="code">INET</field>
+        <field name="input_id" ref="hr_rule_gov_net"/>
+    </record>
+
+    <!-- HR SALARY STRUCTURE-->
+
+    <record id="hr_payroll_gov_structure_base" model="hr.payroll.structure">
+        <field name="code">GOVFIXED</field>
+        <field name="name">Nómina de Empleados del Gobierno</field>
+        <field name="rule_ids" eval="[(6, 0,[
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_basic'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_incentives'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_taxable'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_sfs_employee'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_afp_employee'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_taxable_amounts'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_isr_employee'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_sfs_contribution'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_afp_contribution'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_pension_contribution'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_srl_contribution'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_insurance_live'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_funeral_services'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_sfs_parents_health'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_association_of_public_servants'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_cooperative_appliances'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_ars_universal_complementary_insurance'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_afp_extraordinary_contributions'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_senasa_complementary'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_food_litigation'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_coop_loan'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_coop_savings'),
+            ref('l10n_do_gov_hr_payroll.hr_rule_gov_net'),
+        ])]" />
+        <field name="company_id" ref="base.main_company" />
+        <field name="parent_id" ref="" />
+    </record>
+
+</odoo>

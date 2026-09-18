@@ -1,0 +1,947 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* odoo_cheque_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-27 14:59+0000\n"
+"PO-Revision-Date: 2021-09-27 11:44-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_DO\n"
+"X-Generator: Poedit 3.0\n"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/models/bank_cheque.py:0
+#: code:addons/odoo_cheque_management/wizard/invoice_print_cheque_transient.py:0
+#, python-format
+msgid "%(words)s WITH %(amount_d)s/100"
+msgstr "%(words)s CON %(amount_d)s/100"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_minimal_layout
+msgid "&lt;!DOCTYPE html&gt;"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model:ir.actions.report,print_report_name:odoo_cheque_management.bank_cheque_print_report
+msgid "(object.name)"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model:ir.actions.report,print_report_name:odoo_cheque_management.bank_cheque_leaf_print_report
+msgid "(object.pay_name_line1)"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "--- Attribute ---"
+msgstr "— Atributo —"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_template_view_form
+msgid "<b>From: </b>"
+msgstr "<b>Desde: </b>"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_template_view_form
+msgid ""
+"<br/>\n"
+"                                <b>To: </b>"
+msgstr ""
+"<br/>\n"
+"                                <b>Hasta: </b>"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid ""
+"<span class=\"\">Cheque Preview</span>\n"
+"                                    <span class=\"fa fa-long-arrow-right\"/>"
+msgstr ""
+"<span class=“”>Vista previa del cheque</span>\n"
+"                                    <span class=“fa fa-long-arrow-right”/>"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid ""
+"<span class=\"alert alert-info fa fa-info-circle\" style=\"margin-bottom:0px;\">\n"
+"                                        Select cheque attribute one by one then drag box on "
+"cheque image to fill all the perameters automatically and then click on update button.\n"
+"                                    </span>"
+msgstr ""
+"<span class=“alert alert-info fa fa-info-circle” style=“margin-bottom:0px;”>\n"
+"                                        Seleccione el atributo del cheque uno por uno, luego "
+"arrastre el cuadro en la imagen de verificación para completar todos los parámetros "
+"automáticamente y luego haga clic en el botón Actualizar.\n"
+"                                    </span>"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid ""
+"<span style=\"font-size: 36px;\">\n"
+"                                    <b>\n"
+"                                        Cheque Attributes :\n"
+"                                    </b>\n"
+"                                </span>"
+msgstr ""
+"<span style=“font-size: 36px;”>\n"
+"                                    <b>\n"
+"                                        Atributos del cheque:\n"
+"                                    </b>\n"
+"                                </span>"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_history_print_pdf_report
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_print_pdf_report
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_priview
+msgid "A/C Pay"
+msgstr "Pago A/C"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__is_ac_pay
+msgid "A/C Pay Cheque"
+msgstr "Cheque de pago A/C"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__ac_pay
+msgid "A/C Pay Label"
+msgstr "Etiqueta de pago A/C"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__account_number
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__account_number
+msgid "Account Number"
+msgstr "Número de cuenta"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__amount
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__amount
+msgid "Amount"
+msgstr "Monto"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__amount_box
+msgid "Amount Box"
+msgstr "Caja de monto"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__amount_in_words
+msgid "Amount In Words"
+msgstr "Monto en palabras"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__amount_in_words_line2
+msgid "Amount In Words Line 2"
+msgstr "Monto en palabras linea 2"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__amount_line_1
+msgid "Amount Line 1 (in words)"
+msgstr "Linea de monto 1 (En palabras)"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__amount_line_2
+msgid "Amount Line 2 (in words)"
+msgstr "Linea de monto 2 (En palabras)"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__attribute
+msgid "Attribute"
+msgstr "Atributo"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Attribute Name"
+msgstr "Nombre de atributo"
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_res_bank
+msgid "Bank"
+msgstr "Banco"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__bank_cheque_id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__bank_cheque_id
+#: model:ir.ui.menu,name:odoo_cheque_management.wk_bank_cheque_management_menu
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_view_form
+msgid "Bank Cheque"
+msgstr "Cheque de banco"
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_bank_cheque_attribute
+msgid "Bank Cheque Attribute"
+msgstr "Atributo de cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.actions.act_window,name:odoo_cheque_management.bank_cheque_attribute_action
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_attribute_view_tree
+msgid "Bank Cheque Attributes"
+msgstr "Atributos de cheques"
+
+#. module: odoo_cheque_management
+#: model:ir.actions.act_window,name:odoo_cheque_management.bank_cheque_book_action
+msgid "Bank Cheque Books"
+msgstr "Libro de cheques"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_template_view_tree
+msgid "Bank Cheque Template"
+msgstr "Plantilla de cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.actions.act_window,name:odoo_cheque_management.bank_cheque_action
+msgid "Bank Cheques"
+msgstr "Cheque de banco"
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_bank_payment_cheque_line
+msgid "Bank payment cheque line"
+msgstr "Linea de pago bancario en cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.ui.menu,name:odoo_cheque_management.bank_cheque_menu
+msgid "Banks"
+msgstr "Bancos"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__issued_bank_cheque_history__state__blank
+msgid "Blank"
+msgstr "En blanco"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__bottom_displacement
+msgid "Bottom displacement"
+msgstr "Desplazamiento inferior"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__res_bank__cheque_measure_unit__cm
+msgid "CM"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_view_form
+msgid "CSS Attributes"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_issued_view_form
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.invoice_bank_cheque_print_form_view
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.view_bank_cheque_print_wizard_form
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.view_bank_payment_cheque_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_template_view_form
+msgid "Cancel Now"
+msgstr "Cancelar ahora"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_template_view_form
+msgid "Cancel now"
+msgstr "Cancelar ahora"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__issued_bank_cheque_history__state__cancelled
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: odoo_cheque_management
+#: model:ir.module.category,name:odoo_cheque_management.module_category_cheque
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_issued_view_form
+msgid "Cheque"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model:res.groups,name:odoo_cheque_management.group_bank_cheque_manager
+msgid "Cheque Administrator"
+msgstr "Administrador"
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_bank_cheque_book
+msgid "Cheque Attribute Book"
+msgstr "Talonario de cheques"
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_bank_cheque_attribute_line
+msgid "Cheque Attribute Line"
+msgstr "Linea de atributos de cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_res_bank__cheque_attribute_line_ids
+#: model:ir.ui.menu,name:odoo_cheque_management.bank_cheque_attribute_menu
+msgid "Cheque Attributes"
+msgstr "Atributos de cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__cheque_book_id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__cheque_book_id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__bank_cheque_book_id
+msgid "Cheque Book"
+msgstr "Talonario de cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.ui.menu,name:odoo_cheque_management.bank_cheque_template_menu
+msgid "Cheque Books"
+msgstr "Talonario de cheques"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__cancelled
+msgid "Cheque Cancelled"
+msgstr "Cheque cancelado"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_account_payment__cheque_count
+msgid "Cheque Count"
+msgstr "Contador de cheques"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__cheque_has_amount_line2
+msgid "Cheque Has Amount Line2"
+msgstr "El cheque tiene monto en linea 2"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__cheque_has_pay_line2
+msgid "Cheque Has Pay Line2"
+msgstr "El cheque tiene pago en linea2"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_res_bank__cheque_height
+msgid "Cheque Hight"
+msgstr "Altura de cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_res_bank__cheque_image
+msgid "Cheque Image"
+msgstr "Imagen del cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__issued
+msgid "Cheque Issued"
+msgstr "Cheque emitido"
+
+#. module: odoo_cheque_management
+#: model:ir.module.category,name:odoo_cheque_management.module_category_cheque_management
+msgid "Cheque Management"
+msgstr "Gestión de Cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__cheque_history_id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__cheque_history_id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__cheque_number
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__cheque_number
+msgid "Cheque Number"
+msgstr "Número de cheque"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_template_view_form
+msgid "Cheque Numbers"
+msgstr "Numeros del cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.actions.report,name:odoo_cheque_management.bank_cheque_print_report
+msgid "Cheque Preview"
+msgstr "Vista previa de cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.actions.act_window,name:odoo_cheque_management.invoice_bank_cheque_print_action
+msgid "Cheque Print"
+msgstr "Imprimir cheque"
+
+#. module: odoo_cheque_management
+#: model:res.groups,name:odoo_cheque_management.group_bank_cheque_user
+msgid "Cheque User"
+msgstr "Usuario"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_res_bank__cheque_width
+msgid "Cheque Width"
+msgstr "Ancho del cheque"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/models/bank_cheque.py:0
+#: code:addons/odoo_cheque_management/wizard/invoice_print_cheque_transient.py:0
+#, python-format
+msgid "Cheque has been already printed with Cheque number %s"
+msgstr "El cheque fue impreso con el numero %s"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/models/bank_cheque.py:0
+#, python-format
+msgid "Cheque number %s is not valid. It has been already used. Please use diffrent cheque number."
+msgstr "El numero de cheque %s no es valido. Ya esta en uso. Por favor use un número diferente."
+
+#. module: odoo_cheque_management
+#: model:ir.actions.report,name:odoo_cheque_management.bank_cheque_leaf_print_report
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_print_wizard__issued_cheque_history_ids
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_wizard__payment_cheque_ids
+msgid "Cheques"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Co-ordinate"
+msgstr "Coordinar"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__company_id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_view_form
+msgid "Configure Attributes"
+msgstr "Configurar atributos"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_template_view_form
+msgid "Create Cheque Leaves"
+msgstr "Crear hojas de cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__create_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__create_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__create_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_print_wizard__create_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__create_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_wizard__create_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__create_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__create_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__create_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__create_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_print_wizard__create_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__create_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_wizard__create_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__create_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__currency_id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__partner_id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__customer_id
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__date_format__ddmmyyyy
+msgid "DD MM YYYY"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__cheque_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__date_format
+msgid "Date Format"
+msgstr "Formato de fecha"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__date
+msgid "Date On Cheque"
+msgstr "Fecha del cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__cheque_date
+msgid "Date on cheque"
+msgstr "Fecha del cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__demo_data
+msgid "Demo Data For Preview"
+msgstr "Datos de demostración para vista previa"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__demo_data_date
+msgid "Demo Date For Preview"
+msgstr "Datos de demostración para vista previa"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__display_name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__display_name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__display_name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_print_wizard__display_name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__display_name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_wizard__display_name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__display_name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/models/bank_cheque.py:0
+#, python-format
+msgid ""
+"First you have to set bank cheque attributes. Then you will be able to configure attribute(s) "
+"values"
+msgstr ""
+"Primero debe configurar los atributos del cheque bancario. Entonces podrá configurar los valores "
+"de los atributos"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__font_family
+msgid "Font Family"
+msgstr "Fuente"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__font_size
+msgid "Font Size"
+msgstr "Tamaño de fuente"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__free_text
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__free_text
+msgid "Free Text"
+msgstr "Texto Libre"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__height
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Height"
+msgstr "Altura"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_print_wizard__id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_wizard__id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__id
+msgid "ID"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__res_bank__cheque_measure_unit__in
+msgid "Inches"
+msgstr "Pulgadas"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__initial_cheque_number
+msgid "Initial Cheque Number"
+msgstr "Número de cheque inicial"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/models/bank_cheque.py:0
+#, python-format
+msgid "Invalid cheque number. Cheque number should be in range %s to %s (including last number)."
+msgstr ""
+"Número de cheque no válido. El número de cheque debe estar en el rango de %s a %s (incluido el "
+"último número)."
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_invoice_print_bank_cheque_wizard
+msgid "Invoice Print Bank Cheque Wizard"
+msgstr "Asistente de cheques bancarios de impresión de facturas"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__issued_cheque_history_ids
+msgid "Issue Cheque History"
+msgstr "Historial de emisión de cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__issue_date
+msgid "Issue Date"
+msgstr "Fecha de emisión "
+
+#. module: odoo_cheque_management
+#: model:ir.actions.act_window,name:odoo_cheque_management.bank_cheque_issued_action
+#: model:ir.ui.menu,name:odoo_cheque_management.bank_cheque_issued_menu
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_issued_view_tree
+msgid "Issued Cheques"
+msgstr "Cheques emitidos"
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_issued_bank_cheque_history
+msgid "Issued bank cheque"
+msgstr "Cheques de bancos emitidos"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__last_cheque_number
+msgid "Last Cheque Number"
+msgstr "Número de último cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute____last_update
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line____last_update
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book____last_update
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_print_wizard____last_update
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line____last_update
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_wizard____last_update
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard____last_update
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history____last_update
+msgid "Last Modified on"
+msgstr "Última modificación"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__write_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__write_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__write_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_print_wizard__write_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__write_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_wizard__write_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__write_uid
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__write_uid
+msgid "Last Updated by"
+msgstr "Última modificación por"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__write_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__write_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__write_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_print_wizard__write_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__write_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_wizard__write_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__write_date
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__write_date
+msgid "Last Updated on"
+msgstr "Última modificación en"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__cheque_book_leaves
+msgid "Leaves Count"
+msgstr "Cuenta de hojas"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Left Displacement"
+msgstr "Desplazamiento a la izquierda"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__left_displacement
+msgid "Left displacement"
+msgstr "Desplazamiento a la izquierda"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__letter_spacing
+msgid "Letter Spacing"
+msgstr "Espaciado de letras"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__res_bank__cheque_measure_unit__mm
+msgid "MM"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__date_format__mmddyyyy
+msgid "MM DD YYYY"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_res_bank__max_char_in_line1
+msgid "Maximum Characters"
+msgstr "Caracteres máximos"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,help:odoo_cheque_management.field_res_bank__max_char_in_line1
+msgid ""
+"Maximum characters in 'Amount in words Line1' field.\n"
+" Aplicable if Cheque attributes has both attributes(Amount In words Line1 & Amount In words Line2)"
+msgstr ""
+"Caracteres máximos en el campo ‘Monto en palabras Línea 1’.\n"
+" Aplicable si los atributos de cheque tienen ambos atributos (Monto en palabras Línea 1 y Monto "
+"en palabras Línea 2)"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_res_bank__cheque_measure_unit
+msgid "Measurement Unit"
+msgstr "Unidad de medida"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute__name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_book__name
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/wizard/bank_payment_cheque_wizard.py:0
+#, python-format
+msgid ""
+"Oops! There are two or more lines with same Cheque Book and Cheque Number. Please fix them first."
+msgstr ""
+"¡UPS! Hay dos o más líneas con el mismo talonario de cheques y número de cheque. Por favor, "
+"corríjalos primero."
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/wizard/bank_payment_cheque_wizard.py:0
+#, python-format
+msgid "Oops! There is one or more Cheques which have been issued already. Please fix them first."
+msgstr "¡UPS! Hay uno o más cheques que ya se han emitido. Por favor, corríjalos primero."
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/wizard/bank_cheque_print_wizard.py:0
+#, python-format
+msgid ""
+"Oops! These cheques are incomplete to print. Please update/remove.\n"
+"Cheque Numbers: %s"
+msgstr ""
+"¡UPS! Estos cheques están incompletos para imprimir. Actualice / elimine.\n"
+"Números de los cheques:% s"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "PX"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__paid_to
+msgid "Paid To"
+msgstr "Pagado a"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__pay_line1
+msgid "Pay Line 1"
+msgstr "Linea de pago 1"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__bank_cheque_attribute__attribute__pay_line2
+msgid "Pay Line 2"
+msgstr "Linea de pago 2"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__pay_name_line1
+msgid "Pay To"
+msgstr "Pagar a"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__pay_name_line2
+msgid "Pay To Line2"
+msgstr "Pagar a (Linea 2)"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__payment_id
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__payment_id
+msgid "Payment"
+msgstr "Pago"
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/wizard/bank_payment_cheque_wizard.py:0
+#, python-format
+msgid "Please fill all the entries of Cheque Book and Cheque Number."
+msgstr "Complete todas las entradas del talonario de cheques y el número de cheque."
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/models/bank_cheque.py:0
+#, python-format
+msgid "Please fill cheque book leaves count first."
+msgstr "Primero llene la cuenta de hojas del talonario de cheques."
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/models/bank_cheque.py:0
+#, python-format
+msgid "Please fill staring cheque number first."
+msgstr "Primero, complete el número de cheque."
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/wizard/bank_payment_cheque_wizard.py:0
+#, python-format
+msgid "Please select atleast one valid payment then try again."
+msgstr "Seleccione al menos un pago válido y vuelva a intentarlo."
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/wizard/bank_cheque_print_wizard.py:0
+#, python-format
+msgid "Please select only cheques which are in Blank state."
+msgstr "Seleccione solo los cheques que estén en blanco."
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__is_preview
+msgid "Preview"
+msgstr "Vista previa"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/models/bank_cheque.py:0
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_issued_view_form
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_template_view_form
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.inherit_account_payment_for_cheque_print_form
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.inherit_view_move_form
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.invoice_bank_cheque_print_form_view
+#, python-format
+msgid "Print Cheque"
+msgstr "Imprimir cheque"
+
+#. module: odoo_cheque_management
+#: model:ir.actions.act_window,name:odoo_cheque_management.wk_bank_cheques_print_action
+#: model:ir.actions.act_window,name:odoo_cheque_management.wk_bank_payment_cheques_action
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.view_bank_cheque_print_wizard_form
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.view_bank_payment_cheque_wizard_form
+msgid "Print Cheques"
+msgstr "Imprimir cheques"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.invoice_bank_cheque_print_form_view
+msgid "Print Preview"
+msgstr "Vista previa de impresión"
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_bank_cheque_print_wizard
+msgid "Print bank cheque in bulk wizard"
+msgstr "Imprimir cheque bancario en el asistente masivo"
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_bank_payment_cheque_wizard
+msgid "Print bank payment cheque in bulk wizard"
+msgstr "Imprimir cheque de pago bancario en el asistente masivo"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields.selection,name:odoo_cheque_management.selection__issued_bank_cheque_history__state__printed
+msgid "Printed"
+msgstr "Impreso"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_account_payment__issued_cheque_history_ids
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.inherit_account_payment_for_cheque_print_form
+msgid "Printed Cheques"
+msgstr "Cheques impresos"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/wizard/bank_payment_cheque_wizard.py:0
+#, python-format
+msgid ""
+"Programmation error: the expected model for this action is 'account.payment'. The provided one is "
+"'%s'."
+msgstr ""
+"Error de programación: el modelo esperado para esta acción es ‘account.payment’ El proporcionado "
+"es ‘%s’."
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/wizard/bank_cheque_print_wizard.py:0
+#, python-format
+msgid ""
+"Programmation error: the expected model for this action is 'issued.bank.cheque.history'. The "
+"provided one is '%d'."
+msgstr ""
+"Error de programación: el modelo esperado para esta acción es ‘issued.bank.cheque.history’. El "
+"proporcionado es ‘%d’."
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/wizard/bank_cheque_print_wizard.py:0
+#: code:addons/odoo_cheque_management/wizard/bank_payment_cheque_wizard.py:0
+#, python-format
+msgid "Programmation error: wizard action executed without active_model or active_ids in context."
+msgstr ""
+"Error de programación: acción del asistente ejecutada sin active_model o active_ids en contexto."
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Px"
+msgstr ""
+
+#. module: odoo_cheque_management
+#: model:ir.model,name:odoo_cheque_management.model_ir_actions_report
+msgid "Report Action"
+msgstr "Acción de informe"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_view_form
+msgid "Reset"
+msgstr "Reiniciar"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_view_form
+msgid "Reset Values"
+msgstr "Reiniciar valores"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__right_displacement
+msgid "Right displacement"
+msgstr "Desplazamiento a la derecha"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Select Check Attribute"
+msgstr "Seleccionar atributos de cheque"
+
+#. module: odoo_cheque_management
+#: code:addons/odoo_cheque_management/models/bank_cheque.py:0
+#, python-format
+msgid "Sorry! You are not authorized to perform this action. Please contact to Administration."
+msgstr "¡Perdón! No está autorizado para realizar esta acción. Comuníquese con Administración."
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_issued_bank_cheque_history__state
+msgid "State"
+msgstr "Estado"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,help:odoo_cheque_management.field_bank_cheque_book__account_number
+msgid "This account number will print on cheque if cheque bank has account number attribute."
+msgstr ""
+"Este número de cuenta se imprimirá en el cheque si el cheque tiene un atributo de número de "
+"cuenta."
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Top Displacement"
+msgstr "Desplazamiento superior"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__top_displacement
+msgid "Top displacement"
+msgstr "Desplazamiento superior"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Update"
+msgstr "Actualizar"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Uploaded Scanned Copy :"
+msgstr "Copia escaneada subida :"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_invoice_print_bank_cheque_wizard__user_is_cheque_manager
+msgid "User Is Cheque Manager"
+msgstr "El usuario es gestor de cheques"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_cheque_attribute_line__width
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.bank_cheque_management_template
+msgid "Width"
+msgstr "Ancho"
+
+#. module: odoo_cheque_management
+#: model:ir.model.fields,field_description:odoo_cheque_management.field_bank_payment_cheque_line__wizard_id
+msgid "Wizard"
+msgstr "Asistente"
+
+#. module: odoo_cheque_management
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.view_bank_cheque_print_wizard_form
+#: model_terms:ir.ui.view,arch_db:odoo_cheque_management.view_bank_payment_cheque_wizard_form
+msgid "or"
+msgstr "o"

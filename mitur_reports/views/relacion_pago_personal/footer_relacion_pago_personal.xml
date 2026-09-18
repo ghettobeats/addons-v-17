@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="report_footer_relacion_empleados">
+        <xpath expr="//div[hasclass('page')]/*[last()]" position="after">
+            <br />
+            <table class="table table-borderless">
+                <tr>
+                    <td></td>
+                    <td class="text-left">__________________________________</td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right">__________________________________</td>
+                    <td></td>
+                </tr>
+                <tr style="padding-top:25px">
+                    <td></td>
+                    <td class="text-left">Preparado Por:</td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right">Autorizado Por:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="text-center" colspan="6">__________________________________</td>
+                </tr>
+                <tr>
+                    <td class="text-center" colspan="6">Revisado Por:</td>
+                </tr>
+            </table>
+            <div class="footer text-center">
+                Página
+                <span class="page" />
+                de
+                <span class="topage" />
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

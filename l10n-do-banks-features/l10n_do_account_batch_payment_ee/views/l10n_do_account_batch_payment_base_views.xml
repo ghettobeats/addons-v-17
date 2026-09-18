@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Inactive base module menu item -->
+    <record
+        id="l10n_do_account_batch_payment_base.l10n_do_account_batch_payment_base_menu"
+        model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+</odoo>

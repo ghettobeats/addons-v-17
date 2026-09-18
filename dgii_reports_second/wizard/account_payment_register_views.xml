@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_payment_register_form" model="ir.ui.view">
+            <field name="name">account.payment.register.form</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='journal_id']" position="replace">
+                    <field name="journal_id"/>
+                    <field name="journal_id_type" invisible="1"/>
+                    <field name="is_investor_related" attrs="{'invisible':[('journal_id_type', '!=', 'general')]}"/>
+                    <field name="investor_id" attrs="{'invisible':['|',('journal_id_type', '!=', 'general'), ('is_investor_related', '!=',True)], 'required':[('is_investor_related', '=',True)]}"/>
+                </xpath>
+
+<!--                <xpath expr="//field[@name='payment_method_id']" position="replace">-->
+<!--                <field name="payment_method_id" widget="radio"-->
+<!--                                   required="1"-->
+<!--                                   attrs="{'invisible': [('hide_payment_method', '=', True)]}"/>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <template id="custom_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                        <style>
+                            body {
+                            font-size:<t t-esc="o.journal_id.check_layout.font_zise"/>px;
+                            }
+                            .check_body{
+                            margin-top:<t t-esc="o.journal_id.check_layout.body_top"/>mm;
+                            position: absolute;
+                            }
+                            .check_name {
+                            margin-top:<t t-esc="o.journal_id.check_layout.name_top"/>mm;
+                            margin-left:<t t-esc="o.journal_id.check_layout.name_left"/>mm;
+                            width: 200mm;
+                            position: absolute;
+                            }
+                            .check_date {
+                            margin-top:<t t-esc="o.journal_id.check_layout.date_top"/>mm;
+                            margin-left:<t t-esc="o.journal_id.check_layout.date_left"/>mm;
+                            width: 40mm;
+                            position: absolute;
+                            }
+                            .check_amount {
+                            margin-top:<t t-esc="o.journal_id.check_layout.amount_top"/>mm;
+                            margin-left:<t t-esc="o.journal_id.check_layout.amount_left"/>mm;
+                            position: absolute;
+                            font-size: 18px;
+                            font-weight: bold !important;
+                            }
+
+                            .check_in_words {
+                            margin-top:<t t-esc="o.journal_id.check_layout.amount_letter_top"/>mm;
+                            margin-left:<t t-esc="o.journal_id.check_layout.amount_letter_left"/>mm;
+                            width: 200mm;
+                            position: absolute;
+                            }
+                            .check_communication {
+                            margin-top:<t t-esc="o.journal_id.check_layout.commu_letter_top"/>mm;
+                            margin-left:<t t-esc="o.journal_id.check_layout.commu_letter_left"/>mm;
+                            font-size: 14px;
+                            width: 100mm;
+                            position: absolute;
+                            }
+                            .check_footer_amount{
+                            margin-top:<t t-esc="o.journal_id.check_layout.check_footer_amount_top"/>mm;
+                            margin-left:<t t-esc="o.journal_id.check_layout.check_footer_amount_left"/>mm;
+                            position: absolute;
+                            width: 40mm;
+                            }
+                            .date_month_left{
+                                margin-left:<t t-esc="o.journal_id.check_layout.date_month_left"/>mm;
+                            }
+                            .date_year_left{
+                                margin-left:<t t-esc="o.journal_id.check_layout.date_year_left"/>mm;
+                            }
+                        </style>
+                        <div t-att-data-oe-model="o._name" t-att-data-oe-id="o.id" t-foreach="o._check_get_pages()" t-as="page">
+                        <div class="check_body body">
+                        <t t-if="page['state'] == 'cancelled'">
+                        <div class="o-watermark">VOID</div>
+                        </t>
+                        <div class="row check_date">
+                            <span t-esc="page['date'][0:2].replace('/', ' ')"/>
+                            <span class="date_month_left" t-esc="page['date'][3:5].replace('/', ' ')"/>
+                            <span class="date_year_left" t-esc="page['date'][5:].replace('/', ' ')"/>
+                        </div>
+                        <div class="check_name" t-esc="page['partner_name']"/>
+                        <div class="check_amount">
+                            <t t-esc="page['amount'].replace(o.currency_id.symbol, '')"/>
+                        </div>
+
+                        <div class="check_in_words" t-esc="page['amount_in_word']"/>
+                        
+                        <div class="check_communication" t-esc="page['memo']"/>
+                        <div class ="check_footer_amount" t-esc="page['amount']"/>
+
+                        </div>
+                        </div>
+                        <div class="oe_structure"/>
+                </t>
+            </t>
+        </t>
+    </template>
+        
+    </data>
+</odoo>

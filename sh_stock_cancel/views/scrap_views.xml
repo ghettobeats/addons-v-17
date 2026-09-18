@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_stock_inv_scrap_inherit_form_view" model="ir.ui.view">
+        <field name="name">stock.scrap.inherit.form.view</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view" />
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="sh_cancel" string="Cancel" type="object" groups="sh_stock_cancel.group_sh_stock_scrap_cancel" attrs="{'invisible':[('state','=','cancel')]}"></button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

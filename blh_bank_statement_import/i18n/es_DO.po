@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* blh_bank_statement_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-03 14:55+0000\n"
+"PO-Revision-Date: 2024-04-03 10:57-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_DO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: blh_bank_statement_import
+#: code:addons/blh_bank_statement_import/wizard/blh_bank_statement_import.py:0
+#, python-format
+msgid "BLH %s Bank Statement"
+msgstr "Estado bancario BLH %s"
+
+#. module: blh_bank_statement_import
+#: model_terms:ir.ui.view,arch_db:blh_bank_statement_import.blh_bank_statement_form_view
+msgid "Banco López de Haro (csv)"
+msgstr "Banco López de Haro (csv)"
+
+#. module: blh_bank_statement_import
+#: model:ir.model,name:blh_bank_statement_import.model_account_bank_statement_import
+msgid "Import Bank Statement"
+msgstr "Importar extracto bancario"
+
+#. module: blh_bank_statement_import
+#: model:ir.model,name:blh_bank_statement_import.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: blh_bank_statement_import
+#: code:addons/blh_bank_statement_import/wizard/blh_bank_statement_import.py:0
+#, python-format
+msgid "No. Check: "
+msgstr "Número de Cheque: "
+
+#. module: blh_bank_statement_import
+#: code:addons/blh_bank_statement_import/wizard/blh_bank_statement_import.py:0
+#, python-format
+msgid "No. Reference: "
+msgstr "Número de Referencia: "

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="l10n_do_banks.bank_popular" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101070</field>
+        <field name="l10n_do_bpd_digiver_code">8</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_reservas" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101010</field>
+        <field name="l10n_do_bpd_digiver_code">6</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_bhd" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101230</field>
+        <field name="l10n_do_bpd_digiver_code">8</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_santa_cruz" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101340</field>
+        <field name="l10n_do_bpd_digiver_code">4</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_citibank" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101060</field>
+        <field name="l10n_do_bpd_digiver_code">1</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_scotia" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101030</field>
+        <field name="l10n_do_bpd_digiver_code">0</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_bdi" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101360</field>
+        <field name="l10n_do_bpd_digiver_code">8</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_lopez" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101390</field>
+        <field name="l10n_do_bpd_digiver_code">9</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_vimeca" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101380</field>
+        <field name="l10n_do_bpd_digiver_code">2</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_promerica" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">44405900</field>
+        <field name="l10n_do_bpd_digiver_code">2</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_asoc_popular" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">47940900</field>
+        <field name="l10n_do_bpd_digiver_code">9</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_caribe" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101350</field>
+        <field name="l10n_do_bpd_digiver_code">1</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_bancamerica" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10171228</field>
+        <field name="l10n_do_bpd_digiver_code">4</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_acap" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">48991200</field>
+        <field name="l10n_do_bpd_digiver_code">7</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_banes" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">11102328</field>
+        <field name="l10n_do_bpd_digiver_code">0</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_anap" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10231034</field>
+        <field name="l10n_do_bpd_digiver_code">2</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_lafise" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">11121214</field>
+        <field name="l10n_do_bpd_digiver_code">3</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_bell" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">101142133</field>
+        <field name="l10n_do_bpd_digiver_code">5</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_empire" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10172714</field>
+        <field name="l10n_do_bpd_digiver_code">3</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_atlan" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">11101012</field>
+        <field name="l10n_do_bpd_digiver_code">5</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_ademi" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10101300</field>
+        <field name="l10n_do_bpd_digiver_code">6</field>
+    </record>
+
+    <record id="l10n_do_banks.bank_acf" model="res.bank">
+        <field name="l10n_do_bpd_bank_code">10171214</field>
+        <field name="l10n_do_bpd_digiver_code">5</field>
+    </record>
+</odoo>

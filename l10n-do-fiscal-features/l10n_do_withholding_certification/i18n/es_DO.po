@@ -1,0 +1,368 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_do_withholding_certification
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-20 05:35+0000\n"
+"PO-Revision-Date: 2020-01-20 05:35+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_do_withholding_certification
+#: code:addons/l10n_do_withholding_certification/models/account.py:0
+#, python-format
+msgid "%s Withholding Cert"
+msgstr "%s Certificación Retención"
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+msgid ", <strong>CERTIFICA</strong> que"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid ", de los cuales se le realizó la retención de"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid ", recibió ingresos por un monto de"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid ""
+"<br/>\n"
+"                    <br/>\n"
+"                    <br/>\n"
+"                    <span>Señores:</span>\n"
+"                    <br/>\n"
+"                    <span><strong>DIRECCIÓN GENERAL DE IMPUESTOS INTERNOS</strong></span>\n"
+"                    <br/>\n"
+"                    <span>Ciudad.</span>"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid ""
+"<br/>\n"
+"                    <span><strong>Reporte Retenciones:</strong></span>"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Withholding Certification</span>"
+msgstr "<span class=\"o_form_label\">Certificación de Retención</span>"
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_withholding_cert_layout
+msgid "<span style=\"font-size: 12px;\">PRESIDENCIA DE LA REPÚBLICA</span>"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "<span>Fecha</span>"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "<span>NCF</span>"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "<span>Total Pagado</span>"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "<span>Total bruto</span>"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "<span>Totales</span>"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model,name:l10n_do_withholding_certification.model_account_account
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,help:l10n_do_withholding_certification.field_account_account__l10n_do_legal_base
+msgid ""
+"Article, norm or whatever legal statement that enforce this withholding to "
+"be applied."
+msgstr ""
+"Artículo, norma o cualquier base legal que disponga que se aplique esta "
+"retención."
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.withholding_layout_setup_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_res_company__l10n_do_withholding_cert_type
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__l10n_do_withholding_cert_type
+msgid "Certification Type"
+msgstr "Tipo de Certificación"
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_withholding_cert_layout
+msgid "Coat of Arms"
+msgstr "Escudo Nacional"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model,name:l10n_do_withholding_certification.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model,name:l10n_do_withholding_certification.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+msgid "El"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_account_payment__has_l10n_do_withholding
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.view_account_payment_search_inherited
+msgid "Has Withholding"
+msgstr "Tiene Retención"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields.selection,name:l10n_do_withholding_certification.selection__account_payment__l10n_do_withholding_type__tax
+msgid "Invoice tax"
+msgstr "Impuesto en factura"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_account_account__is_l10n_do_withholding_account
+msgid "Is Withholding Account"
+msgstr "Es una cuenta de retención"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields.selection,name:l10n_do_withholding_certification.selection__account_payment__l10n_do_withholding_type__entry
+msgid "Journal Entry"
+msgstr "Asiento Contable"
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+msgid ""
+"La presente certificación se expide a solicitud de la parte interesada,"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_account_account__l10n_do_legal_base
+msgid "Legal Base"
+msgstr "Base legal"
+
+#. module: l10n_do_withholding_certification
+#: code:addons/l10n_do_withholding_certification/models/account.py:0
+#, python-format
+msgid "New Withholding Certification printed"
+msgstr "Nueva Certificación de Retención generada"
+
+#. module: l10n_do_withholding_certification
+#: code:addons/l10n_do_withholding_certification/models/account.py:0
+#, python-format
+msgid ""
+"No Withholding Certification Type found. Select one in company settings."
+msgstr ""
+"No se encontró un Tipo de Certificación. Seleccione una desde la "
+"configuración de la compañía."
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields.selection,name:l10n_do_withholding_certification.selection__account_payment__l10n_do_withholding_type__payment
+msgid "Payment"
+msgstr "Pago"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model,name:l10n_do_withholding_certification.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "Por medio de la presente <strong>CERTIFICAMOS</strong> que"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.view_account_payment_form_inherited
+msgid "Print Certification"
+msgstr "Imprimir Certificación"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields.selection,name:l10n_do_withholding_certification.selection__res_company__l10n_do_withholding_cert_type__private
+msgid "Private Company"
+msgstr "Compañía privada"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields.selection,name:l10n_do_withholding_certification.selection__res_company__l10n_do_withholding_cert_type__gov
+msgid "Public Sector"
+msgstr "Sector público"
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_withholding_cert_layout
+msgid "RNC:"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.withholding_layout_setup_wizard_form
+msgid "Save"
+msgstr "Guardar"
+
+#. module: l10n_do_withholding_certification
+#: code:addons/l10n_do_withholding_certification/models/res_config_setting.py:0
+#, python-format
+msgid "Setup company Withholding Certification"
+msgstr "Configurar Certificación de retención de la compañía"
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.res_config_settings_view_form
+msgid "Setup document layout"
+msgstr "Configurar apariencia del documento"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_res_company__l10n_do_show_footer
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__l10n_do_show_footer
+msgid "Show Footer"
+msgstr "Mostrar pie de página"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_res_company__l10n_do_show_header
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__l10n_do_show_header
+msgid "Show Header"
+msgstr "Mostrar cabecera"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_res_company__l10n_do_sign_table
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__l10n_do_sign_table
+msgid "Sign Table"
+msgstr "Firmas"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_account_account__l10n_do_tax_name
+msgid "Tax Name"
+msgstr "Nombre del impuesto"
+
+#. module: l10n_do_withholding_certification
+#: code:addons/l10n_do_withholding_certification/models/account.py:0
+#, python-format
+msgid "Unsupported report type %s found."
+msgstr "Tipo de informe desconocido %s."
+
+#. module: l10n_do_withholding_certification
+#: model:ir.actions.report,name:l10n_do_withholding_certification.l10n_do_withholding_cert
+msgid "Withholding Certification"
+msgstr "Certificación de Retención"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model,name:l10n_do_withholding_certification.model_withholding_layout_setup_wizard
+msgid "Withholding Layout Setup Wizard"
+msgstr "Asistente Configuración apariencia Cert. de Retención"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_account_payment__l10n_do_withholding_type
+msgid "Withholding Type"
+msgstr "Tipo de retención"
+
+#. module: l10n_do_withholding_certification
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_res_company__l10n_do_year_tag_line
+#: model:ir.model.fields,field_description:l10n_do_withholding_certification.field_withholding_layout_setup_wizard__l10n_do_year_tag_line
+msgid "Year Tag Line"
+msgstr "Slogan del año"
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+msgid "a los"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "con RNC/Céd"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "el/la"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+msgid "en la ciudad de"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "por un monto de"
+msgstr ""
+
+#. module: l10n_do_withholding_certification
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_do_report_withholding_document
+#: model_terms:ir.ui.view,arch_db:l10n_do_withholding_certification.l10n_hn_report_withholding_document_private
+msgid "según está estipulado en"
+msgstr ""

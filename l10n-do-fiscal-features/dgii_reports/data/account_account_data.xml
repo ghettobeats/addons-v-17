@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="l10n_do.do_niif_51010500" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">A51</field>
+    </record>
+
+    <record id="l10n_do.do_niif_21030201" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">A36</field>
+    </record>
+
+    <record id="l10n_do.do_niif_21030301" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">ISR</field>
+    </record>
+
+    <record id="l10n_do.do_niif_21030202" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">A36</field>
+    </record>
+
+    <record id="l10n_do.do_niif_21030205" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">A36</field>
+    </record>
+
+    <record id="l10n_do.do_niif_21030307" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">ISR</field>
+    </record>
+
+    <record id="l10n_do.do_niif_21030302" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">ISR</field>
+    </record>
+
+    <record id="l10n_do.do_niif_11080302" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">A36</field>
+    </record>
+
+    <record id="l10n_do.do_niif_21030308" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">ISR</field>
+    </record>
+
+    <record id="l10n_do.do_niif_21030303" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">ISR</field>
+    </record>
+
+    <record id="l10n_do.do_niif_21030306" model="account.account.template">
+        <field name="l10n_do_account_fiscal_type">ISR</field>
+    </record>
+</odoo>
